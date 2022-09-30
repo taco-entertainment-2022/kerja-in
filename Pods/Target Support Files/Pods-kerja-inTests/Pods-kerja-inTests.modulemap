@@ -1,0 +1,6 @@
+framework module Pods_kerja_inTests {
+  umbrella header "Pods-kerja-inTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

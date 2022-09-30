@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
+		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
+		4EE62D0B28E6A5F8003B161F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* ViewController.swift */; };
+		4EE62D1028E6A5F9003B161F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE62D0F28E6A5F9003B161F /* Assets.xcassets */; };
+		4EE62D1328E6A5F9003B161F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */; };
+		4EE62D1E28E6A5F9003B161F /* kerja_inTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D1D28E6A5F9003B161F /* kerja_inTests.swift */; };
+		4EE62D2828E6A5F9003B161F /* kerja_inUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2728E6A5F9003B161F /* kerja_inUITests.swift */; };
+		4EE62D2A28E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */; };
+		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
+		D05FE163CE83B38110A3A466 /* Pods_kerja_in_kerja_inUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */; };
+		D1BF61A63B522525002F08DD /* Pods_kerja_inTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BE9644A0342F3502AFB129 /* Pods_kerja_inTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4EE62D1A28E6A5F9003B161F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EE62CFB28E6A5F8003B161F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EE62D0228E6A5F8003B161F;
+			remoteInfo = "kerja-in";
+		};
+		4EE62D2428E6A5F9003B161F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EE62CFB28E6A5F8003B161F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EE62D0228E6A5F8003B161F;
+			remoteInfo = "kerja-in";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
+		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EE62D0628E6A5F8003B161F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4EE62D0A28E6A5F8003B161F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4EE62D0F28E6A5F9003B161F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4EE62D1228E6A5F9003B161F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4EE62D1428E6A5F9003B161F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EE62D1928E6A5F9003B161F /* kerja-inTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "kerja-inTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EE62D1D28E6A5F9003B161F /* kerja_inTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kerja_inTests.swift; sourceTree = "<group>"; };
+		4EE62D2328E6A5F9003B161F /* kerja-inUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "kerja-inUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EE62D2728E6A5F9003B161F /* kerja_inUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kerja_inUITests.swift; sourceTree = "<group>"; };
+		4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kerja_inUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71BE9644A0342F3502AFB129 /* Pods_kerja_inTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_inTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		790C3A9943424ABD8223D6AB /* Pods-kerja-in-kerja-inUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.release.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.release.xcconfig"; sourceTree = "<group>"; };
+		79ABD9FEF74FF050A31328F9 /* Pods-kerja-in-kerja-inUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.release.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD0356B70D9EE08073DC66DD /* Pods-kerja-inTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C1AE826927E79087CA5A8D05 /* Pods-kerja-in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.release.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4EE62D0028E6A5F8003B161F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D1628E6A5F9003B161F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1BF61A63B522525002F08DD /* Pods_kerja_inTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D2028E6A5F9003B161F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D05FE163CE83B38110A3A466 /* Pods_kerja_in_kerja_inUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4EE62CFA28E6A5F8003B161F = {
+			isa = PBXGroup;
+			children = (
+				4EE62D0528E6A5F8003B161F /* kerja-in */,
+				4EE62D1C28E6A5F9003B161F /* kerja-inTests */,
+				4EE62D2628E6A5F9003B161F /* kerja-inUITests */,
+				4EE62D0428E6A5F8003B161F /* Products */,
+				D1736A308DB792A22D6AE1AF /* Pods */,
+				DDADDE828B91EF3F56D81773 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4EE62D0428E6A5F8003B161F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D0328E6A5F8003B161F /* kerja-in.app */,
+				4EE62D1928E6A5F9003B161F /* kerja-inTests.xctest */,
+				4EE62D2328E6A5F9003B161F /* kerja-inUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4EE62D0528E6A5F8003B161F /* kerja-in */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D0628E6A5F8003B161F /* AppDelegate.swift */,
+				4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */,
+				4EE62D0A28E6A5F8003B161F /* ViewController.swift */,
+				4EE62D0F28E6A5F9003B161F /* Assets.xcassets */,
+				4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */,
+				4EE62D1428E6A5F9003B161F /* Info.plist */,
+			);
+			path = "kerja-in";
+			sourceTree = "<group>";
+		};
+		4EE62D1C28E6A5F9003B161F /* kerja-inTests */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D1D28E6A5F9003B161F /* kerja_inTests.swift */,
+			);
+			path = "kerja-inTests";
+			sourceTree = "<group>";
+		};
+		4EE62D2628E6A5F9003B161F /* kerja-inUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D2728E6A5F9003B161F /* kerja_inUITests.swift */,
+				4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */,
+			);
+			path = "kerja-inUITests";
+			sourceTree = "<group>";
+		};
+		D1736A308DB792A22D6AE1AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */,
+				C1AE826927E79087CA5A8D05 /* Pods-kerja-in.release.xcconfig */,
+				79ABD9FEF74FF050A31328F9 /* Pods-kerja-in-kerja-inUITests.debug.xcconfig */,
+				790C3A9943424ABD8223D6AB /* Pods-kerja-in-kerja-inUITests.release.xcconfig */,
+				BD0356B70D9EE08073DC66DD /* Pods-kerja-inTests.debug.xcconfig */,
+				88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DDADDE828B91EF3F56D81773 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */,
+				3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */,
+				71BE9644A0342F3502AFB129 /* Pods_kerja_inTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4EE62D0228E6A5F8003B161F /* kerja-in */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EE62D2D28E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-in" */;
+			buildPhases = (
+				8186046C77E73BB2C659AABC /* [CP] Check Pods Manifest.lock */,
+				4EE62CFF28E6A5F8003B161F /* Sources */,
+				4EE62D0028E6A5F8003B161F /* Frameworks */,
+				4EE62D0128E6A5F8003B161F /* Resources */,
+				2745DD5FEA30532FA753E60C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "kerja-in";
+			productName = "kerja-in";
+			productReference = 4EE62D0328E6A5F8003B161F /* kerja-in.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4EE62D1828E6A5F9003B161F /* kerja-inTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EE62D3028E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-inTests" */;
+			buildPhases = (
+				6C0756BD09388BEB9FFC7210 /* [CP] Check Pods Manifest.lock */,
+				4EE62D1528E6A5F9003B161F /* Sources */,
+				4EE62D1628E6A5F9003B161F /* Frameworks */,
+				4EE62D1728E6A5F9003B161F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EE62D1B28E6A5F9003B161F /* PBXTargetDependency */,
+			);
+			name = "kerja-inTests";
+			productName = "kerja-inTests";
+			productReference = 4EE62D1928E6A5F9003B161F /* kerja-inTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4EE62D2228E6A5F9003B161F /* kerja-inUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EE62D3328E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-inUITests" */;
+			buildPhases = (
+				C33F4A9825D1E3370C08B7DA /* [CP] Check Pods Manifest.lock */,
+				4EE62D1F28E6A5F9003B161F /* Sources */,
+				4EE62D2028E6A5F9003B161F /* Frameworks */,
+				4EE62D2128E6A5F9003B161F /* Resources */,
+				DBCEF1F975A9AD70A882865D /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EE62D2528E6A5F9003B161F /* PBXTargetDependency */,
+			);
+			name = "kerja-inUITests";
+			productName = "kerja-inUITests";
+			productReference = 4EE62D2328E6A5F9003B161F /* kerja-inUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4EE62CFB28E6A5F8003B161F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					4EE62D0228E6A5F8003B161F = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					4EE62D1828E6A5F9003B161F = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 4EE62D0228E6A5F8003B161F;
+					};
+					4EE62D2228E6A5F9003B161F = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 4EE62D0228E6A5F8003B161F;
+					};
+				};
+			};
+			buildConfigurationList = 4EE62CFE28E6A5F8003B161F /* Build configuration list for PBXProject "kerja-in" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4EE62CFA28E6A5F8003B161F;
+			productRefGroup = 4EE62D0428E6A5F8003B161F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4EE62D0228E6A5F8003B161F /* kerja-in */,
+				4EE62D1828E6A5F9003B161F /* kerja-inTests */,
+				4EE62D2228E6A5F9003B161F /* kerja-inUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4EE62D0128E6A5F8003B161F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EE62D1328E6A5F9003B161F /* LaunchScreen.storyboard in Resources */,
+				4EE62D1028E6A5F9003B161F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D1728E6A5F9003B161F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D2128E6A5F9003B161F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2745DD5FEA30532FA753E60C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kerja-in/Pods-kerja-in-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kerja-in/Pods-kerja-in-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kerja-in/Pods-kerja-in-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C0756BD09388BEB9FFC7210 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kerja-inTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8186046C77E73BB2C659AABC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kerja-in-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C33F4A9825D1E3370C08B7DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kerja-in-kerja-inUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBCEF1F975A9AD70A882865D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4EE62CFF28E6A5F8003B161F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EE62D0B28E6A5F8003B161F /* ViewController.swift in Sources */,
+				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
+				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D1528E6A5F9003B161F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EE62D1E28E6A5F9003B161F /* kerja_inTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EE62D1F28E6A5F9003B161F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EE62D2A28E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift in Sources */,
+				4EE62D2828E6A5F9003B161F /* kerja_inUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4EE62D1B28E6A5F9003B161F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EE62D0228E6A5F8003B161F /* kerja-in */;
+			targetProxy = 4EE62D1A28E6A5F9003B161F /* PBXContainerItemProxy */;
+		};
+		4EE62D2528E6A5F9003B161F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EE62D0228E6A5F8003B161F /* kerja-in */;
+			targetProxy = 4EE62D2428E6A5F9003B161F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4EE62D1228E6A5F9003B161F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4EE62D2B28E6A5F9003B161F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4EE62D2C28E6A5F9003B161F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4EE62D2E28E6A5F9003B161F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "kerja-in/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-in";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4EE62D2F28E6A5F9003B161F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1AE826927E79087CA5A8D05 /* Pods-kerja-in.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "kerja-in/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-in";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4EE62D3128E6A5F9003B161F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD0356B70D9EE08073DC66DD /* Pods-kerja-inTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-inTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kerja-in.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/kerja-in";
+			};
+			name = Debug;
+		};
+		4EE62D3228E6A5F9003B161F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-inTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kerja-in.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/kerja-in";
+			};
+			name = Release;
+		};
+		4EE62D3428E6A5F9003B161F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79ABD9FEF74FF050A31328F9 /* Pods-kerja-in-kerja-inUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-inUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "kerja-in";
+			};
+			name = Debug;
+		};
+		4EE62D3528E6A5F9003B161F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 790C3A9943424ABD8223D6AB /* Pods-kerja-in-kerja-inUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M69S54M2M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-inUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "kerja-in";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4EE62CFE28E6A5F8003B161F /* Build configuration list for PBXProject "kerja-in" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EE62D2B28E6A5F9003B161F /* Debug */,
+				4EE62D2C28E6A5F9003B161F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EE62D2D28E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-in" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EE62D2E28E6A5F9003B161F /* Debug */,
+				4EE62D2F28E6A5F9003B161F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EE62D3028E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-inTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EE62D3128E6A5F9003B161F /* Debug */,
+				4EE62D3228E6A5F9003B161F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EE62D3328E6A5F9003B161F /* Build configuration list for PBXNativeTarget "kerja-inUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EE62D3428E6A5F9003B161F /* Debug */,
+				4EE62D3528E6A5F9003B161F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4EE62CFB28E6A5F8003B161F /* Project object */;
+}

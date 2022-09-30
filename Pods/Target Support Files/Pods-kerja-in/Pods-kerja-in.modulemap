@@ -1,0 +1,6 @@
+framework module Pods_kerja_in {
+  umbrella header "Pods-kerja-in-umbrella.h"
+
+  export *
+  module * { export * }
+}
