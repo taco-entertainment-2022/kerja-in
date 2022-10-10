@@ -9,13 +9,28 @@
 /* Begin PBXBuildFile section */
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
-		4EE62D0B28E6A5F8003B161F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* ViewController.swift */; };
+		4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */; };
 		4EE62D1028E6A5F9003B161F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE62D0F28E6A5F9003B161F /* Assets.xcassets */; };
 		4EE62D1328E6A5F9003B161F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */; };
 		4EE62D1E28E6A5F9003B161F /* kerja_inTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D1D28E6A5F9003B161F /* kerja_inTests.swift */; };
 		4EE62D2828E6A5F9003B161F /* kerja_inUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2728E6A5F9003B161F /* kerja_inUITests.swift */; };
 		4EE62D2A28E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */; };
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
+		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
+		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
+		A8B690C328F296E300AA7A02 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */; };
+		A8B690CF28F2982000AA7A02 /* Outfit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */; };
+		A8B690D028F2982000AA7A02 /* Outfit-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C728F2982000AA7A02 /* Outfit-Black.ttf */; };
+		A8B690D128F2982000AA7A02 /* Outfit-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C828F2982000AA7A02 /* Outfit-Light.ttf */; };
+		A8B690D228F2982000AA7A02 /* Outfit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C928F2982000AA7A02 /* Outfit-Medium.ttf */; };
+		A8B690D328F2982000AA7A02 /* Outfit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690CA28F2982000AA7A02 /* Outfit-Regular.ttf */; };
+		A8B690D428F2982000AA7A02 /* Outfit-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690CB28F2982000AA7A02 /* Outfit-Bold.ttf */; };
+		A8B690D528F2982000AA7A02 /* Outfit-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690CC28F2982000AA7A02 /* Outfit-Thin.ttf */; };
+		A8B690D628F2982000AA7A02 /* Outfit-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690CD28F2982000AA7A02 /* Outfit-ExtraBold.ttf */; };
+		A8B690D728F2982000AA7A02 /* Outfit-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690CE28F2982000AA7A02 /* Outfit-SemiBold.ttf */; };
+		A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690D828F2997700AA7A02 /* CustomFont.swift */; };
+		A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690DA28F29AAE00AA7A02 /* JobModel.swift */; };
+		A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */; };
 		D05FE163CE83B38110A3A466 /* Pods_kerja_in_kerja_inUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */; };
 		D1BF61A63B522525002F08DD /* Pods_kerja_inTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BE9644A0342F3502AFB129 /* Pods_kerja_inTests.framework */; };
 /* End PBXBuildFile section */
@@ -43,7 +58,7 @@
 		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE62D0628E6A5F8003B161F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4EE62D0A28E6A5F8003B161F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
 		4EE62D0F28E6A5F9003B161F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EE62D1228E6A5F9003B161F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EE62D1428E6A5F9003B161F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +72,21 @@
 		790C3A9943424ABD8223D6AB /* Pods-kerja-in-kerja-inUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.release.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.release.xcconfig"; sourceTree = "<group>"; };
 		79ABD9FEF74FF050A31328F9 /* Pods-kerja-in-kerja-inUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.release.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.release.xcconfig"; sourceTree = "<group>"; };
+		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-ExtraLight.ttf"; sourceTree = "<group>"; };
+		A8B690C728F2982000AA7A02 /* Outfit-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Black.ttf"; sourceTree = "<group>"; };
+		A8B690C828F2982000AA7A02 /* Outfit-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Light.ttf"; sourceTree = "<group>"; };
+		A8B690C928F2982000AA7A02 /* Outfit-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Medium.ttf"; sourceTree = "<group>"; };
+		A8B690CA28F2982000AA7A02 /* Outfit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Regular.ttf"; sourceTree = "<group>"; };
+		A8B690CB28F2982000AA7A02 /* Outfit-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Bold.ttf"; sourceTree = "<group>"; };
+		A8B690CC28F2982000AA7A02 /* Outfit-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Thin.ttf"; sourceTree = "<group>"; };
+		A8B690CD28F2982000AA7A02 /* Outfit-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A8B690CE28F2982000AA7A02 /* Outfit-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-SemiBold.ttf"; sourceTree = "<group>"; };
+		A8B690D828F2997700AA7A02 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		A8B690DA28F29AAE00AA7A02 /* JobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModel.swift; sourceTree = "<group>"; };
+		A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		BD0356B70D9EE08073DC66DD /* Pods-kerja-inTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1AE826927E79087CA5A8D05 /* Pods-kerja-in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.release.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,8 +146,11 @@
 			children = (
 				4EE62D0628E6A5F8003B161F /* AppDelegate.swift */,
 				4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */,
-				4EE62D0A28E6A5F8003B161F /* ViewController.swift */,
-				4EE62D0F28E6A5F9003B161F /* Assets.xcassets */,
+				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
+				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
+				A8B690DC28F29AB800AA7A02 /* Model */,
+				A8B690C128F296BC00AA7A02 /* Theme */,
+				A8B690C428F297FB00AA7A02 /* Assets */,
 				4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */,
 				4EE62D1428E6A5F9003B161F /* Info.plist */,
 			);
@@ -139,6 +172,50 @@
 				4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */,
 			);
 			path = "kerja-inUITests";
+			sourceTree = "<group>";
+		};
+		A8B690C128F296BC00AA7A02 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				A82FAF4E28E738EA006587D6 /* TabBar.swift */,
+				A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */,
+				A8B690D828F2997700AA7A02 /* CustomFont.swift */,
+				A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		A8B690C428F297FB00AA7A02 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D0F28E6A5F9003B161F /* Assets.xcassets */,
+				A8B690C528F2981600AA7A02 /* Fonts */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A8B690C528F2981600AA7A02 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A8B690C728F2982000AA7A02 /* Outfit-Black.ttf */,
+				A8B690CB28F2982000AA7A02 /* Outfit-Bold.ttf */,
+				A8B690CD28F2982000AA7A02 /* Outfit-ExtraBold.ttf */,
+				A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */,
+				A8B690C828F2982000AA7A02 /* Outfit-Light.ttf */,
+				A8B690C928F2982000AA7A02 /* Outfit-Medium.ttf */,
+				A8B690CA28F2982000AA7A02 /* Outfit-Regular.ttf */,
+				A8B690CE28F2982000AA7A02 /* Outfit-SemiBold.ttf */,
+				A8B690CC28F2982000AA7A02 /* Outfit-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A8B690DC28F29AB800AA7A02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A8B690DA28F29AAE00AA7A02 /* JobModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D1736A308DB792A22D6AE1AF /* Pods */ = {
@@ -274,7 +351,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EE62D1328E6A5F9003B161F /* LaunchScreen.storyboard in Resources */,
+				A8B690D028F2982000AA7A02 /* Outfit-Black.ttf in Resources */,
+				A8B690CF28F2982000AA7A02 /* Outfit-ExtraLight.ttf in Resources */,
+				A8B690D528F2982000AA7A02 /* Outfit-Thin.ttf in Resources */,
 				4EE62D1028E6A5F9003B161F /* Assets.xcassets in Resources */,
+				A8B690D428F2982000AA7A02 /* Outfit-Bold.ttf in Resources */,
+				A8B690D328F2982000AA7A02 /* Outfit-Regular.ttf in Resources */,
+				A8B690D628F2982000AA7A02 /* Outfit-ExtraBold.ttf in Resources */,
+				A8B690D228F2982000AA7A02 /* Outfit-Medium.ttf in Resources */,
+				A8B690D728F2982000AA7A02 /* Outfit-SemiBold.ttf in Resources */,
+				A8B690D128F2982000AA7A02 /* Outfit-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +488,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EE62D0B28E6A5F8003B161F /* ViewController.swift in Sources */,
+				A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */,
+				A8B690C328F296E300AA7A02 /* CustomTableViewCell.swift in Sources */,
+				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
+				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
+				4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */,
+				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
+				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
 			);
