@@ -57,7 +57,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     //MARK: - Label
-    lazy var joblbl: UILabel = {
+    lazy var jobLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 80, y: 8, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.medium, size: 16)
@@ -65,7 +65,7 @@ class CustomTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var datelbl: UILabel = {
+    lazy var dateLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 105, y: 31, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.light, size: 14)
@@ -73,7 +73,7 @@ class CustomTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var locationlbl: UILabel = {
+    lazy var locationLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 240, y: 31, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.light, size: 14)
@@ -81,7 +81,7 @@ class CustomTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var pricelbl: UILabel = {
+    lazy var priceLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 80, y: 53, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.medium, size: 14)
@@ -89,7 +89,7 @@ class CustomTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var postedlbl: UILabel = {
+    lazy var postedLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 280, y: 56, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.light, size: 12)
@@ -127,13 +127,13 @@ class CustomTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         addSubview(backView)
         backView.addSubview(userImage)
-        backView.addSubview(joblbl)
-        backView.addSubview(datelbl)
+        backView.addSubview(jobLabel)
+        backView.addSubview(dateLabel)
         backView.addSubview(calendarIcon)
         backView.addSubview(pinIcon)
-        backView.addSubview(locationlbl)
-        backView.addSubview(pricelbl)
-        backView.addSubview(postedlbl)
+        backView.addSubview(locationLabel)
+        backView.addSubview(priceLabel)
+        backView.addSubview(postedLabel)
         backView.addSubview(savedButton)
     }
 

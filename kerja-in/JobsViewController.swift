@@ -85,11 +85,11 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else {fatalError("Unable to create cell")}
         cell.userImage.image = jobsArr[indexPath.row].userImage
-        cell.joblbl.text = jobsArr[indexPath.row].jobName
-        cell.datelbl.text = jobsArr[indexPath.row].date
-        cell.locationlbl.text = jobsArr[indexPath.row].location
-        cell.pricelbl.text = jobsArr[indexPath.row].price
-        cell.postedlbl.text = jobsArr[indexPath.row].posted
+        cell.jobLabel.text = jobsArr[indexPath.row].jobName
+        cell.dateLabel.text = jobsArr[indexPath.row].date
+        cell.locationLabel.text = jobsArr[indexPath.row].location
+        cell.priceLabel.text = jobsArr[indexPath.row].price
+        cell.postedLabel.text = jobsArr[indexPath.row].posted
         return cell
     }
     
