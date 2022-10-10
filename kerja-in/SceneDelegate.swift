@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        window.rootViewController = ViewController(nibName: nil, bundle: nil)
+       // window.rootViewController = ViewController(nibName: nil, bundle: nil)
+        window.rootViewController = TabBar()
         window.makeKeyAndVisible()
     }
 

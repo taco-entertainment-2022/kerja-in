@@ -8,6 +8,7 @@ target 'kerja-in' do
   # Pods for kerja-in
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
+  pod 'SnapKit', '~> 5.6.0'
 
   target 'kerja-inTests' do
     inherit! :search_paths
