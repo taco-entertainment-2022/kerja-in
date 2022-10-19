@@ -18,6 +18,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
         
+        
         //MARK: - Set Search Bar
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = "Cari Pekerjaan..."
@@ -36,23 +37,26 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         appearance.backgroundColor = UIColor(named: "DarkBlue")
         
         // Customizing navigation bar
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor(named: "White")
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.backButtonTitle = ""
+
         
         //MARK: - Set Table View
         setTableView()
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Skripsi", date: "Mon, 7 Oct 2022", location: "Online", price: "Rp 10.000", posted: "3 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Malam Hari", date: "Mon, 6 Oct 2022", location: "PIK", price: "Rp 50.000", posted: "5 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Bulanan", date: "Tue, 5 Oct 2022", location: "Tanggerang", price: "Rp 5.000", posted: "1 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Interview Mahasiswi Teknik", date: "Tue, 8 Oct 2022", location: "Online", price: "Rp 100.000", posted: "2 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Thesis", date: "Mon, 7 Oct 2022", location: "Tanggerang", price: "Rp 150.000", posted: "1 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Siang Hari", date: "Tue, 8 Oct 2022", location: "Jakarta", price: "Rp 50.000", posted: "2 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Mingguan", date: "Mon, 7 Oct 2022", location: "Rome", price: "Rp 100.000", posted: "5 days ago"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", date: "Tue, 8 Oct 2022", location: "Paris", price: "Rp 200.000", posted: "3 days ago"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Skripsi", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Malam Hari", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 6 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Bulanan", posted: "1 days ago", userName: "Fredo Sembi", date: "Tue, 5 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Interview Mahasiswi Teknik", posted: "2 days ago", userName: "Fredo Sembi", date: "Tue, 12 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Thesis", posted: "1 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Siang Hari", posted: "2 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Mingguan", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
         
     }
+    
     
     func setTableView() {
         tableView.frame = self.view.frame
@@ -63,7 +67,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         tableView.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(JobsTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
         }
@@ -83,7 +87,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
         return jobsArr.count    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else {fatalError("Unable to create cell")}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? JobsTableViewCell else {fatalError("Unable to create cell")}
         cell.userImage.image = jobsArr[indexPath.row].userImage
         cell.jobLabel.text = jobsArr[indexPath.row].jobName
         cell.dateLabel.text = jobsArr[indexPath.row].date
@@ -95,6 +99,10 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(DetailsViewController(), animated: true)
     }
     
 }
