@@ -18,7 +18,6 @@ class JobModel {
     var duration: String?
     var location: String?
     var price: String?
-    var posted: String?
     var description: String?
     
     init(postId: String, userImage: UIImage, jobName: String, date: String, location: String, price: String, posted: String, description: String) {
