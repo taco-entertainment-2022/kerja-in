@@ -18,9 +18,10 @@ class JobModel {
     var duration: String?
     var location: String?
     var price: String?
+    var posted: String?
     var description: String?
     
-    init(postId: String, userImage: UIImage, jobName: String, userName: String, duration: String, date: String, location: String, price: String, posted: String, description: String) {
+    init(postId: String, userImage: UIImage, jobName: String, date: String, location: String, price: String, posted: String, description: String) {
         self.postId = postId
         self.jobImage = userImage
         self.jobName = jobName
@@ -30,6 +31,7 @@ class JobModel {
         self.duration = duration
         self.location = location
         self.price = price
+        self.posted = posted
         self.description = description
     }
 }
