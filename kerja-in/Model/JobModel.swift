@@ -12,7 +12,10 @@ class JobModel {
     var postId: String?
     var jobImage: UIImage?
     var jobName: String?
+    var posted: String?
+    var userName: String?
     var date: String?
+    var duration: String?
     var location: String?
     var price: String?
     var posted: String?
@@ -22,10 +25,12 @@ class JobModel {
         self.postId = postId
         self.jobImage = userImage
         self.jobName = jobName
+        self.posted = posted
+        self.userName = userName
         self.date = date
+        self.duration = duration
         self.location = location
         self.price = price
-        self.posted = posted
         self.description = description
     }
 }

@@ -22,7 +22,8 @@
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
-		A8B690C328F296E300AA7A02 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */; };
+		A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87870A528F573C000633B2D /* DetailsViewController.swift */; };
+		A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */; };
 		A8B690CF28F2982000AA7A02 /* Outfit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */; };
 		A8B690D028F2982000AA7A02 /* Outfit-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C728F2982000AA7A02 /* Outfit-Black.ttf */; };
 		A8B690D128F2982000AA7A02 /* Outfit-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C828F2982000AA7A02 /* Outfit-Light.ttf */; };
@@ -35,6 +36,7 @@
 		A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690D828F2997700AA7A02 /* CustomFont.swift */; };
 		A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690DA28F29AAE00AA7A02 /* JobModel.swift */; };
 		A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */; };
+		A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EA50C828FBE7F60033D994 /* DetailsTableViewCell.swift */; };
 		D05FE163CE83B38110A3A466 /* Pods_kerja_in_kerja_inUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */; };
 		D1BF61A63B522525002F08DD /* Pods_kerja_inTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BE9644A0342F3502AFB129 /* Pods_kerja_inTests.framework */; };
 /* End PBXBuildFile section */
@@ -82,7 +84,8 @@
 		88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.release.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.release.xcconfig"; sourceTree = "<group>"; };
 		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		A87870A528F573C000633B2D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
 		A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A8B690C728F2982000AA7A02 /* Outfit-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Black.ttf"; sourceTree = "<group>"; };
 		A8B690C828F2982000AA7A02 /* Outfit-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Light.ttf"; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		A8B690D828F2997700AA7A02 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		A8B690DA28F29AAE00AA7A02 /* JobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModel.swift; sourceTree = "<group>"; };
 		A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		A8EA50C828FBE7F60033D994 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		BD0356B70D9EE08073DC66DD /* Pods-kerja-inTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1AE826927E79087CA5A8D05 /* Pods-kerja-in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.release.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +169,7 @@
 				4EE62D0628E6A5F8003B161F /* AppDelegate.swift */,
 				4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */,
 				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
+				A87870A528F573C000633B2D /* DetailsViewController.swift */,
 				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
 				A8B690DC28F29AB800AA7A02 /* Model */,
 				A8B690C128F296BC00AA7A02 /* Theme */,
@@ -196,7 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				A82FAF4E28E738EA006587D6 /* TabBar.swift */,
-				A8B690C228F296E300AA7A02 /* CustomTableViewCell.swift */,
+				A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */,
+				A8EA50C828FBE7F60033D994 /* DetailsTableViewCell.swift */,
 				A8B690D828F2997700AA7A02 /* CustomFont.swift */,
 				A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */,
 			);
@@ -514,17 +520,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */,
-				A8B690C328F296E300AA7A02 /* CustomTableViewCell.swift in Sources */,
+				A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */,
 				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
 				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
 				4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */,
 				4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */,
+				A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
 				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
+				A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,7 +702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M69S54M2M5;
+				DEVELOPMENT_TEAM = NRD8HSMRZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -722,7 +730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M69S54M2M5;
+				DEVELOPMENT_TEAM = NRD8HSMRZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

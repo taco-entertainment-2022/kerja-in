@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class CustomTableViewCell: UITableViewCell {
+class JobsTableViewCell: UITableViewCell {
     
     var isOn: Bool = false
     
     lazy var backView: UIView = {
         let view = UIView(frame: CGRect(x: 20, y: 6, width: self.frame.width + 28, height: 81))
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor(named: "White")
         return view
     }()
     
@@ -107,16 +107,29 @@ class CustomTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         
         backView.layer.cornerRadius = 10
-        backView.clipsToBounds = true
-//        backView.layer.shadowColor = UIColor.black.cgColor
-//        backView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-//        backView.layer.shadowOpacity = 1
-//        backView.layer.shadowRadius = 5.0
+        backView.clipsToBounds = false
+
+        //backView Shadow
+        backView.layer.shadowColor = UIColor(named: "Black")?.cgColor
+        backView.layer.shadowOpacity = 0.1
+        backView.layer.shadowRadius = 6
+        backView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        
+        //Card constraint
         backView.snp.makeConstraints { make in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(17)
+            make.right.equalTo(-17)
             make.top.equalTo(5)
             make.bottom.equalTo(-5)
+        }
+        
+        //Saved buttom & posted constraint
+        savedButton.snp.makeConstraints { make in
+            make.topMargin.equalTo(12)
+            make.rightMargin.equalTo(-12)
+        }
+        postedLabel.snp.makeConstraints { make in
+            make.rightMargin.bottomMargin.equalTo(-12)
         }
         
         userImage.layer.cornerRadius = 10
@@ -135,6 +148,7 @@ class CustomTableViewCell: UITableViewCell {
         backView.addSubview(priceLabel)
         backView.addSubview(postedLabel)
         backView.addSubview(savedButton)
+        
     }
 
 }
