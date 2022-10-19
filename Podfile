@@ -9,6 +9,12 @@ target 'kerja-in' do
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'Firebase', '9.6.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'LBTAComponents'
 
   target 'kerja-inTests' do
     inherit! :search_paths

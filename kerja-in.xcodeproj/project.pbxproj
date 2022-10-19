@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A412828FF9647007F56D2 /* DataModel.swift */; };
+		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
+		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
+		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
 		4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */; };
@@ -55,6 +59,10 @@
 /* Begin PBXFileReference section */
 		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
 		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E6A412828FF9647007F56D2 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE62D0628E6A5F8003B161F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E6A412728FF94BC007F56D2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A412828FF9647007F56D2 /* DataModel.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		4EE62CFA28E6A5F8003B161F = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +160,8 @@
 		4EE62D0528E6A5F8003B161F /* kerja-in */ = {
 			isa = PBXGroup;
 			children = (
+				4E6A412728FF94BC007F56D2 /* Networking */,
+				4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */,
 				4EE62D0628E6A5F8003B161F /* AppDelegate.swift */,
 				4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */,
 				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
@@ -214,6 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				A8B690DA28F29AAE00AA7A02 /* JobModel.swift */,
+				4ED4332B28F47ACD00FF74D5 /* UserModel.swift */,
+				4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +279,8 @@
 			dependencies = (
 			);
 			name = "kerja-in";
+			packageProductDependencies = (
+			);
 			productName = "kerja-in";
 			productReference = 4EE62D0328E6A5F8003B161F /* kerja-in.app */;
 			productType = "com.apple.product-type.application";
@@ -334,6 +356,8 @@
 				Base,
 			);
 			mainGroup = 4EE62CFA28E6A5F8003B161F;
+			packageReferences = (
+			);
 			productRefGroup = 4EE62D0428E6A5F8003B161F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -355,6 +379,7 @@
 				A8B690CF28F2982000AA7A02 /* Outfit-ExtraLight.ttf in Resources */,
 				A8B690D528F2982000AA7A02 /* Outfit-Thin.ttf in Resources */,
 				4EE62D1028E6A5F9003B161F /* Assets.xcassets in Resources */,
+				4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */,
 				A8B690D428F2982000AA7A02 /* Outfit-Bold.ttf in Resources */,
 				A8B690D328F2982000AA7A02 /* Outfit-Regular.ttf in Resources */,
 				A8B690D628F2982000AA7A02 /* Outfit-ExtraBold.ttf in Resources */,
@@ -493,10 +518,13 @@
 				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
 				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
 				4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */,
+				4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
+				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
+				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
