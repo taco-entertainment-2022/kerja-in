@@ -47,11 +47,11 @@ User UID <uid> String: {
 import Foundation
 import Firebase
 
-var ref: DatabaseReference!
-
-class DataModel {
-    func createPost(postID: Int, value: JobModel) {
-        ref = Database.database().reference()
-        self.ref.child(postID).setValue(value)
-    }
-}
+//var ref: DatabaseReference!
+//
+//class DataModel {
+//    func createPost(postID: Int, value: JobModel) {
+//        ref = Database.database().reference()
+////        self.ref.child(postID).setValue(value)
+//    }
+//}
