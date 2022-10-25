@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = JobsViewController()
         window?.makeKeyAndVisible()
+        
+        var navigationBar = UINavigationBar.appearance()
+        navigationBar.barTintColor = .white
+        navigationBar.tintColor = .white
 
         return true
     }

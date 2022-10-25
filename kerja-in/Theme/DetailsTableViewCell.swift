@@ -6,32 +6,27 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailsTableViewCell: UITableViewCell {
     
-    lazy var dateLabel: UILabel = {
-        let lbl = UILabel(frame: CGRect(x: 105, y: 31, width: 30, height: 30))
-        lbl.textAlignment = .left
-        lbl.font = UIFont.Outfit(.light, size: 14)
-        lbl.textColor = UIColor(named: "DarkGray")
-        return lbl
+    lazy var backView: UIView = {
+        let view = UIView(frame: CGRect(x: 20, y: 6, width: self.frame.width + 28, height: 20))
+        view.backgroundColor = UIColor.red
+        return view
     }()
     
-    lazy var locationLabel: UILabel = {
-        let lbl = UILabel(frame: CGRect(x: 240, y: 31, width: 30, height: 30))
-        lbl.textAlignment = .left
-        lbl.font = UIFont.Outfit(.light, size: 14)
-        lbl.textColor = UIColor(named: "DarkGray")
-        return lbl
-    }()
+    //MARK: - Static Label
+  
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override func layoutSubviews() {
-        contentView.backgroundColor = UIColor.clear
-        backgroundColor = UIColor.white
+        contentView.backgroundColor = UIColor(named: "White")
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

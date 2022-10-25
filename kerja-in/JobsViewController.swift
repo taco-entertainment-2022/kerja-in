@@ -18,6 +18,16 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
         
+        if #available(iOS 11.0, *) {
+            //To change iOS 11 navigationBar largeTitle color
+            
+            UINavigationBar.appearance().prefersLargeTitles = false
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        } else {
+            // for default navigation bar title color
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+        
         
         //MARK: - Set Search Bar
         searchBar.searchBarStyle = UISearchBar.Style.default
@@ -46,14 +56,14 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         
         //MARK: - Set Table View
         setTableView()
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Skripsi", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Malam Hari", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 6 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Bulanan", posted: "1 days ago", userName: "Fredo Sembi", date: "Tue, 5 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Interview Mahasiswi Teknik", posted: "2 days ago", userName: "Fredo Sembi", date: "Tue, 12 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Thesis", posted: "1 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Siang Hari", posted: "2 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Mingguan", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
-        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp 10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Skripsi", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Malam Hari", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 6 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Bulanan", posted: "1 days ago", userName: "Fredo Sembi", date: "Tue, 5 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Interview Mahasiswi Teknik", posted: "2 days ago", userName: "Fredo Sembi", date: "Tue, 12 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Thesis", posted: "1 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Siang Hari", posted: "2 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Mingguan", posted: "5 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
+        jobsArr.append(JobModel(userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", posted: "3 days ago", userName: "Fredo Sembi", date: "Mon, 7 Oct 2022", duration: "15 Menit", location: "Online", price: "Rp10.000"))
         
     }
     
@@ -64,7 +74,6 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = UIColor.clear
-        tableView.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         
         tableView.register(JobsTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -103,6 +112,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(DetailsViewController(), animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
