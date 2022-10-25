@@ -11,6 +11,17 @@
 		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
 		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
 		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
+		4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A412828FF9647007F56D2 /* DataModel.swift */; };
+		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
+		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
+		4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F542905EF47005FA88A /* editProfileController.swift */; };
+		4E930F5B2905EF47005FA88A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F552905EF47005FA88A /* HomeController.swift */; };
+		4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F562905EF47005FA88A /* Extensions.swift */; };
+		4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F572905EF47005FA88A /* SignUpController.swift */; };
+		4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */; };
+		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
+		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
+		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
 		4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */; };
@@ -62,6 +73,13 @@
 		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
 		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6A412828FF9647007F56D2 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		4E930F522905EF46005FA88A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		4E930F532905EF47005FA88A /* CurrentUserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserModels.swift; sourceTree = "<group>"; };
+		4E930F542905EF47005FA88A /* editProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editProfileController.swift; sourceTree = "<group>"; };
+		4E930F552905EF47005FA88A /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		4E930F562905EF47005FA88A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4E930F572905EF47005FA88A /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewViewModel.swift; sourceTree = "<group>"; };
 		4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
@@ -139,6 +157,43 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		4E930F5E2905F0BB005FA88A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4E930F5F2905F0D2005FA88A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
+				A87870A528F573C000633B2D /* DetailsViewController.swift */,
+				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
+				4E930F542905EF47005FA88A /* editProfileController.swift */,
+				4E930F552905EF47005FA88A /* HomeController.swift */,
+				4E930F522905EF46005FA88A /* LoginController.swift */,
+				4E930F572905EF47005FA88A /* SignUpController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4E930F602905F0DA005FA88A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4E930F612905F11C005FA88A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4E930F562905EF47005FA88A /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4EE62CFA28E6A5F8003B161F = {
 			isa = PBXGroup;
 			children = (
@@ -164,14 +219,15 @@
 		4EE62D0528E6A5F8003B161F /* kerja-in */ = {
 			isa = PBXGroup;
 			children = (
+				4E930F612905F11C005FA88A /* Helpers */,
+				4E930F602905F0DA005FA88A /* Controllers */,
+				4E930F5F2905F0D2005FA88A /* Views */,
+				4E930F5E2905F0BB005FA88A /* ViewModels */,
 				4E6A412728FF94BC007F56D2 /* Networking */,
 				4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */,
 				4EE62D0628E6A5F8003B161F /* AppDelegate.swift */,
 				4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */,
-				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
-				A87870A528F573C000633B2D /* DetailsViewController.swift */,
-				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
-				A8B690DC28F29AB800AA7A02 /* Model */,
+				A8B690DC28F29AB800AA7A02 /* Models */,
 				A8B690C128F296BC00AA7A02 /* Theme */,
 				A8B690C428F297FB00AA7A02 /* Assets */,
 				4EE62D1128E6A5F9003B161F /* LaunchScreen.storyboard */,
@@ -234,14 +290,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		A8B690DC28F29AB800AA7A02 /* Model */ = {
+		A8B690DC28F29AB800AA7A02 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4E930F532905EF47005FA88A /* CurrentUserModels.swift */,
 				A8B690DA28F29AAE00AA7A02 /* JobModel.swift */,
 				4ED4332B28F47ACD00FF74D5 /* UserModel.swift */,
 				4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D1736A308DB792A22D6AE1AF /* Pods */ = {
@@ -523,17 +580,22 @@
 				A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */,
 				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
 				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
+				4E930F582905EF47005FA88A /* LoginController.swift in Sources */,
 				4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */,
-				4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */,
+				4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */,
+				4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */,
 				A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */,
 				4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */,
+				4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
-				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
+				4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */,
+				4E930F5B2905EF47005FA88A /* HomeController.swift in Sources */,
 				A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */,
+				4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */,
 				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
