@@ -18,6 +18,16 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
         
+        if #available(iOS 11.0, *) {
+            //To change iOS 11 navigationBar largeTitle color
+            
+            UINavigationBar.appearance().prefersLargeTitles = false
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        } else {
+            // for default navigation bar title color
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+        
         
         //MARK: - Set Search Bar
         searchBar.searchBarStyle = UISearchBar.Style.default
@@ -54,7 +64,6 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         jobsArr.append(JobModel(postId: "6", userImage: UIImage(named: "Car")!, jobName: "Jasa Mengemudi Siang Hari", userName: "Indro", duration: "8 Jam", date: "Thu, 10 Oct 2022", location: "Saranjana", price: "Rp 800.000", posted: "a few seconds ago", description: "Saya tidak hafal jalan setiap kali saya diberi alamar di kota ini. Tolong temani saya untuk membacakan peta selama perjalanan. Garansi kembali tidak dijamin."))
         jobsArr.append(JobModel(postId: "7", userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja MPASI untuk bayi umur 276 bulan", userName: "Tatang Glia", duration: "1 bulan", date: "Fri, 10 Oct 2022", location: "Tasikmalaya", price: "Rp 1.500.000", posted: "a few seconds ago", description: "Minta tolong untuk memasak harian untuk anak saya yang berusia 276 bulan. Saya sibuk."))
         jobsArr.append(JobModel(postId: "8", userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", userName: "Ningsih Slay", duration: "1 jam", date: "Fri, 10 Oct 2022", location: "Batam", price: "20.000.000", posted: "a few seconds ago", description: "Dicari kadaver hidup untuk praktikum bedah organ dalam!"))
-        
     }
     
     
@@ -64,7 +73,6 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = UIColor.clear
-        tableView.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         
         tableView.register(JobsTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -103,6 +111,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(DetailsViewController(), animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

@@ -104,7 +104,6 @@ class JobsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         contentView.backgroundColor = UIColor.clear
-        backgroundColor = UIColor.clear
         
         backView.layer.cornerRadius = 10
         backView.clipsToBounds = false
