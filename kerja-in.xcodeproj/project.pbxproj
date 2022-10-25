@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A412828FF9647007F56D2 /* DataModel.swift */; };
-		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
-		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
-		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
-		4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A412828FF9647007F56D2 /* DataModel.swift */; };
 		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
 		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
 		4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F542905EF47005FA88A /* editProfileController.swift */; };
@@ -179,13 +175,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4E930F602905F0DA005FA88A /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		4E930F612905F11C005FA88A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				4E930F612905F11C005FA88A /* Helpers */,
-				4E930F602905F0DA005FA88A /* Controllers */,
 				4E930F5F2905F0D2005FA88A /* Views */,
 				4E930F5E2905F0BB005FA88A /* ViewModels */,
 				4E6A412728FF94BC007F56D2 /* Networking */,
