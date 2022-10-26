@@ -16,12 +16,15 @@ class LoginController: UIViewController {
     //MARK: - Properties
     lazy var titleTextView: UILabel = {
         let text = UILabel()
-        return text.displayText(withPlaceholder: "Masuk", color: .black, isSecureTextEntry: false)
+        //text.font = UIFont(name: "Outfit-SemiBold", size: 32)
+        text.font = UIFont.Outfit(.semiBold, size: 32)
+
+        return text.displayText(withPlaceholder: "Masuk", font: UIFont.Outfit(.semiBold, size: 32), color: .black, isSecureTextEntry: false)
     }()
     
     lazy var bodyTextView: UILabel = {
         let text = UILabel()
-        return text.displayText(withPlaceholder: "Masukkan alamat email dan password yang  telah didaftarkan", color: UIColor.placeHolderColor(),isSecureTextEntry: false)
+        return text.displayText(withPlaceholder: "Masukkan alamat email dan password yang  telah didaftarkan", font: UIFont.Outfit(.light, size: 16), color: UIColor.placeHolderColor(),isSecureTextEntry: false)
     }()
     
 
@@ -46,6 +49,7 @@ class LoginController: UIViewController {
         let tf = UITextField()
         return tf.textField(withPlaceholder: "Password", isSecureTextEntry: false)
     }()
+    
     
     let seperator: UIImageView = {
        
@@ -86,13 +90,13 @@ class LoginController: UIViewController {
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Masuk menggunakan Google", for: .normal)
+        button.setTitle("Daftar menggunakan Google", for: .normal)
         button.setImage(UIImage(named: "google"), for: .normal)
         button.imageView?.anchor(top: nil, left: nil , bottom: nil, right: button.titleLabel?.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 16, height: 16)
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
@@ -148,7 +152,11 @@ class LoginController: UIViewController {
     }
     
     @objc func handleShowSignUp() {
-        navigationController?.pushViewController(SignUpController(), animated: true)
+        //navigationController?.pushViewController(SignUpController(), animated: true)
+        let navVC = UINavigationController(rootViewController: SignUpController())
+        navVC.modalPresentationStyle = .fullScreen
+        navVC.modalTransitionStyle = .coverVertical
+        present(navVC, animated: true)
     }
     
     //MARK: - API
@@ -162,11 +170,22 @@ class LoginController: UIViewController {
                 return
             }
             
-            guard let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {return}
-            guard let controller = navController.viewControllers[0] as? HomeController else {return}
-            controller.configureViewComponents()
+//            guard let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {return}
+//            guard let controller = navController.viewControllers[0] as? TabBar else {return}
+//            controller.setupVCs()
             print("Successfully logged user in...")
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            
+            UserDefaults.standard.set(true, forKey: "userLoggedIn")
+            UserDefaults.standard.synchronize()
+            
+            //self.present(TabBar(), animated: true)
+            let navVC = UINavigationController(rootViewController: LoginController())
+            navVC.modalPresentationStyle = .fullScreen
+            //navVC.modalTransitionStyle = .coverVertical
+            self.present(navVC, animated: false) {
+                navVC.pushViewController(TabBar(), animated: false)
+            }
 
         }
         
@@ -249,13 +268,6 @@ class LoginController: UIViewController {
                 
               
             }
-            
-            
-            
-            
-            
-            
-            
             
         }
     }
