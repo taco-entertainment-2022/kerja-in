@@ -429,6 +429,7 @@ class SignUpController: UIViewController {
                 }
                 // User is signed in
                 print(" User is signed in")
+                //self.navigationController?.pushViewController(JobsViewController(), animated: true)
                 
                 //MARK: Store Google Data to Firestore
                 let db = Firestore.firestore()
