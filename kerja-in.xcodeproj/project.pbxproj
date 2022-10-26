@@ -31,6 +31,7 @@
 		4EE62D2828E6A5F9003B161F /* kerja_inUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2728E6A5F9003B161F /* kerja_inUITests.swift */; };
 		4EE62D2A28E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */; };
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
+		933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
 		A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87870A528F573C000633B2D /* DetailsViewController.swift */; };
@@ -104,6 +105,7 @@
 		790C3A9943424ABD8223D6AB /* Pods-kerja-in-kerja-inUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.release.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.release.xcconfig"; sourceTree = "<group>"; };
 		79ABD9FEF74FF050A31328F9 /* Pods-kerja-in-kerja-inUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in-kerja-inUITests.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in-kerja-inUITests/Pods-kerja-in-kerja-inUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.release.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.release.xcconfig"; sourceTree = "<group>"; };
+		9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A87870A528F573C000633B2D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				A82FAF4E28E738EA006587D6 /* TabBar.swift */,
+				9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */,
 				A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */,
 				A8EA50C828FBE7F60033D994 /* DetailsTableViewCell.swift */,
 				A8B690D828F2997700AA7A02 /* CustomFont.swift */,
@@ -576,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */,
 				A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */,
 				A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */,
 				4EE22AB12912F76D0090F7CE /* TransitioningDelegate.swift in Sources */,
