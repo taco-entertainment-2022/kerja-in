@@ -59,6 +59,28 @@ extension UIView {
         return view
     }
     
+    func textFieldContainerView(view: UIView,/* _ button: UIButton,*/ _ textField: UITextField) -> UIView {
+        
+        //let imageView = UIImageView()
+        //imageView.image = image
+        //imageView.alpha = 0.87
+        //view.addSubview(imageView)
+        //imageView.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 24, height: 24)
+        //imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        view.addSubview(textField)
+        textField.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 24, height: 43)
+        textField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        
+//        let seperatorView = UIView()
+//        seperatorView.backgroundColor = UIColor(white: 1, alpha: 0.87)
+//        view.addSubview(seperatorView)
+//        seperatorView.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.75)
+        
+        return view
+    }
+    
 }
 
 extension UIColor {
@@ -93,7 +115,7 @@ extension UITextField {
         tf.borderStyle = .none
         tf.backgroundColor = UIColor.textFieldColor()
         tf.layer.cornerRadius = 10
-        tf.font = UIFont.systemFont(ofSize: 16)
+        tf.font = UIFont.Outfit(.medium, size: 16)
         tf.textColor = .black
         tf.isSecureTextEntry = isSecureTextEntry
         tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor()])
@@ -104,12 +126,34 @@ extension UITextField {
     }
 }
 
+extension UITextField {
+    
+    func enablePasswordToggle(){
+        let button = UIButton(type: .custom)
+        //setPasswordToggleImage(button)
+        
+        button.setImage(UIImage(named: "icons8-open-eye-48"), for: .normal)
+        button.setImage(UIImage(named: "icons8-closed-eye-48"), for: .selected)
+        
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+        button.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
+        self.rightView = button
+        self.rightViewMode = .always
+    }
+    
+    @objc func togglePasswordView() {
+        self.isSecureTextEntry.toggle()
+        self.isSelected.toggle()
+    }
+}
+
 extension UILabel {
-    func displayText(withPlaceholder placeholder: String, color: UIColor, isSecureTextEntry: Bool) -> UILabel {
+    func displayText(withPlaceholder placeholder: String, font: UIFont, color: UIColor, isSecureTextEntry: Bool) -> UILabel {
         let displayText = UILabel()
         
         displayText.text = placeholder
-        displayText.font = UIFont.systemFont(ofSize: 16)
+        displayText.font = font
         displayText.textAlignment = .left
         displayText.textColor = color
         displayText.numberOfLines = 0

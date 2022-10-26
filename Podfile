@@ -15,6 +15,7 @@ target 'kerja-in' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'LBTAComponents'
+  pod 'Firebase/Firestore'
   pod 'DropDown'
 
   target 'kerja-inTests' do

@@ -20,10 +20,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        window.rootViewController = TabBar()
+        checkAuth()
         window.makeKeyAndVisible()
         
       
+    }
+    
+    func checkAuth() {
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
+        if isLoggedIn == true{
+         print("loggedIn")
+            window?.rootViewController = TabBar()
+
+        }else{
+         print("loggedOut")
+            window?.rootViewController = LoginController()
+
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

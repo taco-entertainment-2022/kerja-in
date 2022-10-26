@@ -9,18 +9,19 @@ import UIKit
 import Firebase
 import AuthenticationServices
 import GoogleSignIn
+import FirebaseFirestore
 
 class SignUpController: UIViewController {
     
     //MARK: - Properties
     lazy var titleTextView: UILabel = {
         let text = UILabel()
-        return text.displayText(withPlaceholder: "Daftar", color: .black, isSecureTextEntry: false)
+        return text.displayText(withPlaceholder: "Daftar", font: UIFont.Outfit(.semiBold, size: 32), color: .black, isSecureTextEntry: false)
     }()
     
     lazy var bodyTextView: UILabel = {
         let text = UILabel()
-        return text.displayText(withPlaceholder: "Daftarkan diri anda untuk dapat melamar dan menawarkan pekerjaan tambahan", color: UIColor.placeHolderColor(),isSecureTextEntry: false)
+        return text.displayText(withPlaceholder: "Daftarkan diri anda untuk dapat melamar dan menawarkan pekerjaan tambahan", font: UIFont.Outfit(.light, size: 16), color: UIColor.placeHolderColor(),isSecureTextEntry: false)
     }()
  
     lazy var nameContainerView: UIView = {
@@ -91,7 +92,7 @@ class SignUpController: UIViewController {
         attributedTitle.append(NSAttributedString(string: "Masuk", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
-        
+
         return button
     }()
     
@@ -110,20 +111,28 @@ class SignUpController: UIViewController {
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
         view.addSubview(button)
-        button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+        //button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+        button.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            //make.topMargin.equalTo(607)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            make.bottom.equalTo(-146)
+        }
         
         //return button
     }//()
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Masuk menggunakan Google", for: .normal)
+        button.setTitle("Daftar menggunakan Google", for: .normal)
         button.setImage(UIImage(named: "google"), for: .normal)
         button.imageView?.anchor(top: nil, left: nil , bottom: nil, right: button.titleLabel?.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 16, height: 16)
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
@@ -159,7 +168,11 @@ class SignUpController: UIViewController {
     }
     
     @objc func handleShowLogin() {
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
+        let navVC = UINavigationController(rootViewController: LoginController())
+        navVC.modalPresentationStyle = .fullScreen
+        navVC.modalTransitionStyle = .coverVertical
+        present(navVC, animated: true)
     }
     
     @objc func handleAppleLogin() {
@@ -183,28 +196,36 @@ class SignUpController: UIViewController {
                 return
             }
             
-            guard let uid = result?.user.uid else {return}
-            
-            let values = ["email": email, "username": username, "phone": phone]
-
-            
-            Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
+            else {
                 
-                if let error = error {
-                    print("Failed to update database values with error: ", error.localizedDescription)
-                    return
+                // No Error. Store name
+                let db = Firestore.firestore()
+                
+                db.collection("user").addDocument(data: ["firstname": username, "phone": phone, "email": email, "uid":result!.user.uid]) { (error) in
+                    
+                    if let error = error {
+                        print("Failed to update database values with error: ", error.localizedDescription)
+                        return
+                    }
+                
+                }
+                print("User Sign In")
+                // Transition to home screen
+                //self.transitionToHome()
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                UserDefaults.standard.synchronize()
+                
+                //self.present(TabBar(), animated: true)
+                let navVC = UINavigationController(rootViewController: SignUpController())
+                navVC.modalPresentationStyle = .fullScreen
+                //navVC.modalTransitionStyle = .coverVertical
+                self.present(navVC, animated: false) {
+                    navVC.pushViewController(TabBar(), animated: false)
                 }
                 
-                guard let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {return}
                 
-                guard let controller = navController.viewControllers[0] as? HomeController else {return}
-                
-                controller.configureViewComponents()
-                
-                print("Successfully signed user up...")
-                self.dismiss(animated: true, completion: nil)
+            }
 
-            })
         }
     }
     
@@ -278,6 +299,7 @@ class SignUpController: UIViewController {
                 }
                 // User is signed in
                 print(" User is signed in")
+                //self.navigationController?.pushViewController(JobsViewController(), animated: true)
                 
                 // go to google view controller
                // goToHome()
@@ -303,37 +325,136 @@ class SignUpController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(titleTextView)
-        titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        //titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        
+        titleTextView.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(40)
+            make.topMargin.equalTo(15)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-261)
+            //make.bottom.equalTo(-742)
+        }
         
         view.addSubview(bodyTextView)
-        bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
+        //bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
+        
+        bodyTextView.snp.makeConstraints { make in
+            make.width.equalTo(321)
+            make.height.equalTo(50)
+            make.topMargin.equalTo(60)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-39)
+            //make.bottom.equalTo(-697)
+        }
         
         view.addSubview(nameContainerView)
-        nameContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        //nameContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        
+        nameContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.topMargin.equalTo(120)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            //make.bottom.equalTo(-634)
+        }
         
         view.addSubview(phoneContainerView)
-        phoneContainerView.anchor(top: nameContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        //phoneContainerView.anchor(top: nameContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        
+        phoneContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.topMargin.equalTo(178)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            //make.bottom.equalTo(-576)
+        }
         
         view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: phoneContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        //emailContainerView.anchor(top: phoneContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        
+        emailContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.topMargin.equalTo(236)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            //make.bottom.equalTo(-518)
+        }
 
         view.addSubview(passwordContainerView)
-        passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        //passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        
+        passwordContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.topMargin.equalTo(294)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            //make.bottom.equalTo(-460)
+        }
         
         view.addSubview(rePasswordContainerView)
-        rePasswordContainerView.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        //rePasswordContainerView.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
+        
+        rePasswordContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.topMargin.equalTo(352)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            //make.bottom.equalTo(-402)
+        }
 
         view.addSubview(loginButton)
-        loginButton.anchor(top: rePasswordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 93, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+        //loginButton.anchor(top: rePasswordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 93, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+        
+        loginButton.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            //make.topMargin.equalTo(488)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            make.bottom.equalTo(-265)
+        }
 
         view.addSubview(dontHaveAccount)
-        dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 14, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
+        //dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 14, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
+        
+        dontHaveAccount.snp.makeConstraints { make in
+            make.width.equalTo(220)
+            make.height.equalTo(20)
+            //make.topMargin.equalTo(546)
+            make.leftMargin.equalTo(86)
+            //make.rightMargin.equalTo(-94)
+            make.bottom.equalTo(-231)
+        }
         
         view.addSubview(seperator)
-        seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 43, paddingBottom: 0, paddingRight: 41, width: 305, height: 19)
+        //seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 43, paddingBottom: 0, paddingRight: 41, width: 305, height: 19)
+        
+        seperator.snp.makeConstraints { make in
+            make.width.equalTo(305)
+            make.height.equalTo(19)
+            //make.topMargin.equalTo(573)
+            make.leftMargin.equalTo(34)
+            //make.rightMargin.equalTo(-41)
+            make.bottom.equalTo(-205)
+        }
         
         view.addSubview(googleLoginButton)
-        googleLoginButton.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 72, paddingLeft: 30, paddingBottom: 89, paddingRight: 30, width: 330, height: 44)
+        //googleLoginButton.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 72, paddingLeft: 30, paddingBottom: 89, paddingRight: 30, width: 330, height: 44)
+        
+        googleLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            //make.topMargin.equalTo(664)
+            make.leftMargin.equalTo(21)
+            //make.rightMargin.equalTo(-29)
+            make.bottom.equalTo(-89)
+        }
     }
 }
 
