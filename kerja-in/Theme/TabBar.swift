@@ -30,7 +30,7 @@ class TabBar: UITabBarController {
     func setupVCs() {
         viewControllers = [
             createNavController(for: JobsViewController(), title: NSLocalizedString("Jobs", comment: ""), image: UIImage(systemName: "briefcase.fill")!),
-            createNavController(for: ProfileViewController(), title: NSLocalizedString("Profile", comment: ""), image: UIImage(systemName: "person.fill")!)
+            createNavController(for: AddJobViewController(), title: NSLocalizedString("Profile", comment: ""), image: UIImage(systemName: "person.fill")!)
         ]
     }
     
