@@ -6883,8 +6883,8 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2B5E7DCCBBFB32341D857D01211A1A3;
-			remoteInfo = nanopb;
+			remoteGlobalIDString = B53D977A951AFC38B21751B706C1DF83;
+			remoteInfo = GoogleAppMeasurement;
 		};
 		2664736437E11DC5DDD1684003601861 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -6995,8 +6995,8 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 736AF68F6527ACF6B4A4C54728824A1C;
-			remoteInfo = FirebaseDatabase;
+			remoteGlobalIDString = DBA2B63E3A5FE83FE89E731664C9269F;
+			remoteInfo = FirebaseFirestore;
 		};
 		55E64161D72C115AAC7CB032F509FF8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -7058,8 +7058,8 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D7F5D5DD528D21A72DC87ADA5B12E2D;
-			remoteInfo = GoogleUtilities;
+			remoteGlobalIDString = 8627999EF1D5E93E13DAFF580DA8CDCF;
+			remoteInfo = GTMAppAuth;
 		};
 		6AA6AD3F7340F7A97334F79CA40EB4BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -7401,8 +7401,8 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5C0371EE948D0357B8EE0E34ABB44BF0;
-			remoteInfo = GoogleDataTransport;
+			remoteGlobalIDString = 25E9E9A17BC3F670357D7385C521E48E;
+			remoteInfo = FirebaseCoreInternal;
 		};
 		DD24786947FB0F4C3617DA57F5815628 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -14789,6 +14789,7 @@
 		331D7F65ABD947A391F0E7105DB841AC /* endpoint.cc */ = {isa = PBXFileReference; includeInIndex = 1; name = endpoint.cc; path = src/core/lib/iomgr/event_engine/endpoint.cc; sourceTree = "<group>"; };
 		332B2CCEFEA573AF5C375CE4930DAE6D /* async.c */ = {isa = PBXFileReference; includeInIndex = 1; name = async.c; path = src/unix/async.c; sourceTree = "<group>"; };
 		333DB942541DFDD4D0C138C354F57E36 /* Pods-kerja-in-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-kerja-in-umbrella.h"; sourceTree = "<group>"; };
+		3345643A3EF0C0ABD254BB7058DC030A /* FWriteRecord.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FWriteRecord.h; path = FirebaseDatabase/Sources/Core/FWriteRecord.h; sourceTree = "<group>"; };
 		3347A1AB6546F0A3977529B8F199DC41 /* PromisesObjC */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PromisesObjC; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33491FBBF7E9E58EF9888F7013443EDC /* secure_server_credentials.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = secure_server_credentials.h; path = src/cpp/server/secure_server_credentials.h; sourceTree = "<group>"; };
 		334FC6AB22B71736A203A6632A6C43DA /* unscaledcycleclock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = unscaledcycleclock.h; path = absl/base/internal/unscaledcycleclock.h; sourceTree = "<group>"; };
@@ -29760,8 +29761,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -29935,6 +29936,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE276B8A49DAC13B29CB053C2FF68E58 /* roots.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30054,6 +30056,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DC2C30DF3829981C5A1E60CDA080E78 /* ar.lproj in Resources */,
+				48FB6CD1FB0CE1DDFE364C7744AEB509 /* ca.lproj in Resources */,
+				366E1524F94DF13AA5DE467A1B7ACF81 /* cs.lproj in Resources */,
+				965710D9010CC058A180D163C76FF4CE /* da.lproj in Resources */,
+				2C5A4A2ABAD44AFEE0C186D4171A0AC8 /* de.lproj in Resources */,
+				0C41DFB57FA16A86F2303ECF753E89E8 /* el.lproj in Resources */,
+				5D0547E5C5718481780E9636561EB9D3 /* en.lproj in Resources */,
+				FA36E1137D89373EB6E786F8EE6D871B /* en_GB.lproj in Resources */,
+				9ACDEE988A2B1E5F3556FA763D6EB286 /* es.lproj in Resources */,
+				D739CC92CEF7E7716AED1D99E7FA396E /* es_MX.lproj in Resources */,
+				BE74F0B9C45741F4F32C1111B37FFD02 /* fi.lproj in Resources */,
+				19DBD50703ACA2A9CACC2E6437152FDA /* fr.lproj in Resources */,
+				DD6ECEC3A3284807F41C30F3AC74FA45 /* fr_CA.lproj in Resources */,
+				91D0F8FD93316D1187166547BA1A7BCC /* google.png in Resources */,
+				17D9A5FE0D751866905A0F92F624396F /* google@2x.png in Resources */,
+				07E89CC3C8D55ED235F692C8C3D9C043 /* google@3x.png in Resources */,
+				23313F9AD9E55D6B9B01E47D574908A9 /* he.lproj in Resources */,
+				44957005A36B300F06F1F83E1F92B6EE /* hi.lproj in Resources */,
+				B9AF618D8B1CAA988DEA730476BD33FD /* hr.lproj in Resources */,
+				C002548AEAAEFAD35ADB6EFFFC69C165 /* hu.lproj in Resources */,
+				7597C5EAA0AF1858EDCBE514831AFF80 /* id.lproj in Resources */,
+				1F23374ABE7B598F8328D5E3AD5529B6 /* it.lproj in Resources */,
+				E0CCF3CDE0399394E0FE64A3AD817A04 /* ja.lproj in Resources */,
+				5CACD8032E0128A97D8AF29AE92999AB /* ko.lproj in Resources */,
+				A13F7E8E3F2CDD2B9B5EE5397A3EE20F /* ms.lproj in Resources */,
+				008A06E0E312E717ECB9FCC9DA9E9981 /* nb.lproj in Resources */,
+				157F805F7AC076421D77D7860161DC29 /* nl.lproj in Resources */,
+				1907FF1A3C2048377AA1D1682D6E4753 /* pl.lproj in Resources */,
+				7712E6A1306326E678C6AEED2216C5E2 /* pt.lproj in Resources */,
+				8874E3E60B8290D2BE9B0638A307CE48 /* pt_BR.lproj in Resources */,
+				FD54B0584D10B049AA5911B04B3C66D2 /* pt_PT.lproj in Resources */,
+				91313E68522DCD259C9C8D6EE51D7F70 /* ro.lproj in Resources */,
+				5F3E4E18977C42D309B11FDEA71D4C32 /* Roboto-Bold.ttf in Resources */,
+				754CABC776A4C20FDFD26112D61F24E2 /* ru.lproj in Resources */,
+				73505D098ADB476B964CA8C4C817DB57 /* sk.lproj in Resources */,
+				AC3CE2CE9BC80B80271E9BEFEB52A921 /* sv.lproj in Resources */,
+				5851AB48E57E750C846C9104714BE087 /* th.lproj in Resources */,
+				8D2261B7CB75A50D6F62A68A12F00C00 /* tr.lproj in Resources */,
+				4254083E0A7F3C9B9487AA633FC69D6D /* uk.lproj in Resources */,
+				301EE00FE31AE46CB0F56B9D248004ED /* vi.lproj in Resources */,
+				5B1B8986EBA0BBC553497CF76372F5AE /* zh_CN.lproj in Resources */,
+				E7819F61C8AA02ED22FF3BF6964CB9FC /* zh_TW.lproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30119,6 +30163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF52D786A8770CCB89E0DB063D82E522 /* GoogleSignIn-GoogleSignIn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33673,6 +33718,139 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		20DCE7B9BCAA2D824119BB2E4D2CB7BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A08D9B1D3956C52D8E662BD18142884 /* GoogleUtilities.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities.modulemap";
+				PRODUCT_MODULE_NAME = GoogleUtilities;
+				PRODUCT_NAME = GoogleUtilities;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		228D87324B2B0A7D4657C219286CA0FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8AE67A4048F60933A06622026FC938D /* GTMSessionFetcher.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FirebaseCore/FirebaseCore.modulemap";
+				PRODUCT_MODULE_NAME = FirebaseCore;
+				PRODUCT_NAME = FirebaseCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		24A35A56E75BFA963EEE01141201B146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2497058846A9D79B8217A3F6BDCF8725 /* Pods-kerja-in.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities.modulemap";
+				PRODUCT_MODULE_NAME = GoogleUtilities;
+				PRODUCT_NAME = GoogleUtilities;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		27D610BC77EF98E1559F945E56AE9751 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52FFEA0EDD165E8D303EECA18B712196 /* RxSwift.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RxSwift/RxSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RxSwift/RxSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/RxSwift/RxSwift.modulemap";
+				PRODUCT_MODULE_NAME = RxSwift;
+				PRODUCT_NAME = RxSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -34142,11 +34320,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		389BDC2A283E199CCB3B73D183E7DEB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -34175,6 +34352,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -34359,8 +34537,25 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		589807FCEC35B025DA09A80BC0330029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 551CCF7401A1B277F569842D3FB2FCC1 /* GoogleSignIn.debug.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/GoogleSignIn";
+				IBSC_MODULE = GoogleSignIn;
+				INFOPLIST_FILE = "Target Support Files/GoogleSignIn/ResourceBundle-GoogleSignIn-GoogleSignIn-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = GoogleSignIn;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -34398,7 +34593,7 @@
 			};
 			name = Release;
 		};
-		577A24D81FA00BED9154F445BE58F743 /* Release */ = {
+		59FAFEBADDCE0BB9847F3EDC1E8D89D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4FE7349AE6635B138E68E32CC2327E1 /* RxCocoa.release.xcconfig */;
 			buildSettings = {
@@ -34882,6 +35077,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19934CEC68EBF304231F84056581B437 /* FirebaseCoreInternal.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -34925,6 +35122,37 @@
 				INFOPLIST_FILE = "Target Support Files/RxRelay/RxRelay-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FirebaseCoreInternal/FirebaseCoreInternal.modulemap";
+				PRODUCT_MODULE_NAME = FirebaseCoreInternal;
+				PRODUCT_NAME = FirebaseCoreInternal;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		726975405D1ABE1E2653EEFF4BE52E7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3196241D24FA0F20176B791F416B0CA7 /* RxRelay.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RxRelay/RxRelay-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RxRelay/RxRelay-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -35049,7 +35277,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -35067,12 +35295,13 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		887F8FC4D708DC24F3BFAFBF55534E01 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -35092,7 +35321,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6694797197280A87BACF7577C848938E /* GoogleDataTransport.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -35102,7 +35330,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -35369,11 +35597,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		8A2766993FAB49F43DABC2169D0C56BC /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -35535,6 +35762,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49072EAC983A8AAB1511195690C3ED8D /* Pods-kerja-in.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -35546,7 +35774,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/gRPC-Core/gRPC-Core-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/gRPC-Core/gRPC-Core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -35608,7 +35836,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/abseil/abseil-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/abseil/abseil-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -35620,7 +35848,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -36227,8 +36455,26 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E13ECF23C78790202CA31917DFCF1FC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C18D9ECC3B13767C0C92AFDD406F8F0F /* GoogleAppMeasurement.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
