@@ -10,23 +10,25 @@ import UIKit
 class AddJobViewController: UIViewController {
     
     private let jobTitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 0, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Judul Pekerjaan"
         return label
     }()
     
     private let jobTitleInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 30, width: 350, height: 44))
-//        textField.placeholder = "Placeholder text"
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
         return textField
     }()
     
     private let jobDescriptionLabel: UILabel = {
-       let label = UILabel(frame: CGRect(x: 10, y: 90, width: 350, height: 24))
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Deskripsi Pekerjaan"
         
@@ -34,7 +36,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let jobDescriptionInput: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 10, y: 118, width: 350, height: 100))
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = UIColor(named: "LightGray")
         textView.layer.cornerRadius = 10
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -43,7 +46,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let categoryLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 230, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Pilih Kategori"
         
@@ -51,7 +55,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let categoryInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 260, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.placeholder = "Pilih Kategori"
@@ -60,7 +65,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let jobDurationLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 320, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Durasi Pekerjaan"
         
@@ -68,7 +74,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let jobDurationInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 350, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
@@ -76,7 +83,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let locationLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 410, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Lokasi"
         
@@ -84,7 +92,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let locationInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 440, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
@@ -92,7 +101,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let feeLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 500, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Bayaran"
         
@@ -100,7 +110,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let feeInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 530, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
@@ -108,7 +119,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let contactLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 590, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Nomor Whatsapp"
         
@@ -116,7 +128,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let contactInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 620, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
@@ -124,7 +137,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let jobDateLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 680, width: 350, height: 24))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.text = "Waktu Pengerjaan"
         
@@ -132,7 +146,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let jobDateInput: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 10, y: 710, width: 350, height: 44))
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         
@@ -140,7 +155,8 @@ class AddJobViewController: UIViewController {
     }()
     
     private let createButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 10, y: 800, width: 350, height: 44))
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 26
         button.setTitle("Post Job", for: .normal)
         button.backgroundColor = UIColor(named: "DarkBlue")
@@ -160,33 +176,124 @@ class AddJobViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
+    
+        setUpViews()
+    }
+    
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .red
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let scrollView: UIScrollView = {
-            let scrollView = UIScrollView(frame: CGRect(x: 10, y: 120, width: view.frame.size.width - 20, height: view.frame.size.height - 20))
-//            scrollView.backgroundColor = .red
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            
-            return scrollView
-        }()
-        
+        return scrollView
+    }()
+    
+    private func setUpViews() {
         view.addSubview(scrollView)
-        scrollView.contentSize = CGSize(width: view.frame.size.width - 20, height: 1050)
-        scrollView.addSubview(jobTitleLabel)
-        scrollView.addSubview(jobTitleInput)
-        scrollView.addSubview(jobDescriptionLabel)
-        scrollView.addSubview(jobDescriptionInput)
-        scrollView.addSubview(categoryLabel)
-        scrollView.addSubview(categoryInput)
-        scrollView.addSubview(jobDurationLabel)
-        scrollView.addSubview(jobDurationInput)
-        scrollView.addSubview(locationLabel)
-        scrollView.addSubview(locationInput)
-        scrollView.addSubview(feeLabel)
-        scrollView.addSubview(feeInput)
-        scrollView.addSubview(contactLabel)
-        scrollView.addSubview(contactInput)
-        scrollView.addSubview(jobDateLabel)
-        scrollView.addSubview(jobDateInput)
-        scrollView.addSubview(createButton)
+        
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, createButton]
+        
+        for i in 0..<views.count {
+            scrollView.addSubview(views[i])
+        }
+        
+        jobTitleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
+        }
+        
+        jobTitleInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(jobTitleLabel.snp.bottom).offset(7)
+        }
+        
+        jobDescriptionLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(jobTitleInput.snp.bottom).offset(20)
+        }
+        
+        jobDescriptionInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(120)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(jobDescriptionLabel.snp.bottom).offset(7)
+        }
+        
+        categoryLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(jobDescriptionInput.snp.bottom).offset(20)
+        }
+        
+        categoryInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(categoryLabel.snp.bottom).offset(7)
+        }
+        
+        jobDurationLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(categoryInput.snp.bottom).offset(20)
+        }
+        
+        jobDurationInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(jobDurationLabel.snp.bottom).offset(7)
+        }
+        
+        locationLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(jobDurationInput.snp.bottom).offset(20)
+        }
+        
+        locationInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(locationLabel.snp.bottom).offset(7)
+        }
+        
+        feeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(locationInput.snp.bottom).offset(20)
+        }
+        
+        feeInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(feeLabel.snp.bottom).offset(7)
+        }
+        
+        contactLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(feeInput.snp.bottom).offset(20)
+        }
+        
+        contactInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(contactLabel.snp.bottom).offset(7)
+        }
+        
+        jobDateLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(contactInput.snp.bottom).offset(20)
+        }
+        
+        jobDateInput.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(jobDateLabel.snp.bottom).offset(7)
+        }
+        
+        createButton.snp.makeConstraints { (make) in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(jobDateInput.snp.bottom).offset(45)
+        }
     }
 }
