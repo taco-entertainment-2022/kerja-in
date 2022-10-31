@@ -12,6 +12,7 @@ class AddJobViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 900)
         
         return scrollView
     }()
@@ -22,6 +23,7 @@ class AddJobViewController: UIViewController {
         stackView.alignment = .leading
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
         
         return stackView
     }()
@@ -197,6 +199,13 @@ class AddJobViewController: UIViewController {
         return button
     }()
     
+    let randomBox: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -221,7 +230,7 @@ class AddJobViewController: UIViewController {
         contentView.addSubview(stackView)
         
         let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, createButton]
-        
+
         for i in 0..<views.count {
             stackView.addArrangedSubview(views[i])
         }
@@ -237,6 +246,7 @@ class AddJobViewController: UIViewController {
             make.bottom.equalTo(scrollView.snp.bottom)
             make.left.equalTo(scrollView.snp.left)
             make.right.equalTo(scrollView.snp.right)
+            make.height.equalTo(900)
         }
         
         stackView.snp.makeConstraints { (make) in
@@ -247,14 +257,14 @@ class AddJobViewController: UIViewController {
         }
         
         jobTitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
+            make.top.equalTo(contentView.snp.top)
         }
         
         jobTitleInput.snp.makeConstraints { (make) in
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobTitleLabel.snp.bottom).offset(7)
+            make.top.equalTo(jobTitleLabel.snp.bottom)
         }
         
         jobDescriptionLabel.snp.makeConstraints { (make) in
@@ -265,7 +275,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(120)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDescriptionLabel.snp.bottom).offset(7)
+            make.top.equalTo(jobDescriptionLabel.snp.bottom)
         }
         
         categoryLabel.snp.makeConstraints { (make) in
@@ -276,7 +286,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(categoryLabel.snp.bottom).offset(7)
+            make.top.equalTo(categoryLabel.snp.bottom)
         }
         
         jobDurationLabel.snp.makeConstraints { (make) in
@@ -287,7 +297,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDurationLabel.snp.bottom).offset(7)
+            make.top.equalTo(jobDurationLabel.snp.bottom)
         }
         
         locationLabel.snp.makeConstraints { (make) in
@@ -298,7 +308,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(locationLabel.snp.bottom).offset(7)
+            make.top.equalTo(locationLabel.snp.bottom)
         }
         
         feeLabel.snp.makeConstraints { (make) in
@@ -309,7 +319,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(feeLabel.snp.bottom).offset(7)
+            make.top.equalTo(feeLabel.snp.bottom)
         }
         
         contactLabel.snp.makeConstraints { (make) in
@@ -320,7 +330,7 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(contactLabel.snp.bottom).offset(7)
+            make.top.equalTo(contactLabel.snp.bottom)
         }
         
         jobDateLabel.snp.makeConstraints { (make) in
@@ -331,14 +341,13 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDateLabel.snp.bottom).offset(7)
+            make.top.equalTo(jobDateLabel.snp.bottom)
         }
         
         createButton.snp.makeConstraints { (make) in
             make.width.equalTo(350)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDateInput.snp.bottom).offset(45)
         }
     }
 }
