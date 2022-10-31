@@ -18,6 +18,7 @@
 		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
 		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
 		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
+		4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */; };
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
 		4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */; };
@@ -82,6 +83,7 @@
 		4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
+		4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewViewModel.swift; sourceTree = "<group>"; };
 		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE62D0628E6A5F8003B161F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */,
+				4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */,
 				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
 				933616822909C16800F6B668 /* CheckboxButton.swift in Sources */,
+				4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
