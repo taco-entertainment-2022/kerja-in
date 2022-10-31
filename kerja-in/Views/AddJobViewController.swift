@@ -314,6 +314,7 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
+        createButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
     }
     
     private func setUpViews() {
