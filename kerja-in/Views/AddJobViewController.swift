@@ -9,10 +9,35 @@ import UIKit
 
 class AddJobViewController: UIViewController {
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return contentView
+    }()
+    
     private let jobTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Judul Pekerjaan"
         return label
     }()
@@ -30,6 +55,7 @@ class AddJobViewController: UIViewController {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Deskripsi Pekerjaan"
         
         return label
@@ -49,6 +75,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Pilih Kategori"
         
         return label
@@ -59,7 +86,7 @@ class AddJobViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
-        textField.placeholder = "Pilih Kategori"
+        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Kategori", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.semiBold, size: 16)])
         
         return textField
     }()
@@ -68,6 +95,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Durasi Pekerjaan"
         
         return label
@@ -86,6 +114,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Lokasi"
         
         return label
@@ -96,6 +125,7 @@ class AddJobViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
+        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Lokasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.semiBold, size: 16)])
         
         return textField
     }()
@@ -104,6 +134,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Bayaran"
         
         return label
@@ -122,6 +153,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Nomor Whatsapp"
         
         return label
@@ -140,6 +172,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.font = UIFont.Outfit(.semiBold, size: 18)
         label.text = "Waktu Pengerjaan"
         
         return label
@@ -170,35 +203,47 @@ class AddJobViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(named: "DarkBlue")
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.Outfit(.semiBold, size: 20)]
+        appearance.backgroundColor = UIColor(named: "DarkBlue")
         
         navigationController?.navigationBar.tintColor = UIColor(named: "White")
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
-    
+            
         setUpViews()
     }
     
-    private var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .red
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return scrollView
-    }()
-    
     private func setUpViews() {
         view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+        
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, createButton]
+        
+        for i in 0..<views.count {
+            stackView.addArrangedSubview(views[i])
+        }
+        
+        scrollView.addSubview(stackView)
         
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
-        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, createButton]
+        contentView.snp.makeConstraints { (make) in
+            make.top.equalTo(scrollView.snp.top)
+            make.bottom.equalTo(scrollView.snp.bottom)
+            make.left.equalTo(scrollView.snp.left)
+            make.right.equalTo(scrollView.snp.right)
+        }
         
-        for i in 0..<views.count {
-            scrollView.addSubview(views[i])
+        stackView.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView.snp.top)
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(contentView.snp.right)
         }
         
         jobTitleLabel.snp.makeConstraints { (make) in
