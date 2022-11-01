@@ -336,8 +336,10 @@ class SignUpController: UIViewController {
                 
                 // No Error. Store name
                 let db = Firestore.firestore()
-                
-                db.collection("user").addDocument(data: ["firstname": username, "phone": phone, "email": email, "uid":result!.user.uid]) { (error) in
+                let userID = Auth.auth().currentUser?.uid
+                db.collection("user").document(userID!).setData(["firstname": username, "phone": phone, "email": email, "uid": result?.user.uid], merge: true)  { (error) in
+                //addDocument(data: ["firstname": username, "phone": phone, "email": email, "uid":result!.user.uid])
+              
                     
                     if let error = error {
                         print("Failed to update database values with error: ", error.localizedDescription)

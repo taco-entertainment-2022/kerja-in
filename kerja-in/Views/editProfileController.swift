@@ -83,7 +83,7 @@ class editProfileController: UIViewController {
         super.viewDidLoad()
 
         configureViewComponents()
-        
+        loadData()
     }
 
  
@@ -118,21 +118,34 @@ class editProfileController: UIViewController {
 //        })
         
         let db = Firestore.firestore()
-        let userID = Auth.auth().currentUser?.uid
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         let userEmail = Auth.auth().currentUser?.email
         let currentUser = Auth.auth().currentUser
         
-        if nameTextField.text != nil && emailTextField.text != nil && phoneTextField.text != nil {
-            db.collection("user").document("\(userID)").updateData(["firstname": nameTextField.text!, "email": emailTextField.text!, "phone": phoneTextField.text!] )
-            if emailTextField.text != userEmail {
-                currentUser?.updateEmail(to: emailTextField.text!) { error in
-                    if let error  = error {
-                        print(error)
+//        if nameTextField.text != nil && emailTextField.text != nil && phoneTextField.text != nil {
+//            db.collection("user").document("\(userID)").updateData(["firstname": nameTextField.text!, "email": emailTextField.text!, "phone": phoneTextField.text!] )
+        let userRef = db.collection("user").document(userID)
+        userRef.updateData(["email": emailTextField.text, "firstname": nameTextField.text!, "phone": phoneTextField.text!]) { (error) in
+            if error == nil {
+                print("UPDATED")
+                
+                if self.emailTextField.text != userEmail {
+                    currentUser?.updateEmail(to: self.emailTextField.text!) { error in
+                        if let error  = error {
+                            print(error)
+                        }
                     }
                 }
+                
+            } else {
+                print("NOT UPDATED")
             }
         }
         
+        
+      
+        
+        //}
     }
     
     @objc func handleFetchUserButtonTapped() {
@@ -160,7 +173,43 @@ class editProfileController: UIViewController {
         }
     }
     
+    func loadData() {
 
+        let db = Firestore.firestore()
+//        if let userId = Auth.auth().currentUser?.uid {
+//
+//        var userName = db.collection("user").getDocuments() { (snapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//
+//                if let currentUserDoc = snapshot?.documents.first(where: { ($0["uid"] as? String) == userId }) {
+//                    let userName = currentUserDoc["firstname"] as! String
+//                    let phoneNumber = currentUserDoc["phone"] as! String
+//                    let email = currentUserDoc["email"] as! String
+//
+//                    self.nameTextField.text = userName
+//                    self.phoneTextField.text = phoneNumber
+//                    self.emailTextField.text = email
+        
+        guard let userUID = Auth.auth().currentUser?.uid else { return  }
+        db.collection("user").document(userUID).getDocument { snapshot, error in
+            if error != nil {
+                print("ERROR FETCh")
+            }
+            else {
+                let userName = snapshot?.get("firstname") as! String
+                let phoneNumber = snapshot?.get("phone") as! String
+                let email = snapshot?.get("email") as! String
+                
+                self.nameTextField.text = userName
+                self.phoneTextField.text = phoneNumber
+                self.emailTextField.text = email
+                }
+//            }
+//        }
+    }
+    }
 
     func configureViewComponents() {
         
