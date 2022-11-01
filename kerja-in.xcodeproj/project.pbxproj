@@ -36,6 +36,7 @@
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
 		933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */; };
 		93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */; };
+		933616822909C16800F6B668 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
 		A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87870A528F573C000633B2D /* DetailsViewController.swift */; };
