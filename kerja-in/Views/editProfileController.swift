@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseFirestore
 
 class editProfileController: UIViewController {
 
@@ -65,7 +66,7 @@ class editProfileController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
 
-        button.setTitle("Daftar", for: .normal)
+        button.setTitle("Ganti", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.buttonColor()
@@ -89,32 +90,48 @@ class editProfileController: UIViewController {
     
     @objc func handleSaveProfile() {
         
+//        let currentUser = Auth.auth().currentUser
+//
+//        guard let uid = Auth.auth().currentUser?.uid else {return}
+//
+//        let ref = Database.database().reference().child("user")
+//
+//        let values = ["firstname": nameTextField.text ?? "", "email": emailTextField.text ?? ""]
+//        ref.child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
+//            if (error != nil) {
+//                print("error")
+//                return
+//            }
+//            print("Value Update")
+//
+//            currentUser?.updateEmail(to: self.emailTextField.text!) { error in
+//                if let error = error {
+//                    print(error)
+//                } else {
+//                    print("CHANGED")
+//                    let uid = Auth.auth().currentUser!.uid
+//                    let thisUserRef = Database.database().reference().child("users").child(uid)
+//                    let thisUserEmailRef = thisUserRef.child("email")
+//                    thisUserEmailRef.setValue(self.emailTextField.text!)
+//                }
+//            }
+//        })
+        
+        let db = Firestore.firestore()
+        let userID = Auth.auth().currentUser?.uid
+        let userEmail = Auth.auth().currentUser?.email
         let currentUser = Auth.auth().currentUser
         
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        
-        let ref = Database.database().reference().child("users")
-        
-        let values = ["username": nameTextField.text ?? "", "email": emailTextField.text ?? ""]
-        ref.child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
-            if (error != nil) {
-                print("error")
-                return
-            }
-            print("Value Update")
-                
-            currentUser?.updateEmail(to: self.emailTextField.text!) { error in
-                if let error = error {
-                    print(error)
-                } else {
-                    print("CHANGED")
-                    let uid = Auth.auth().currentUser!.uid
-                    let thisUserRef = Database.database().reference().child("users").child(uid)
-                    let thisUserEmailRef = thisUserRef.child("email")
-                    thisUserEmailRef.setValue(self.emailTextField.text!)
+        if nameTextField.text != nil && emailTextField.text != nil && phoneTextField.text != nil {
+            db.collection("user").document("\(userID)").updateData(["firstname": nameTextField.text!, "email": emailTextField.text!, "phone": phoneTextField.text!] )
+            if emailTextField.text != userEmail {
+                currentUser?.updateEmail(to: emailTextField.text!) { error in
+                    if let error  = error {
+                        print(error)
+                    }
                 }
             }
-        })
+        }
         
     }
     
@@ -124,7 +141,7 @@ class editProfileController: UIViewController {
             
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            Database.database().reference().child("user").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 guard let dict = snapshot.value as? [String: Any] else {return}
                 
