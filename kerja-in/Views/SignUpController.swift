@@ -64,22 +64,70 @@ class SignUpController: UIViewController {
         return tf.textField(withPlaceholder: "Email", isSecureTextEntry: false)
     }()
     
-    lazy var passwordTextField: UITextField = {
-        let tf = UITextField()
-        return tf.textField(withPlaceholder: "Password", isSecureTextEntry: false)
-    }()
+    var iconClick = true
     
+    lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 10
+        textField.backgroundColor = UIColor.textFieldColor()
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor()])
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        
+        let btnPassword = UIButton(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        btnPassword.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        btnPassword.contentMode = .scaleAspectFit
+        btnPassword.addTarget(self, action: #selector(passwordButtonPressed), for: .touchUpInside)
+        btnPassword.tintColor = UIColor.placeHolderColor()
+        
+        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        separatorView.addSubview(btnPassword)
+        textField.rightViewMode = .always
+        textField.rightView = separatorView
+        
+        
+        return textField
+    }()
+
     lazy var rePasswordTextField: UITextField = {
-        let tf = UITextField()
-        return tf.textField(withPlaceholder: "Re-Password", isSecureTextEntry: false)
+        let textField = UITextField()
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 10
+        textField.backgroundColor = UIColor.textFieldColor()
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.attributedPlaceholder = NSAttributedString(string: "Re-Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor()])
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        
+        let btnPassword = UIButton(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        btnPassword.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        btnPassword.contentMode = .scaleAspectFit
+        btnPassword.addTarget(self, action: #selector(rePasswordButtonPressed), for: .touchUpInside)
+        btnPassword.tintColor = UIColor.placeHolderColor()
+        
+        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        separatorView.addSubview(btnPassword)
+        textField.rightViewMode = .always
+        textField.rightView = separatorView
+        
+        
+        return textField
     }()
     
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Daftar", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.buttonColor()
+        
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         button.layer.cornerRadius = 20
         
@@ -88,8 +136,8 @@ class SignUpController: UIViewController {
     
     let dontHaveAccount: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Sudah memiliki akun? ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
-        attributedTitle.append(NSAttributedString(string: "Masuk", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
+        let attributedTitle = NSMutableAttributedString(string: "Sudah memiliki akun? ", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.light, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
+        attributedTitle.append(NSAttributedString(string: "Masuk", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
 
@@ -101,28 +149,79 @@ class SignUpController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "seperator")
         imageView.alpha = 0.87
-        //view.addSubview(imageView)
         
         return imageView
     }()
+    
+    let checkbox1 = CheckboxButton(frame: CGRect(x: 70, y: 200, width: 40, height: 40 ))
+    func termsLabel() {
+        
+//        let label = UILabel()//frame: CGRect(x: 115, y: 200, width: 200, height: 40))
+//        label.text = "Saya setuju dengan perjanjian syarat dan ketentuan."
+//        label.font = UIFont.Outfit(.light, size: 15)
+//        label.numberOfLines = 0
+        
+        let label: UIButton = {
+            let button = UIButton(type: .system)
+            let attributedTitle = NSMutableAttributedString(string: "Saya setuju dengan perjanjian ", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.light, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
+            attributedTitle.append(NSAttributedString(string: "syarat dan ketentuan", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
+            button.setAttributedTitle(attributedTitle, for: .normal)
+            //button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+            button.titleLabel?.numberOfLines = 0
+            return button
+        }()
+        
+        view.addSubview(checkbox1)
+        checkbox1.snp.makeConstraints { make in
+            make.width.equalTo(15)
+            make.height.equalTo(15)
+            make.leftMargin.equalTo(21)
+            make.bottom.equalTo(-368)
+
+          
+        }
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.width.equalTo(290)
+            make.height.equalTo(38)
+            make.leftMargin.equalTo(35)
+            make.bottom.equalTo(-349)
+
+          
+        }
+        
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCheckbox))
+        checkbox1.addGestureRecognizer(gesture)
+        
+    }
+    
+    @objc func didTapCheckbox() {
+        checkbox1.toggle()
+        
+        if checkbox1.checkmark.isHidden{
+            print("checked")
+            loginButton.isUserInteractionEnabled = false
+        } else {
+            print("Not Checked")
+            loginButton.isUserInteractionEnabled = true
+        }
+    }
     
     func appleLoginButton() {
         let button = ASAuthorizationAppleIDButton()
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
         view.addSubview(button)
-        //button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+  
         button.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(44)
-            //make.topMargin.equalTo(607)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
             make.bottom.equalTo(-146)
         }
         
-        //return button
-    }//()
+    }
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -136,7 +235,7 @@ class SignUpController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
-        //button.titleLabel?.anchor(top: nil, left: button.imageView?.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+      
         button.titleLabel?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
 
         
@@ -147,15 +246,52 @@ class SignUpController: UIViewController {
     }()
     
     //MARK: - Init
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViewComponents()
         appleLoginButton()
+        
+        termsLabel()
+        
+        if checkbox1.checkmark.isHidden {
+            loginButton.isUserInteractionEnabled = true
+        }
+        
+
     }
     
     //MARK: - Selectors
+    
+    @objc func passwordButtonPressed(sender: UIButton){
+        let passwordHideImage = UIImage(systemName: "eye.slash")
+        let passwordVisibleImage = UIImage(systemName: "eye")
+        
+        iconClick = !iconClick
+        if iconClick == false {
+            passwordTextField.isSecureTextEntry = false
+            sender.setImage(passwordVisibleImage, for: .normal)
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            sender.setImage(passwordHideImage, for: .normal)
+        }
+    }
+    
+    @objc func rePasswordButtonPressed(sender: UIButton){
+        let passwordHideImage = UIImage(systemName: "eye.slash")
+        let passwordVisibleImage = UIImage(systemName: "eye")
+        
+        iconClick = !iconClick
+        if iconClick == false {
+            rePasswordTextField.isSecureTextEntry = false
+            sender.setImage(passwordVisibleImage, for: .normal)
+        } else {
+            rePasswordTextField.isSecureTextEntry = true
+            sender.setImage(passwordHideImage, for: .normal)
+        }
+    }
+    
+    
     
     @objc func handleSignUp() {
 
@@ -211,11 +347,9 @@ class SignUpController: UIViewController {
                 }
                 print("User Sign In")
                 // Transition to home screen
-                //self.transitionToHome()
                 UserDefaults.standard.set(true, forKey: "userLoggedIn")
                 UserDefaults.standard.synchronize()
                 
-                //self.present(TabBar(), animated: true)
                 let navVC = UINavigationController(rootViewController: SignUpController())
                 navVC.modalPresentationStyle = .fullScreen
                 //navVC.modalTransitionStyle = .coverVertical
@@ -299,12 +433,7 @@ class SignUpController: UIViewController {
                 }
                 // User is signed in
                 print(" User is signed in")
-                //self.navigationController?.pushViewController(JobsViewController(), animated: true)
-                
-                // go to google view controller
-               // goToHome()
-                
-                
+
               
             }
             
@@ -324,135 +453,99 @@ class SignUpController: UIViewController {
         view.backgroundColor = UIColor.backgroundColor()
         navigationController?.navigationBar.isHidden = true
         
-        view.addSubview(titleTextView)
-        //titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
         
+        view.addSubview(titleTextView)
         titleTextView.snp.makeConstraints { make in
             make.width.equalTo(100)
             make.height.equalTo(40)
             make.topMargin.equalTo(15)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-261)
-            //make.bottom.equalTo(-742)
+
         }
         
         view.addSubview(bodyTextView)
-        //bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
-        
         bodyTextView.snp.makeConstraints { make in
             make.width.equalTo(321)
             make.height.equalTo(50)
             make.topMargin.equalTo(60)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-39)
-            //make.bottom.equalTo(-697)
+            
         }
         
         view.addSubview(nameContainerView)
-        //nameContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
-        
         nameContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
             make.topMargin.equalTo(120)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
-            //make.bottom.equalTo(-634)
+ 
         }
         
         view.addSubview(phoneContainerView)
-        //phoneContainerView.anchor(top: nameContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
-        
         phoneContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
             make.topMargin.equalTo(178)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
-            //make.bottom.equalTo(-576)
+
         }
         
         view.addSubview(emailContainerView)
-        //emailContainerView.anchor(top: phoneContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
-        
         emailContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
             make.topMargin.equalTo(236)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
-            //make.bottom.equalTo(-518)
+
         }
 
         view.addSubview(passwordContainerView)
-        //passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
-        
         passwordContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
             make.topMargin.equalTo(294)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
-            //make.bottom.equalTo(-460)
+          
         }
         
         view.addSubview(rePasswordContainerView)
-        //rePasswordContainerView.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 43)
-        
         rePasswordContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
             make.topMargin.equalTo(352)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
-            //make.bottom.equalTo(-402)
+        
         }
 
         view.addSubview(loginButton)
-        //loginButton.anchor(top: rePasswordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 93, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
-        
         loginButton.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(44)
-            //make.topMargin.equalTo(488)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
             make.bottom.equalTo(-265)
         }
 
         view.addSubview(dontHaveAccount)
-        //dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 14, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
-        
         dontHaveAccount.snp.makeConstraints { make in
             make.width.equalTo(220)
             make.height.equalTo(20)
-            //make.topMargin.equalTo(546)
             make.leftMargin.equalTo(86)
-            //make.rightMargin.equalTo(-94)
             make.bottom.equalTo(-231)
         }
         
         view.addSubview(seperator)
-        //seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 43, paddingBottom: 0, paddingRight: 41, width: 305, height: 19)
-        
         seperator.snp.makeConstraints { make in
             make.width.equalTo(305)
             make.height.equalTo(19)
-            //make.topMargin.equalTo(573)
             make.leftMargin.equalTo(34)
-            //make.rightMargin.equalTo(-41)
             make.bottom.equalTo(-205)
         }
         
         view.addSubview(googleLoginButton)
-        //googleLoginButton.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 72, paddingLeft: 30, paddingBottom: 89, paddingRight: 30, width: 330, height: 44)
-        
         googleLoginButton.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(44)
-            //make.topMargin.equalTo(664)
             make.leftMargin.equalTo(21)
-            //make.rightMargin.equalTo(-29)
             make.bottom.equalTo(-89)
         }
     }

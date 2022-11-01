@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import AuthenticationServices
 import GoogleSignIn
+import FirebaseAuth
 
 class LoginController: UIViewController {
 
@@ -16,7 +17,6 @@ class LoginController: UIViewController {
     //MARK: - Properties
     lazy var titleTextView: UILabel = {
         let text = UILabel()
-        //text.font = UIFont(name: "Outfit-SemiBold", size: 32)
         text.font = UIFont.Outfit(.semiBold, size: 32)
 
         return text.displayText(withPlaceholder: "Masuk", font: UIFont.Outfit(.semiBold, size: 32), color: .black, isSecureTextEntry: false)
@@ -26,8 +26,6 @@ class LoginController: UIViewController {
         let text = UILabel()
         return text.displayText(withPlaceholder: "Masukkan alamat email dan password yang  telah didaftarkan", font: UIFont.Outfit(.light, size: 16), color: UIColor.placeHolderColor(),isSecureTextEntry: false)
     }()
-    
-
     
     lazy var emailContainerView: UIView = {
         let view = UIView()
@@ -45,9 +43,45 @@ class LoginController: UIViewController {
         return tf.textField(withPlaceholder: "Email", isSecureTextEntry: false)
     }()
     
+    var iconClick = true
+
     lazy var passwordTextField: UITextField = {
-        let tf = UITextField()
-        return tf.textField(withPlaceholder: "Password", isSecureTextEntry: false)
+        let textField = UITextField()
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 10
+        textField.backgroundColor = UIColor.textFieldColor()
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor()])
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        
+        let btnPassword = UIButton(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        btnPassword.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        btnPassword.contentMode = .scaleAspectFit
+        btnPassword.addTarget(self, action: #selector(passwordButtonPressed), for: .touchUpInside)
+        btnPassword.tintColor = UIColor.placeHolderColor()
+        
+        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        separatorView.addSubview(btnPassword)
+        textField.rightViewMode = .always
+        textField.rightView = separatorView
+        
+        
+        return textField
+    }()
+    
+    lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.Outfit(.regular, size: 14)
+        label.textAlignment = .left
+        label.text = "Error"
+        label.textColor = UIColor.systemRed
+        label.numberOfLines = 0
+        label.alpha = 0
+        
+        return label
     }()
     
     
@@ -64,7 +98,7 @@ class LoginController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Masuk", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.buttonColor()
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
@@ -72,21 +106,24 @@ class LoginController: UIViewController {
         
         return button
     }()
+
     
     func appleLoginButton() {
         let button = ASAuthorizationAppleIDButton()
-        //button.setTitle("Masuk menggunakan Apple", for: .normal)
-        //button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        //button.setTitleColor(.white, for: .normal)
-        //button.backgroundColor = UIColor.black
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
-        //button.layer.cornerRadius = 20
         button.center = view.center
         view.addSubview(button)
-        button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
+        //button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
         
-        //return button
-    }//()
+        view.addSubview(button)
+        button.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            make.top.equalTo(424)
+            make.leftMargin.equalTo(21)
+        }
+
+    }
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -100,9 +137,7 @@ class LoginController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
-        //button.titleLabel?.anchor(top: nil, left: button.imageView?.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         button.titleLabel?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
-
         
         button.layer.cornerRadius = 8
         button.layer.shadowOpacity = 0.5
@@ -112,8 +147,8 @@ class LoginController: UIViewController {
     
     let dontHaveAccount: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Belum memiliki akun? ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
-        attributedTitle.append(NSAttributedString(string: "Daftar", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
+        let attributedTitle = NSMutableAttributedString(string: "Belum memiliki akun? ", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.light, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
+        attributedTitle.append(NSAttributedString(string: "Daftar", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         
@@ -132,6 +167,21 @@ class LoginController: UIViewController {
     }
     
     //MARK: - Selectors
+    
+    @objc func passwordButtonPressed(sender: UIButton){
+        let passwordHideImage = UIImage(systemName: "eye.slash")
+        let passwordVisibleImage = UIImage(systemName: "eye")
+        
+        iconClick = !iconClick
+        if iconClick == false {
+            passwordTextField.isSecureTextEntry = false
+            sender.setImage(passwordVisibleImage, for: .normal)
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            sender.setImage(passwordHideImage, for: .normal)
+        }
+    }
+    
     
     @objc func handleLogin() {
         
@@ -152,12 +202,16 @@ class LoginController: UIViewController {
     }
     
     @objc func handleShowSignUp() {
-        //navigationController?.pushViewController(SignUpController(), animated: true)
         let navVC = UINavigationController(rootViewController: SignUpController())
         navVC.modalPresentationStyle = .fullScreen
         navVC.modalTransitionStyle = .coverVertical
         present(navVC, animated: true)
     }
+    
+//    func showError(_ messsage:String) {
+//        errorLabel.text = messsage
+//        errorLabel.alpha = 1
+//    }
     
     //MARK: - API
     
@@ -166,20 +220,58 @@ class LoginController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             
             if let error = error {
-                print("Failed to sign user in with error: ", error.localizedDescription)
+                let err = error as NSError
+                switch err.code {
+                case AuthErrorCode.emailAlreadyInUse.rawValue:
+                    self.errorLabel.text =  "The email is already in use with another account"
+                    self.errorLabel.alpha = 1
+                    
+                
+                case AuthErrorCode.userNotFound.rawValue:
+                    self.errorLabel.text = "Account not found for the specified us er. Please check and try again"
+                    self.errorLabel.alpha = 1
+
+                case AuthErrorCode.userDisabled.rawValue:
+                    self.errorLabel.text = "Your account has been disabled. Please contact support."
+                    self.errorLabel.alpha = 1
+
+                case AuthErrorCode.invalidEmail.rawValue, AuthErrorCode.invalidSender.rawValue, AuthErrorCode.invalidRecipientEmail.rawValue:
+                    self.errorLabel.text = "Please enter a valid email"
+                    self.errorLabel.alpha = 1
+
+                case AuthErrorCode.networkError.rawValue:
+                    self.errorLabel.text = "Network error. Please try again."
+                    self.errorLabel.alpha = 1
+
+                case AuthErrorCode.weakPassword.rawValue:
+                    self.errorLabel.text = "Your password is too weak. The password must be 6 characters long or more."
+                    self.errorLabel.alpha = 1
+
+                case AuthErrorCode.wrongPassword.rawValue:
+                    self.errorLabel.text = "Your password is incorrect. Please try again or use 'Forgot password' to reset your password"
+                    self.errorLabel.alpha = 1
+
+                default:
+                    self.errorLabel.text = "Unknown error occurred"
+                    self.errorLabel.alpha = 1
+
+                    
+                }
+                
+                //print("Failed to sign user in with error: ", error.localizedDescription)
+                
+                //self.errorLabel.text = error.localizedDescription
+                //self.errorLabel.alpha = 1
+                
                 return
+                
             }
-            
-//            guard let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {return}
-//            guard let controller = navController.viewControllers[0] as? TabBar else {return}
-//            controller.setupVCs()
+
             print("Successfully logged user in...")
-//            self.dismiss(animated: true, completion: nil)
             
             UserDefaults.standard.set(true, forKey: "userLoggedIn")
             UserDefaults.standard.synchronize()
             
-            //self.present(TabBar(), animated: true)
             let navVC = UINavigationController(rootViewController: LoginController())
             navVC.modalPresentationStyle = .fullScreen
             //navVC.modalTransitionStyle = .coverVertical
@@ -279,31 +371,97 @@ class LoginController: UIViewController {
         view.backgroundColor = UIColor.backgroundColor()
         navigationController?.navigationBar.isHidden = true
         
+       // view.addSubview(titleTextView)
+        //titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        
         view.addSubview(titleTextView)
-        titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        titleTextView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            make.top.equalTo(62)
+            make.leftMargin.equalTo(21)
+        }
         
         view.addSubview(bodyTextView)
-        bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
+        //bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
+        
+        bodyTextView.snp.makeConstraints { make in
+            make.width.equalTo(321)
+            make.height.equalTo(40)
+            make.top.equalTo(107)
+            make.leftMargin.equalTo(21)
+        }
         
         view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        //emailContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        
+        emailContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.top.equalTo(167)
+            make.leftMargin.equalTo(21)
+        }
 
         view.addSubview(passwordContainerView)
-        passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        //passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
+        
+        passwordContainerView.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(43)
+            make.top.equalTo(225)
+            make.leftMargin.equalTo(21)
+        }
 
         view.addSubview(loginButton)
-        loginButton.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
+        //loginButton.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
+        
+        loginButton.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            make.top.equalTo(308)
+            make.leftMargin.equalTo(21)
+        }
 
         view.addSubview(dontHaveAccount)
-        dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 11, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
-
-        view.addSubview(googleLoginButton)
-        googleLoginButton.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 98, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
+        //dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 11, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
+        
+        dontHaveAccount.snp.makeConstraints { make in
+            make.width.equalTo(202)
+            make.height.equalTo(20)
+            make.top.equalTo(363)
+            make.leftMargin.equalTo(85)
+        }
 
         view.addSubview(seperator)
-        seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 42, paddingBottom: 0, paddingRight: 42, width: 305, height: 19)
+       // seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 42, paddingBottom: 0, paddingRight: 42, width: 305, height: 19)
         
-
+        seperator.snp.makeConstraints { make in
+            make.width.equalTo(305)
+            make.height.equalTo(19)
+            make.top.equalTo(390)
+            make.leftMargin.equalTo(34)
+        }
+        
+        view.addSubview(googleLoginButton)
+        //googleLoginButton.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 98, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
+        
+        googleLoginButton.snp.makeConstraints { make in
+            make.width.equalTo(330)
+            make.height.equalTo(44)
+            make.top.equalTo(481)
+            make.leftMargin.equalTo(21)
+        }
+        
+        view.addSubview(errorLabel)
+        //errorLabel.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 68, paddingBottom: 0, paddingRight: 0, width: 258, height: 50)
+        
+        errorLabel.snp.makeConstraints { make in
+            make.width.equalTo(254)
+            make.height.equalTo(18)
+            make.top.equalTo(280)
+            make.leftMargin.equalTo(59)
+        }
+          
     }
 }
 
@@ -392,5 +550,46 @@ private func sha256(_ input: String) -> String {
 
   return hashString
 }
+
+extension AuthErrorCode {
+    var errorMessage: String {
+        switch self {
+        case AuthErrorCode.emailAlreadyInUse:
+            return "The email is already in use with another account"
+        case AuthErrorCode.userNotFound:
+            return "Account not found for the specified us er. Please check and try again"
+        case AuthErrorCode.userDisabled:
+            return "Your account has been disabled. Please contact support."
+        case AuthErrorCode.invalidEmail, AuthErrorCode.invalidSender, AuthErrorCode.invalidRecipientEmail:
+            return "Please enter a valid email"
+        case AuthErrorCode.networkError:
+            return "Network error. Please try again."
+        case AuthErrorCode.weakPassword:
+            return "Your password is too weak. The password must be 6 characters long or more."
+        case AuthErrorCode.wrongPassword:
+            return "Your password is incorrect. Please try again or use 'Forgot password' to reset your password"
+        default:
+            return "Unknown error occurred"
+        }
+    }
+}
+
+//
+//extension UIViewController{
+//    func handleError(_ error: Error) {
+//        if let errorCode = AuthErrorCode.Code(rawValue: error._code) {
+//            //print(errorCode.errorMessage)
+//            let alert = UIAlertController(title: "Error", message: errorCode.errorMessage, preferredStyle: .alert)
+//
+//            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+//
+//            alert.addAction(okAction)
+//
+//            self.present(alert, animated: true, completion: nil)
+//
+//        }
+//    }
+//
+//}
 
     

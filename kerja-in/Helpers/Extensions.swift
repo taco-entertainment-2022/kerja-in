@@ -126,28 +126,6 @@ extension UITextField {
     }
 }
 
-extension UITextField {
-    
-    func enablePasswordToggle(){
-        let button = UIButton(type: .custom)
-        //setPasswordToggleImage(button)
-        
-        button.setImage(UIImage(named: "icons8-open-eye-48"), for: .normal)
-        button.setImage(UIImage(named: "icons8-closed-eye-48"), for: .selected)
-        
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-        button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-        button.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
-        self.rightView = button
-        self.rightViewMode = .always
-    }
-    
-    @objc func togglePasswordView() {
-        self.isSecureTextEntry.toggle()
-        self.isSelected.toggle()
-    }
-}
-
 extension UILabel {
     func displayText(withPlaceholder placeholder: String, font: UIFont, color: UIColor, isSecureTextEntry: Bool) -> UILabel {
         let displayText = UILabel()
