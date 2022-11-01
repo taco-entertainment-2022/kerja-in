@@ -345,7 +345,8 @@ class LoginController: UIViewController {
                 print(" User is signed in")
                 
                 // go to google view controller
-
+               // goToHome()
+                
                 //MARK: Store Google Data to Firestore
                 let db = Firestore.firestore()
  
