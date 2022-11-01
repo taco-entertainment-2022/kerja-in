@@ -118,7 +118,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
    
         view.addSubview(editButton)
-        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 34, width: 16, height: 16)
+        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 34, width: 16, height: 16)
         
         tableView.frame = self.view.frame
         tableView.isScrollEnabled = false
@@ -242,22 +242,37 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadData() {
 
         let db = Firestore.firestore()
-        if let userId = Auth.auth().currentUser?.uid {
-
-        var userName = db.collection("user").getDocuments() { (snapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                
-                if let currentUserDoc = snapshot?.documents.first(where: { ($0["uid"] as? String) == userId }) {
-                    let userName = currentUserDoc["firstname"] as! String
-                    let phoneNumber = currentUserDoc["phone"] as! String
-                    
-                    self.nameLabel.text = userName
-                    self.phoneLabel.text = phoneNumber
-                }
+//        if let userId = Auth.auth().currentUser?.uid {
+//
+//            var userName = db.collection("user").getDocuments() { (snapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//
+//                if let currentUserDoc = snapshot?.documents.first(where: { ($0["uid"] as? String) == userId }) {
+//                    let userName = currentUserDoc["firstname"] as! String
+//                    let phoneNumber = currentUserDoc["phone"] as! String
+//
+//                    self.nameLabel.text = userName
+//                    self.phoneLabel.text = phoneNumber
+//                }
+//            }
+//        }
+//        }
+        
+        guard let userUID = Auth.auth().currentUser?.uid else { return  }
+        db.collection("user").document(userUID).getDocument { snapshot, error in
+            if error != nil {
+                print("ERROR FETCh")
             }
-        }
+            else {
+                let userName = snapshot?.get("firstname") as! String
+                let phoneNumber = snapshot?.get("phone") as! String
+                
+                
+                self.nameLabel.text = userName
+                self.phoneLabel.text = phoneNumber
+            }
         }
     }
     
