@@ -187,6 +187,7 @@
 				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
 				4EE22AB22912FB1A0090F7CE /* DurationPickerViewController.swift */,
+				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
