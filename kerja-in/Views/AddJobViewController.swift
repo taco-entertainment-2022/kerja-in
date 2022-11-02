@@ -26,7 +26,7 @@ class AddJobViewController: UIViewController {
         stackView.alignment = .leading
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
         
         return stackView
     }()
@@ -223,14 +223,7 @@ class AddJobViewController: UIViewController {
         
         return button
     }()
-    
-    let randomBox: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
         
-        return view
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
