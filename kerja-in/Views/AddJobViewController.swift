@@ -48,6 +48,13 @@ class AddJobViewController: UIViewController {
         return contentView
     }()
     
+    private lazy var durationPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return pickerView
+    }()
+    
     private lazy var jobTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -350,6 +357,13 @@ class AddJobViewController: UIViewController {
             make.right.equalTo(contentView.snp.right)
         }
         
+//        durationPickerView.snp.makeConstraints { (make) in
+////            make.left.equalTo(view.safeAreaLayoutGuide.leadingAnchor)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//        }
+        
         jobTitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top)
         }
@@ -513,4 +527,43 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+private extension AddJobViewController {
+    func setHalfModal() {
+        modalPresentationStyle = .custom
+        modalTransitionStyle = .crossDissolve
+        transitioningDelegate = customTransisioningDelegate
+    }
+}
+
+extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return numPicker.count
+        }
+        
+        return durationPicker.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return "\(numPicker[row])"
+        }
+        
+        return "\(durationPicker[row])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let numSelected = numPicker[pickerView.selectedRow(inComponent: 0)]
+        let durationSelected = durationPicker[pickerView.selectedRow(inComponent: 1)]
+        
+        print(numSelected, durationSelected)
+    }
+    
+    
 }
