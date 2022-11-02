@@ -29,6 +29,7 @@
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
 		933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */; };
 		933616822909C16800F6B668 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
+		93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
 		A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87870A528F573C000633B2D /* DetailsViewController.swift */; };
@@ -100,6 +101,7 @@
 		88D55F363093ED281236DFCC /* Pods-kerja-inTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-inTests.release.xcconfig"; path = "Target Support Files/Pods-kerja-inTests/Pods-kerja-inTests.release.xcconfig"; sourceTree = "<group>"; };
 		9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		933616812909C16800F6B668 /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
+		93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A87870A528F573C000633B2D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				4E930F552905EF47005FA88A /* HomeController.swift */,
 				4E930F522905EF46005FA88A /* LoginController.swift */,
 				4E930F572905EF47005FA88A /* SignUpController.swift */,
+				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
 				4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */,
 				4E930F5B2905EF47005FA88A /* HomeController.swift in Sources */,
+				93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */,
 				A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */,
 				4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */,
 				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
