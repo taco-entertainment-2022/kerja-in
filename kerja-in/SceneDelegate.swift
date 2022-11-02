@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        
+        //window.rootViewController = OnboardingViewController()
         checkAuth()
         window.makeKeyAndVisible()
         
@@ -28,15 +28,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func checkAuth() {
         let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
-        if isLoggedIn == true{
-         print("loggedIn")
-            window?.rootViewController = TabBar()
-
-        }else{
-         print("loggedOut")
-            window?.rootViewController = LoginController()
-
+        let isOnboardin = UserDefaults.standard.bool(forKey: "onboarding")
+        
+        if isOnboardin == false {
+            print("Show Onboard")
+            window?.rootViewController = OnboardingViewController()
         }
+        else {
+            
+            if isLoggedIn == true{
+             print("loggedIn")
+                window?.rootViewController = TabBar()
+
+            }else{
+             print("loggedOut")
+                window?.rootViewController = LoginController()
+
+            }
+        }
+
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

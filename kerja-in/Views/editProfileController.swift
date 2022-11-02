@@ -40,27 +40,67 @@ class editProfileController: UIViewController {
     
     lazy var nameTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Nama Lengkap", isSecureTextEntry: false)
+        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
     }()
     
     lazy var phoneTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Nomor Telepon", isSecureTextEntry: false)
+        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
     }()
     
     lazy var emailTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Email", isSecureTextEntry: false)
+        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
     }()
     
     lazy var passwordTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Password", isSecureTextEntry: false)
+        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
     }()
     
     lazy var rePasswordTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Re-Password", isSecureTextEntry: false)
+        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
+    }()
+    
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Nama Lengkap"
+        label.font = UIFont.Outfit(.semiBold, size: 18)
+        
+        return label
+    }()
+    
+    lazy var phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Nomor WhatsApp"
+        label.font = UIFont.Outfit(.semiBold, size: 18)
+        
+        return label
+    }()
+    
+    lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Email"
+        label.font = UIFont.Outfit(.semiBold, size: 18)
+        
+        return label
+    }()
+    
+    lazy var passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Password Lama"
+        label.font = UIFont.Outfit(.semiBold, size: 18)
+        
+        return label
+    }()
+    
+    lazy var rePasswordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Password Baru"
+        label.font = UIFont.Outfit(.semiBold, size: 18)
+        
+        return label
     }()
     
     let loginButton: UIButton = {
@@ -76,12 +116,26 @@ class editProfileController: UIViewController {
         return button
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        handleFetchUserButtonTapped()
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        view.backgroundColor = UIColor(named: "DarkWhite")
+        
+        let appearance = UINavigationBarAppearance(idiom: .phone)
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.Outfit(.semiBold, size: 20)]
+        appearance.backgroundColor = UIColor(named: "DarkBlue")
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+       
+        
+        //Navigation Bar
+        self.title = "Edit Profile"
+       // self.navigationItem.setRightBarButtonItems([item1], animated: true)
+        
         configureViewComponents()
         loadData()
     }
@@ -90,41 +144,12 @@ class editProfileController: UIViewController {
     
     @objc func handleSaveProfile() {
         
-//        let currentUser = Auth.auth().currentUser
-//
-//        guard let uid = Auth.auth().currentUser?.uid else {return}
-//
-//        let ref = Database.database().reference().child("user")
-//
-//        let values = ["firstname": nameTextField.text ?? "", "email": emailTextField.text ?? ""]
-//        ref.child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
-//            if (error != nil) {
-//                print("error")
-//                return
-//            }
-//            print("Value Update")
-//
-//            currentUser?.updateEmail(to: self.emailTextField.text!) { error in
-//                if let error = error {
-//                    print(error)
-//                } else {
-//                    print("CHANGED")
-//                    let uid = Auth.auth().currentUser!.uid
-//                    let thisUserRef = Database.database().reference().child("users").child(uid)
-//                    let thisUserEmailRef = thisUserRef.child("email")
-//                    thisUserEmailRef.setValue(self.emailTextField.text!)
-//                }
-//            }
-//        })
-        
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let userEmail = Auth.auth().currentUser?.email
         let currentUser = Auth.auth().currentUser
-        
-//        if nameTextField.text != nil && emailTextField.text != nil && phoneTextField.text != nil {
-//            db.collection("user").document("\(userID)").updateData(["firstname": nameTextField.text!, "email": emailTextField.text!, "phone": phoneTextField.text!] )
         let userRef = db.collection("user").document(userID)
+        
         userRef.updateData(["email": emailTextField.text, "firstname": nameTextField.text!, "phone": phoneTextField.text!]) { (error) in
             if error == nil {
                 print("UPDATED")
@@ -141,11 +166,6 @@ class editProfileController: UIViewController {
                 print("NOT UPDATED")
             }
         }
-        
-        
-      
-        
-        //}
     }
     
     @objc func handleFetchUserButtonTapped() {
@@ -160,8 +180,6 @@ class editProfileController: UIViewController {
                 
                 let user = CurrentUser(uid: uid, dictionary: dict)
                 
-                //self.nameLabel.text = user.name
-                //self.phoneLabel.text = user.phone
                 self.nameTextField.text = user.name
                 self.phoneTextField.text = user.phone
                 self.emailTextField.text = user.email
@@ -174,25 +192,10 @@ class editProfileController: UIViewController {
     }
     
     func loadData() {
-
-        let db = Firestore.firestore()
-//        if let userId = Auth.auth().currentUser?.uid {
-//
-//        var userName = db.collection("user").getDocuments() { (snapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//
-//                if let currentUserDoc = snapshot?.documents.first(where: { ($0["uid"] as? String) == userId }) {
-//                    let userName = currentUserDoc["firstname"] as! String
-//                    let phoneNumber = currentUserDoc["phone"] as! String
-//                    let email = currentUserDoc["email"] as! String
-//
-//                    self.nameTextField.text = userName
-//                    self.phoneTextField.text = phoneNumber
-//                    self.emailTextField.text = email
         
-        guard let userUID = Auth.auth().currentUser?.uid else { return  }
+        let db = Firestore.firestore()
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+        
         db.collection("user").document(userUID).getDocument { snapshot, error in
             if error != nil {
                 print("ERROR FETCh")
@@ -205,10 +208,8 @@ class editProfileController: UIViewController {
                 self.nameTextField.text = userName
                 self.phoneTextField.text = phoneNumber
                 self.emailTextField.text = email
-                }
-//            }
-//        }
-    }
+            }
+        }
     }
 
     func configureViewComponents() {
@@ -216,23 +217,104 @@ class editProfileController: UIViewController {
         view.backgroundColor = UIColor.backgroundColor()
         navigationController?.navigationBar.isHidden = true
         
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.width.equalTo(124)
+            make.height.equalTo(23)
+            make.top.equalTo(110)
+            make.left.equalTo(19)
+            make.right.equalTo(-247)
+        }
+        
         view.addSubview(nameContainerView)
-        nameContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 140, paddingLeft: 20, paddingBottom: 0, paddingRight: 21, width: 0, height: 43)
+        nameContainerView.snp.makeConstraints { make in
+            make.width.equalTo(349)
+            make.height.equalTo(43)
+            make.top.equalTo(140)
+            make.left.equalTo(20)
+            make.right.equalTo(-21)
+        }
+        
+        view.addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
+            make.width.equalTo(148)
+            make.height.equalTo(23)
+            make.top.equalTo(193)
+            make.left.equalTo(19)
+            make.right.equalTo(-223)
+        }
         
         view.addSubview(phoneContainerView)
-        phoneContainerView.anchor(top: nameContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 21, width: 0, height: 43)
+        phoneContainerView.snp.makeConstraints { make in
+            make.width.equalTo(349)
+            make.height.equalTo(43)
+            make.top.equalTo(223)
+            make.left.equalTo(20)
+            make.right.equalTo(-21)
+        }
+        
+        view.addSubview(emailLabel)
+        emailLabel.snp.makeConstraints { make in
+            make.width.equalTo(46)
+            make.height.equalTo(23)
+            make.top.equalTo(276)
+            make.left.equalTo(19)
+            make.right.equalTo(-325)
+        }
         
         view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: phoneContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 21, width: 0, height: 43)
-
+        emailContainerView.snp.makeConstraints { make in
+            make.width.equalTo(349)
+            make.height.equalTo(43)
+            make.top.equalTo(306)
+            make.left.equalTo(20)
+            make.right.equalTo(-21)
+        }
+        
+        view.addSubview(passwordLabel)
+        passwordLabel.snp.makeConstraints { make in
+            make.width.equalTo(130)
+            make.height.equalTo(23)
+            make.top.equalTo(359)
+            make.left.equalTo(19)
+            make.right.equalTo(-241)
+        }
+        
         view.addSubview(passwordContainerView)
-        passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 21, width: 0, height: 43)
+        passwordContainerView.snp.makeConstraints { make in
+            make.width.equalTo(349)
+            make.height.equalTo(43)
+            make.top.equalTo(389)
+            make.left.equalTo(20)
+            make.right.equalTo(-21)
+        }
+        
+        view.addSubview(rePasswordLabel)
+        rePasswordLabel.snp.makeConstraints { make in
+            make.width.equalTo(122)
+            make.height.equalTo(23)
+            make.top.equalTo(442)
+            make.left.equalTo(19)
+            make.right.equalTo(-249)
+        }
         
         view.addSubview(rePasswordContainerView)
-        rePasswordContainerView.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 21, width: 0, height: 43)
+        rePasswordContainerView.snp.makeConstraints { make in
+            make.width.equalTo(349)
+            make.height.equalTo(43)
+            make.top.equalTo(472)
+            make.left.equalTo(20)
+            make.right.equalTo(-21)
+        }
 
         view.addSubview(loginButton)
-        loginButton.anchor(top: rePasswordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 50)
+        loginButton.snp.makeConstraints { make in
+            make.width.equalTo(350)
+            make.height.equalTo(44)
+            make.top.equalTo(555)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+        }
 
     }
 

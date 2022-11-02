@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseFirestore
 import LBTAComponents
+import SnapKit
 
 
 struct Section {
@@ -30,26 +31,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         var iv = CachedImageView()
         iv.backgroundColor = .blue
         iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = profileImageViewHeight / 2
+        iv.layer.cornerRadius = 8
         iv.clipsToBounds = true
 
         return iv
     }()
-//
-//    private lazy var profileImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 35
-//        imageView.backgroundColor = .red
-//        imageView
-//        return imageView
-//    }()
-//
+
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "User's Name"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.Outfit(.medium, size: 20)
        
         return label
     }()
@@ -57,8 +48,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let phoneLabel: UILabel = {
         let label = UILabel()
         label.text = "Phone Number"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor = .lightGray
+        label.font = UIFont.Outfit(.light, size: 14)
+        label.textColor = .black
        
         return label
     }()
@@ -72,22 +63,49 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     
     lazy var backView: UIView = {
-        let view = UIView(frame: CGRect(x: 20, y: 6, width: 350, height: 79))
+        let view = UIView()//(frame: CGRect(x: 20, y: 109, width: 350, height: 79))
         view.backgroundColor = UIColor(named: "White")
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = false
+
+        //backView Shadow
+        view.layer.shadowColor = UIColor(named: "Black")?.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowRadius = 6
+        view.layer.shadowOffset = CGSize(width: 1, height: 2)
+        
+  
         return view
+    }()
+    
+    lazy var fileLabel: UILabel = {
+        let label = UILabel()
+        label.text = "File Saya"
+        label.font = UIFont.Outfit(.semiBold, size: 20)
+        
+        return label
+    }()
+    
+    lazy var supportLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Support"
+        label.font = UIFont.Outfit(.semiBold, size: 20)
+        
+        return label
     }()
     
     let editButton: UIButton = {
         
         let button = UIButton(type: .system)
-        //button.setTitle("Masuk", for: .normal)
         button.setImage(UIImage(named: "edit"), for: .normal)
+        button.tintColor = UIColor(named: "GuideGray")
         //button.backgroundColor = .red
         //button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         //button.setTitleColor(.black, for: .normal)
         //button.backgroundColor = UIColor.buttonColor()
         button.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
         //button.layer.cornerRadius = 20
+        
         
         return button
         
@@ -101,24 +119,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         loadData()
         configure()
-        
-        
-        view.addSubview(tableView)
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 200, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        
-        view.addSubview(profileImageView)
-        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 16, paddingBottom: 0, paddingRight: 0, width: profileImageViewHeight, height: profileImageViewHeight)
-        
-        view.addSubview(nameLabel)
-        nameLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 24, paddingLeft: 16, paddingBottom: 0, paddingRight: 16, width: 0, height: 0)
-        
-        view.addSubview(phoneLabel)
-        phoneLabel.anchor(top: nameLabel.bottomAnchor, left: profileImageView.rightAnchor, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingBottom: 0, paddingRight: 16, width: 0, height: 0)
-        
-   
-        view.addSubview(editButton)
-        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 34, width: 16, height: 16)
+        configureViewComponents()
         
         tableView.frame = self.view.frame
         tableView.isScrollEnabled = false
@@ -127,7 +128,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
-        
+        tableView.layer.shadowColor = UIColor(named: "Black")?.cgColor
+        tableView.layer.shadowOpacity = 0.1
+        tableView.layer.shadowRadius = 6
+        tableView.layer.shadowOffset = CGSize(width: 1, height: 2)
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -140,10 +144,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.backButtonTitle = ""
 
+  
     }
     
     func configure() {
-        models.append(Section(title: "File Saya", option: [
+        models.append(Section(title:" ", option: [
             SettingOption(title: "Job Posted") {
                 print("Tapped First Cell")
             },
@@ -154,7 +159,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         ]))
         
         
-        models.append(Section(title: "Support", option: [
+        models.append(Section(title:" ", option: [
             SettingOption(title: "FAQ") {
                 
             },
@@ -174,8 +179,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         ]))
         
         models.append(Section(title: "", option: [
-            SettingOption(title: "Sign Out") {
-               
+            SettingOption(title: "Keluar") {
+                
                 UserDefaults.standard.set(false, forKey: "userLoggedIn")
                 UserDefaults.standard.synchronize()
                 
@@ -227,9 +232,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return UITableViewCell()
         }
         cell.configure(with: model)
-        
-
-        
+      
         return cell
     }
     
@@ -242,33 +245,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadData() {
 
         let db = Firestore.firestore()
-//        if let userId = Auth.auth().currentUser?.uid {
-//
-//            var userName = db.collection("user").getDocuments() { (snapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//
-//                if let currentUserDoc = snapshot?.documents.first(where: { ($0["uid"] as? String) == userId }) {
-//                    let userName = currentUserDoc["firstname"] as! String
-//                    let phoneNumber = currentUserDoc["phone"] as! String
-//
-//                    self.nameLabel.text = userName
-//                    self.phoneLabel.text = phoneNumber
-//                }
-//            }
-//        }
-//        }
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
         
-        guard let userUID = Auth.auth().currentUser?.uid else { return  }
         db.collection("user").document(userUID).getDocument { snapshot, error in
             if error != nil {
-                print("ERROR FETCh")
+                print("ERROR FETCH")
             }
             else {
                 let userName = snapshot?.get("firstname") as! String
                 let phoneNumber = snapshot?.get("phone") as! String
-                
                 
                 self.nameLabel.text = userName
                 self.phoneLabel.text = phoneNumber
@@ -276,5 +261,69 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    
+    func configureViewComponents() {
+        
+        view.addSubview(backView)
+        backView.snp.makeConstraints { make in
+            make.width.equalTo(350)
+            make.height.equalTo(79)
+            make.top.equalTo(109)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+        }
+        
+        view.addSubview(tableView)
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 180, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        view.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints { make in
+            make.width.equalTo(59)
+            make.height.equalTo(59)
+            make.top.equalTo(119)
+            make.left.equalTo(31)
+            //make.right.equalTo(-300)
+        }
+        
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.width.equalTo(112)
+            make.height.equalTo(25)
+            make.top.equalTo(127)
+            make.left.equalTo(105)
+            make.right.equalTo(-173)
+        }
+        
+        view.addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
+            make.top.equalTo(152)
+            make.left.equalTo(105)
+        }
+   
+        view.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
+            make.width.equalTo(16)
+            make.height.equalTo(16)
+            make.top.equalTo(141)
+            //make.left.equalTo(340)
+            make.right.equalTo(-34)
+        }
+        
+        view.addSubview(fileLabel)
+        fileLabel.snp.makeConstraints { make in
+            make.width.equalTo(80)
+            make.height.equalTo(25)
+            make.top.equalTo(203)
+            make.left.equalTo(21)
+            make.right.equalTo(-287)
+        }
+        
+        view.addSubview(supportLabel)
+        supportLabel.snp.makeConstraints { make in
+            make.width.equalTo(74)
+            make.height.equalTo(25)
+            make.top.equalTo(338)
+            make.left.equalTo(20)
+            make.right.equalTo(-296)
+        }
+    }
 }
