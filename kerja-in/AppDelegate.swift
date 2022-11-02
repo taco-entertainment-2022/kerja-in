@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import Firebase
 import GoogleSignIn
+import DropDown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBar.tintColor = .white
 
         FirebaseApp.configure()
+        DropDown.startListeningToKeyboard()
 
         return true
     }

@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import DropDown
 
 class AddJobViewController: UIViewController {
     
     private let textFieldWidth = 350
     private let textFieldHeight = 44
+    private let cornerRadius = 10.0
+    private let labelSize = 18.0
+    private let dropDown = DropDown()
     let backButton = UIButton(type: .custom)
     
     private lazy var scrollView: UIScrollView = {
@@ -43,7 +47,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Judul Pekerjaan"
         
         return label
@@ -66,7 +70,7 @@ class AddJobViewController: UIViewController {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Deskripsi Pekerjaan"
         
         return label
@@ -76,7 +80,7 @@ class AddJobViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = UIColor(named: "LightGray")
-        textView.layer.cornerRadius = 10
+        textView.layer.cornerRadius = cornerRadius
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         textView.delegate = self
         textView.returnKeyType = .continue
@@ -88,29 +92,42 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Pilih Kategori"
         
         return label
     }()
     
-    private lazy var categoryInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Kategori", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.semiBold, size: 16)])
-        textField.delegate = self
-        textField.returnKeyType = .continue
+    private lazy var categoryInputLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Pilih Kategori"
+        label.textAlignment = .left
+        label.textColor = UIColor(named: "DetailsGray")
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return textField
+        return label
+    }()
+    
+    private lazy var categoryInput: UIView = {
+        let view = UIView()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCategory))
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addGestureRecognizer(tap)
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor(named: "LightGray")
+        view.layer.cornerRadius = cornerRadius
+        
+        view.addSubview(categoryInputLabel)
+        
+        return view
     }()
     
     private lazy var jobDurationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Durasi Pekerjaan"
         
         return label
@@ -131,7 +148,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Lokasi"
         
         return label
@@ -153,7 +170,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Bayaran"
         
         return label
@@ -175,7 +192,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Nomor Whatsapp"
         
         return label
@@ -197,7 +214,7 @@ class AddJobViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: labelSize)
         label.text = "Waktu Pengerjaan"
         
         return label
@@ -248,10 +265,6 @@ class AddJobViewController: UIViewController {
             
         setUpViews()
         createButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
-    }
-    
-    @objc func backPressed() {
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     private func setUpViews() {
@@ -319,6 +332,11 @@ class AddJobViewController: UIViewController {
             make.top.equalTo(categoryLabel.snp.bottom)
         }
         
+        categoryInputLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(categoryInput.snp.left).offset(10)
+            make.centerY.equalTo(categoryInput.snp.centerY)
+        }
+        
         jobDurationLabel.snp.makeConstraints { (make) in
             make.top.equalTo(categoryInput.snp.bottom).offset(20)
         }
@@ -381,22 +399,35 @@ class AddJobViewController: UIViewController {
         }
     }
     
+    @objc func backPressed() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func didTapCategory() {
+        dropDown.dataSource = ["Respondent", "Jasa Setir", "Titip Beli", "Foto Model", "Sales", "MC", "Riset", "Lainnya"]
+        dropDown.anchorView = categoryInput
+        dropDown.bottomOffset = CGPoint(x: 0, y: categoryInput.frame.size.height)
+        dropDown.show()
+        
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+            AddJobViewViewModel.shared.category = item
+            categoryInputLabel.text = item
+            categoryInputLabel.textColor = .black
+        }
+    }
+    
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-        AddJobViewViewModel.shared.category = categoryInput.text!
         AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text!
         
-        print(jobTitleInput.text!, jobDescriptionInput.text!, categoryInput.text!, jobDurationInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
-    }
-    
-    @objc func didTapTextField() {
-        
+        print(jobTitleInput.text!, jobDescriptionInput.text!, jobDurationInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
     }
 }
 

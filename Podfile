@@ -16,6 +16,7 @@ target 'kerja-in' do
   pod 'GoogleSignIn'
   pod 'LBTAComponents'
   pod 'Firebase/Firestore'
+  pod 'DropDown'
 
   target 'kerja-inTests' do
     inherit! :search_paths
