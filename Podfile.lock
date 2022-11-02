@@ -5,6 +5,7 @@ PODS:
   - AppAuth/Core (1.6.0)
   - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
+  - DropDown (2.3.13)
   - Firebase (9.6.0):
     - Firebase/Core (= 9.6.0)
   - Firebase/Auth (9.6.0):
@@ -129,6 +130,7 @@ PODS:
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - DropDown
   - Firebase (= 9.6.0)
   - Firebase/Auth
   - Firebase/Core
@@ -142,6 +144,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
+    - DropDown
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -167,6 +170,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
   FirebaseAnalytics: 89ad762c6c3852a685794174757e2c60a36b6a82
   FirebaseAuth: e4a5d3c36e778e41141b91cc861103a441d80bcc
@@ -190,6 +194,6 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 669f6fe221d42da12a8191d8815bb93bdff703a2
+PODFILE CHECKSUM: 209d0f4f9970de4de94757aa3848beaad1ca4e07
 
 COCOAPODS: 1.11.3
