@@ -42,7 +42,6 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
         navigationItem.backButtonTitle = ""
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
         addButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
