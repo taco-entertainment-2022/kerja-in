@@ -317,6 +317,10 @@ class AddJobViewController: UIViewController {
         createButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
     }
     
+    @objc func backPressed() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     private func setUpViews() {
         
         view.addSubview(scrollView)
