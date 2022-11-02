@@ -14,8 +14,23 @@ class AddJobViewController: UIViewController {
     private let textFieldHeight = 44
     private let cornerRadius = 10.0
     private let labelSize = 18.0
+    
     private let dropDown = DropDown()
+    private let numPicker = Array(1...60)
+    private let durationPicker = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
+    
     let backButton = UIButton(type: .custom)
+    private var customTransisioningDelegate = TransitioningDelegate()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setHalfModal()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setHalfModal()
+    }
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -41,6 +56,13 @@ class AddJobViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         return contentView
+    }()
+    
+    private lazy var durationPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return pickerView
     }()
     
     private lazy var jobTitleLabel: UILabel = {
@@ -133,15 +155,29 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var jobDurationInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.delegate = self
-        textField.returnKeyType = .continue
+    private lazy var jobDurationInputLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Durasi"
+        label.textAlignment = .left
+        label.textColor = UIColor(named: "DetailsGray")
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return textField
+        return label
+    }()
+    
+    private lazy var jobDurationInput: UIView = {
+        let view = UIView()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapDuration))
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addGestureRecognizer(tap)
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor(named: "LightGray")
+        view.layer.cornerRadius = cornerRadius
+        
+        view.addSubview(jobDurationInputLabel)
+        
+        return view
     }()
     
     private lazy var locationLabel: UILabel = {
@@ -268,6 +304,10 @@ class AddJobViewController: UIViewController {
     }
     
     private func setUpViews() {
+        
+        durationPickerView.delegate = self
+        durationPickerView.dataSource = self
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
@@ -298,6 +338,13 @@ class AddJobViewController: UIViewController {
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
         }
+        
+//        durationPickerView.snp.makeConstraints { (make) in
+////            make.left.equalTo(view.safeAreaLayoutGuide.leadingAnchor)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//        }
         
         jobTitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top)
@@ -346,6 +393,11 @@ class AddJobViewController: UIViewController {
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
             make.top.equalTo(jobDurationLabel.snp.bottom)
+        }
+        
+        jobDurationInputLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(jobDurationInput.snp.left).offset(10)
+            make.centerY.equalTo(jobDurationInput.snp.centerY)
         }
         
         locationLabel.snp.makeConstraints { (make) in
@@ -417,17 +469,21 @@ class AddJobViewController: UIViewController {
         }
     }
     
+    @objc private func didTapDuration() {
+        print("Duration pressed")
+    }
+    
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
+//        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text!
         
-        print(jobTitleInput.text!, jobDescriptionInput.text!, jobDurationInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
+        print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
     }
 }
 
@@ -436,4 +492,43 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+private extension AddJobViewController {
+    func setHalfModal() {
+        modalPresentationStyle = .custom
+        modalTransitionStyle = .crossDissolve
+        transitioningDelegate = customTransisioningDelegate
+    }
+}
+
+extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return numPicker.count
+        }
+        
+        return durationPicker.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return "\(numPicker[row])"
+        }
+        
+        return "\(durationPicker[row])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let numSelected = numPicker[pickerView.selectedRow(inComponent: 0)]
+        let durationSelected = durationPicker[pickerView.selectedRow(inComponent: 1)]
+        
+        print(numSelected, durationSelected)
+    }
+    
+    
 }
