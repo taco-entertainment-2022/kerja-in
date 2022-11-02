@@ -11,6 +11,7 @@ class AddJobViewController: UIViewController {
     
     private let textFieldWidth = 350
     private let textFieldHeight = 44
+    let backButton = UIButton(type: .custom)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -233,21 +234,31 @@ class AddJobViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "DarkWhite")
+        self.title = "Add Job"
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(named: "DarkBlue")
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.Outfit(.semiBold, size: 20)]
-        appearance.backgroundColor = UIColor(named: "DarkBlue")
         
         navigationController?.navigationBar.tintColor = UIColor(named: "White")
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
+        backButton.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
+        let item1 = UIBarButtonItem(customView: backButton)
+        self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
         createButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
+    }
+    
+    @objc func backPressed() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     private func setUpViews() {

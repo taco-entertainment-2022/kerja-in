@@ -12,6 +12,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
     var tableView = UITableView()
     var jobsArr = [JobModel]()
     lazy var searchBar: UISearchBar = UISearchBar()
+    let addButton = UIButton(type: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +42,12 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
         navigationItem.backButtonTitle = ""
-
+        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        addButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
+        addButton.addTarget(self, action: #selector(didTapAdd), for: .touchUpInside)
+        let item1 = UIBarButtonItem(customView: addButton)
+        self.navigationItem.setRightBarButtonItems([item1], animated: true)
         
         //MARK: - Set Table View
         setTableView()
