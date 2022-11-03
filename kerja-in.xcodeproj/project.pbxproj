@@ -11,7 +11,6 @@
 		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
 		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
 		4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F542905EF47005FA88A /* editProfileController.swift */; };
-		4E930F5B2905EF47005FA88A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F552905EF47005FA88A /* HomeController.swift */; };
 		4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F562905EF47005FA88A /* Extensions.swift */; };
 		4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F572905EF47005FA88A /* SignUpController.swift */; };
 		4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */; };
@@ -78,7 +77,6 @@
 		4E930F522905EF46005FA88A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4E930F532905EF47005FA88A /* CurrentUserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserModels.swift; sourceTree = "<group>"; };
 		4E930F542905EF47005FA88A /* editProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editProfileController.swift; sourceTree = "<group>"; };
-		4E930F552905EF47005FA88A /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		4E930F562905EF47005FA88A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4E930F572905EF47005FA88A /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewViewModel.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 				A87870A528F573C000633B2D /* DetailsViewController.swift */,
 				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
 				4E930F542905EF47005FA88A /* editProfileController.swift */,
-				4E930F552905EF47005FA88A /* HomeController.swift */,
 				4E930F522905EF46005FA88A /* LoginController.swift */,
 				4E930F572905EF47005FA88A /* SignUpController.swift */,
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
@@ -602,7 +599,6 @@
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
 				4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */,
-				4E930F5B2905EF47005FA88A /* HomeController.swift in Sources */,
 				93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */,
 				A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */,
 				4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */,

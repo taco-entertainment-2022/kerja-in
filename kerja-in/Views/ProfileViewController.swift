@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     
     lazy var backView: UIView = {
-        let view = UIView()//(frame: CGRect(x: 20, y: 109, width: 350, height: 79))
+        let view = UIView()
         view.backgroundColor = UIColor(named: "White")
         view.layer.cornerRadius = 10
         view.clipsToBounds = false
@@ -99,14 +99,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "edit"), for: .normal)
         button.tintColor = UIColor(named: "GuideGray")
-        //button.backgroundColor = .red
-        //button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        //button.setTitleColor(.black, for: .normal)
-        //button.backgroundColor = UIColor.buttonColor()
         button.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
-        //button.layer.cornerRadius = 20
-        
-        
+
         return button
         
     }()
@@ -124,7 +118,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.frame = self.view.frame
         tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor.clear
-        tableView.separatorColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
@@ -132,18 +125,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.layer.shadowOpacity = 0.1
         tableView.layer.shadowRadius = 6
         tableView.layer.shadowOffset = CGSize(width: 1, height: 2)
-
+        
+        //MARK: - Set Navigation Bar
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(named: "DarkBlue")
-        
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.Outfit(.semiBold, size: 20)]
         // Customizing navigation bar
-        navigationController?.navigationBar.tintColor = UIColor(named: "White")
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.backButtonTitle = ""
 
+      
   
     }
     
@@ -184,7 +178,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 UserDefaults.standard.set(false, forKey: "userLoggedIn")
                 UserDefaults.standard.synchronize()
                 
-                
                 do {
                     try Auth.auth().signOut()
                     
@@ -206,7 +199,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func handleEdit() {
-        
         navigationController?.pushViewController(editProfileController(), animated: true)
     }
     
@@ -232,7 +224,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return UITableViewCell()
         }
         cell.configure(with: model)
-      
+
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
         return cell
     }
     
@@ -286,11 +280,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.width.equalTo(112)
+//            make.width.equalTo(112)
             make.height.equalTo(25)
             make.top.equalTo(127)
             make.left.equalTo(105)
-            make.right.equalTo(-173)
+//            make.right.equalTo(-173)
         }
         
         view.addSubview(phoneLabel)

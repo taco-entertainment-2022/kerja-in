@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        //window.rootViewController = OnboardingViewController()
+        //window.rootViewController = editProfileController()
         checkAuth()
         window.makeKeyAndVisible()
         
@@ -28,9 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func checkAuth() {
         let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
-        let isOnboardin = UserDefaults.standard.bool(forKey: "onboarding")
+        let isOnboarding = UserDefaults.standard.bool(forKey: "onboarding")
         
-        if isOnboardin == false {
+        if isOnboarding == false {
             print("Show Onboard")
             window?.rootViewController = OnboardingViewController()
         }
