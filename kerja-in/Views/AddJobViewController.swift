@@ -16,21 +16,8 @@ class AddJobViewController: UIViewController {
     private let labelSize = 18.0
     
     private let dropDown = DropDown()
-    private let numPicker = Array(1...60)
-    private let durationPicker = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
     
     let backButton = UIButton(type: .custom)
-    private var customTransisioningDelegate = TransitioningDelegate()
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setHalfModal()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setHalfModal()
-    }
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -56,13 +43,6 @@ class AddJobViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         return contentView
-    }()
-    
-    private lazy var durationPickerView: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return pickerView
     }()
     
     private lazy var jobTitleLabel: UILabel = {
@@ -274,6 +254,7 @@ class AddJobViewController: UIViewController {
         button.setTitle("Post Job", for: .normal)
         button.backgroundColor = UIColor(named: "DarkBlue")
         button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
+        button.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
         
         return button
     }()
@@ -300,13 +281,9 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
-        createButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
     }
     
     private func setUpViews() {
-        
-        durationPickerView.delegate = self
-        durationPickerView.dataSource = self
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -338,13 +315,6 @@ class AddJobViewController: UIViewController {
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
         }
-        
-//        durationPickerView.snp.makeConstraints { (make) in
-////            make.left.equalTo(view.safeAreaLayoutGuide.leadingAnchor)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//            make.bottom.equalToSuperview()
-//        }
         
         jobTitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top)
@@ -456,7 +426,7 @@ class AddJobViewController: UIViewController {
     }
     
     @objc private func didTapCategory() {
-        dropDown.dataSource = ["Respondent", "Jasa Setir", "Titip Beli", "Foto Model", "Sales", "MC", "Riset", "Lainnya"]
+        dropDown.dataSource = ["Responden", "Jasa Setir", "Titip Beli", "Foto Model", "Sales", "MC", "Riset", "Lainnya"]
         dropDown.anchorView = categoryInput
         dropDown.bottomOffset = CGPoint(x: 0, y: categoryInput.frame.size.height)
         dropDown.show()
@@ -492,43 +462,4 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-}
-
-private extension AddJobViewController {
-    func setHalfModal() {
-        modalPresentationStyle = .custom
-        modalTransitionStyle = .crossDissolve
-        transitioningDelegate = customTransisioningDelegate
-    }
-}
-
-extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return numPicker.count
-        }
-        
-        return durationPicker.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return "\(numPicker[row])"
-        }
-        
-        return "\(durationPicker[row])"
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let numSelected = numPicker[pickerView.selectedRow(inComponent: 0)]
-        let durationSelected = durationPicker[pickerView.selectedRow(inComponent: 1)]
-        
-        print(numSelected, durationSelected)
-    }
-    
-    
 }
