@@ -436,6 +436,7 @@ class AddJobViewController: UIViewController {
             AddJobViewViewModel.shared.category = item
             categoryInputLabel.text = item
             categoryInputLabel.textColor = .black
+            categoryInputLabel.font = UIFont.Outfit(.regular, size: labelSize)
         }
     }
     
