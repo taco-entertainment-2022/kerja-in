@@ -20,6 +20,7 @@
 		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
 		4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */; };
 		4EE22AB32912FB1A0090F7CE /* DurationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22AB22912FB1A0090F7CE /* DurationPickerViewController.swift */; };
+		4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
 		4EE62D0B28E6A5F8003B161F /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */; };
@@ -30,7 +31,6 @@
 		4EE62D2A28E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D2928E6A5F9003B161F /* kerja_inUITestsLaunchTests.swift */; };
 		8DC9903D61890E5EFB24F356 /* Pods_kerja_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE50AD115B1968EE21DF2D0 /* Pods_kerja_in.framework */; };
 		933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336167F2908FFCA00F6B668 /* SettingTableViewCell.swift */; };
-		933616822909C16800F6B668 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
 		93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
@@ -591,6 +591,7 @@
 				A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */,
 				4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */,
 				4EB2FB512909A2CB00C5CF53 /* AddJobViewController.swift in Sources */,
+				4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */,
 				4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
