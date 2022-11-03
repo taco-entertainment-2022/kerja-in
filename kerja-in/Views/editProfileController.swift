@@ -106,10 +106,10 @@ class editProfileController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
 
-        button.setTitle("Ganti", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor.buttonColor()
+        button.setTitle("Simpan", for: .normal)
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(named: "DarkBlue")
         button.addTarget(self, action: #selector(handleSaveProfile), for: .touchUpInside)
         button.layer.cornerRadius = 20
         
@@ -119,8 +119,6 @@ class editProfileController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         
         view.backgroundColor = UIColor(named: "DarkWhite")
         
@@ -134,16 +132,13 @@ class editProfileController: UIViewController {
         
         //Navigation Bar
         self.title = "Edit Profile"
-       // self.navigationItem.setRightBarButtonItems([item1], animated: true)
         
         configureViewComponents()
         loadData()
     }
 
- 
     
     @objc func handleSaveProfile() {
-        
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let userEmail = Auth.auth().currentUser?.email
@@ -158,6 +153,15 @@ class editProfileController: UIViewController {
                     currentUser?.updateEmail(to: self.emailTextField.text!) { error in
                         if let error  = error {
                             print(error)
+                        }
+                        
+                        self.changePassword(email: userEmail!, currentPassword: self.passwordTextField.text!, newPassword: self.rePasswordTextField.text!) { (error) in
+                            if error != nil {
+                                print("ERROR CHANGE PASS")
+                            }
+                            else {
+                                print("SUCCESS CHANGE PASS")
+                            }
                         }
                     }
                 }
@@ -211,6 +215,20 @@ class editProfileController: UIViewController {
             }
         }
     }
+    
+    func changePassword(email: String, currentPassword: String, newPassword: String, completion: @escaping (Error?) -> Void) {
+            let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
+            Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
+                if let error = error {
+                    completion(error)
+                }
+                else {
+                    Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { (error) in
+                        completion(error)
+                    })
+                }
+            })
+        }
 
     func configureViewComponents() {
         

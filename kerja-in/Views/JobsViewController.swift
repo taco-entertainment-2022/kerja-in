@@ -42,6 +42,8 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.backButtonTitle = ""
+        
+
 
         
         //MARK: - Set Table View

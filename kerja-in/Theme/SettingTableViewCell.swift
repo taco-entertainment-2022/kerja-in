@@ -21,18 +21,9 @@ class SettingTableViewCell: UITableViewCell {
         return view
     }()
     
-//    private let iconImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.tintColor = .white
-//        imageView.contentMode = .scaleAspectFit
-//
-//        return imageView
-//    }()
-    
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        //label.font = UIFont.Outfit(.regular, size: 16)
         
         return label
     }()
@@ -42,7 +33,6 @@ class SettingTableViewCell: UITableViewCell {
         
         contentView.addSubview(label)
         contentView.addSubview(iconContainer)
-//        iconContainer.addSubview(iconImageView)
 
         contentView.clipsToBounds = true
         accessoryType = .disclosureIndicator
@@ -59,13 +49,6 @@ class SettingTableViewCell: UITableViewCell {
         let size: CGFloat = contentView.frame.size.height - 12
         iconContainer.frame = CGRect(x: 15, y: 6, width: size, height: size)
         
-//        let imageSize: CGFloat = size/1.5
-//        iconImageView.frame = CGRect(x: (size-imageSize)/2, y: (size-imageSize)/2, width: imageSize, height: imageSize)
-        
-//        label.frame = CGRect(x: 25 + iconContainer.frame.size.width,
-//                             y: 0,
-//                             width: contentView.frame.size.width - 20 - iconContainer.frame.size.width,
-//                             height: contentView.frame.size.height)
         label.frame = CGRect(x: 10,
                              y: 0,
                              width: contentView.frame.size.width - 20 - iconContainer.frame.size.width,
@@ -79,15 +62,11 @@ class SettingTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-//        iconImageView.image = nil
         label.text = nil
-//        iconContainer.backgroundColor = nil
     }
     
     public func configure(with model: SettingOption) {
         label.text = model.title
-//        iconImageView.image = model.icon
-//        iconContainer.backgroundColor = model.iconBackgroundColor
     }
     
 }
