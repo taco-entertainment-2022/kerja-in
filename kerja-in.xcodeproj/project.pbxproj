@@ -224,6 +224,7 @@
 		4EE62D0528E6A5F8003B161F /* kerja-in */ = {
 			isa = PBXGroup;
 			children = (
+				93F05D6F2913B83000B55756 /* kerja-in.entitlements */,
 				4E930F612905F11C005FA88A /* Helpers */,
 				4E930F5F2905F0D2005FA88A /* Views */,
 				4E930F5E2905F0BB005FA88A /* ViewModels */,
@@ -776,6 +777,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRD8HSMRZ7;
@@ -806,6 +808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRD8HSMRZ7;

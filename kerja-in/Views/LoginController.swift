@@ -10,6 +10,7 @@ import Firebase
 import AuthenticationServices
 import GoogleSignIn
 import FirebaseAuth
+import FirebaseFirestore
 
 class LoginController: UIViewController {
 
@@ -459,6 +460,23 @@ extension LoginController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("Nice you have sign in as \(user.uid), email: \(user.email ?? " unknown")  ")
+                    
+                    //MARK: Store Data to Firestore
+                    let db = Firestore.firestore()
+                    
+                    db.collection("user").document(user.uid).setData([
+                        "firstname": user.displayName as? String,
+                        "email": user.email as? String], merge: true)
+                    
+                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    let navVC = UINavigationController(rootViewController: LoginController())
+                    navVC.modalPresentationStyle = .fullScreen
+                    //navVC.modalTransitionStyle = .coverVertical
+                    self.present(navVC, animated: false) {
+                        navVC.pushViewController(TabBar(), animated: false)
+                    }
                 }
             }
         }
