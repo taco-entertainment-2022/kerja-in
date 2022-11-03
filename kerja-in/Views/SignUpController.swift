@@ -154,7 +154,7 @@ class SignUpController: UIViewController {
     }()
     
     let checkbox1 = CheckboxButton(frame: CGRect(x: 70, y: 200, width: 40, height: 40 ))
-    
+
     func termsLabel() {
         
         let label: UIButton = {
@@ -429,6 +429,26 @@ class SignUpController: UIViewController {
                 }
                 // User is signed in
                 print(" User is signed in")
+                
+                //MARK: Store Google Data to Firestore
+                let db = Firestore.firestore()
+ 
+                let googleEmail = (authResult?.user.email)!
+                let googleName = (authResult?.user.displayName)!
+                
+                db.collection("user").document(String(authResult!.user.uid)).setData([
+                    "firstname": String(googleName),
+                    "email": String(googleEmail)], merge: true)
+                
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                UserDefaults.standard.synchronize()
+                
+                let navVC = UINavigationController(rootViewController: LoginController())
+                navVC.modalPresentationStyle = .fullScreen
+                //navVC.modalTransitionStyle = .coverVertical
+                self.present(navVC, animated: false) {
+                    navVC.pushViewController(TabBar(), animated: false)
+                }
 
               
             }        
@@ -563,6 +583,23 @@ extension SignUpController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("Nice you have sign in as \(user.uid), email: \(user.email ?? " unknown")  ")
+                    
+                    //MARK: Store Data to Firestore
+                    let db = Firestore.firestore()
+                    
+                    db.collection("user").document(user.uid).setData([
+                        "firstname": user.displayName as? String,
+                        "email": user.email as? String], merge: true)
+                    
+                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                    UserDefaults.standard.synchronize()
+                    
+                    let navVC = UINavigationController(rootViewController: LoginController())
+                    navVC.modalPresentationStyle = .fullScreen
+                    //navVC.modalTransitionStyle = .coverVertical
+                    self.present(navVC, animated: false) {
+                        navVC.pushViewController(TabBar(), animated: false)
+                    }
                 }
             }
             
