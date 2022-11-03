@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class DurationPickerViewController: UIViewController {
     
@@ -24,6 +25,11 @@ class DurationPickerViewController: UIViewController {
         
         durationPickerView.delegate = self
         durationPickerView.dataSource = self
+        
+        view.backgroundColor = .white
+        view.addSubview(durationPickerView)
+        
+        styleLayouts()
     }
 }
 
@@ -51,7 +57,16 @@ extension DurationPickerViewController: UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let numSelected = numPicker[pickerView.selectedRow(inComponent: 0)]
         let durationSelected = durationPicker[pickerView.selectedRow(inComponent: 1)]
+        let addJobController = AddJobViewController()
         
         print(numSelected, durationSelected)
+        addJobController.jobDurationInputLabel.text = "\(numSelected) \(durationSelected)"
+    }
+    
+    func styleLayouts() {
+        durationPickerView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
     }
 }

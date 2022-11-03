@@ -135,7 +135,7 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var jobDurationInputLabel: UILabel = {
+    lazy var jobDurationInputLabel: UILabel = {
         let label = UILabel()
         label.text = "Durasi"
         label.textAlignment = .left
@@ -442,6 +442,13 @@ class AddJobViewController: UIViewController {
     
     @objc private func didTapDuration() {
         print("Duration pressed")
+        let durationPicker = DurationPickerViewController()
+        if let sheet = durationPicker.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        }
+        
+        present(durationPicker, animated: true, completion: nil)
     }
     
     @objc func didTapCreate() {
