@@ -154,7 +154,7 @@ class SignUpController: UIViewController {
     }()
     
     let checkbox1 = CheckboxButton(frame: CGRect(x: 70, y: 200, width: 40, height: 40 ))
-
+    
     func termsLabel() {
         
         let label: UIButton = {
@@ -429,27 +429,6 @@ class SignUpController: UIViewController {
                 }
                 // User is signed in
                 print(" User is signed in")
-                //self.navigationController?.pushViewController(JobsViewController(), animated: true)
-                
-                //MARK: Store Google Data to Firestore
-                let db = Firestore.firestore()
- 
-                let googleEmail = (authResult?.user.email)!
-                let googleName = (authResult?.user.displayName)!
-                
-                db.collection("user").document(String(authResult!.user.uid)).setData([
-                    "firstname": String(googleName),
-                    "email": String(googleEmail)], merge: true)
-                
-                UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                UserDefaults.standard.synchronize()
-                
-                let navVC = UINavigationController(rootViewController: LoginController())
-                navVC.modalPresentationStyle = .fullScreen
-                //navVC.modalTransitionStyle = .coverVertical
-                self.present(navVC, animated: false) {
-                    navVC.pushViewController(TabBar(), animated: false)
-                }
 
               
             }        

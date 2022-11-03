@@ -348,25 +348,6 @@ class LoginController: UIViewController {
                 // go to google view controller
                // goToHome()
                 
-                //MARK: Store Google Data to Firestore
-                let db = Firestore.firestore()
- 
-                let googleEmail = (authResult?.user.email)!
-                let googleName = (authResult?.user.displayName)!
-                
-                db.collection("user").document(String(authResult!.user.uid)).setData([
-                    "firstname": String(googleName),
-                    "email": String(googleEmail)], merge: true)
-                
-                UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                UserDefaults.standard.synchronize()
-                
-                let navVC = UINavigationController(rootViewController: LoginController())
-                navVC.modalPresentationStyle = .fullScreen
-                //navVC.modalTransitionStyle = .coverVertical
-                self.present(navVC, animated: false) {
-                    navVC.pushViewController(TabBar(), animated: false)
-                }
                 
               
             }

@@ -246,8 +246,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 print("ERROR FETCH")
             }
             else {
-                let userName = snapshot?.get("firstname") as? String
-                let phoneNumber = snapshot?.get("phone") as? String
+                let userName = snapshot?.get("firstname") as! String
+                let phoneNumber = snapshot?.get("phone") as! String
                 
                 self.nameLabel.text = userName
                 self.phoneLabel.text = phoneNumber

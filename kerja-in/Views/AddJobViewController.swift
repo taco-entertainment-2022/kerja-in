@@ -12,15 +12,12 @@ class AddJobViewController: UIViewController {
     
     private let textFieldWidth = 350
     private let textFieldHeight = 44
-<<<<<<< HEAD
     private let cornerRadius = 10.0
     private let labelSize = 18.0
     
     private let dropDown = DropDown()
     
     let backButton = UIButton(type: .custom)
-=======
->>>>>>> cfdd6a4 (add integration with viewmodel)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -103,28 +100,16 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-<<<<<<< HEAD
     private lazy var categoryInputLabel: UILabel = {
         let label = UILabel()
         label.text = "Pilih Kategori"
         label.textAlignment = .left
         label.textColor = UIColor(named: "DetailsGray")
         label.translatesAutoresizingMaskIntoConstraints = false
-=======
-    private lazy var categoryInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Kategori", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.semiBold, size: 16)])
-        textField.delegate = self
-        textField.returnKeyType = .continue
->>>>>>> cfdd6a4 (add integration with viewmodel)
         
         return label
     }()
     
-<<<<<<< HEAD
     private lazy var categoryInput: UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCategory))
@@ -140,8 +125,6 @@ class AddJobViewController: UIViewController {
         return view
     }()
     
-=======
->>>>>>> cfdd6a4 (add integration with viewmodel)
     private lazy var jobDurationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -152,27 +135,16 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-<<<<<<< HEAD
     private lazy var jobDurationInputLabel: UILabel = {
         let label = UILabel()
         label.text = "Durasi"
         label.textAlignment = .left
         label.textColor = UIColor(named: "DetailsGray")
         label.translatesAutoresizingMaskIntoConstraints = false
-=======
-    private lazy var jobDurationInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.delegate = self
-        textField.returnKeyType = .continue
->>>>>>> cfdd6a4 (add integration with viewmodel)
         
         return label
     }()
     
-<<<<<<< HEAD
     private lazy var jobDurationInput: UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapDuration))
@@ -188,8 +160,6 @@ class AddJobViewController: UIViewController {
         return view
     }()
     
-=======
->>>>>>> cfdd6a4 (add integration with viewmodel)
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -284,10 +254,7 @@ class AddJobViewController: UIViewController {
         button.setTitle("Post Job", for: .normal)
         button.backgroundColor = UIColor(named: "DarkBlue")
         button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
-<<<<<<< HEAD
         button.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
-=======
->>>>>>> cfdd6a4 (add integration with viewmodel)
         
         return button
     }()
@@ -454,7 +421,6 @@ class AddJobViewController: UIViewController {
         }
     }
     
-<<<<<<< HEAD
     @objc func backPressed() {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
@@ -478,32 +444,17 @@ class AddJobViewController: UIViewController {
         print("Duration pressed")
     }
     
-=======
->>>>>>> cfdd6a4 (add integration with viewmodel)
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-<<<<<<< HEAD
 //        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
-=======
-        AddJobViewViewModel.shared.category = categoryInput.text!
-        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
->>>>>>> cfdd6a4 (add integration with viewmodel)
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text!
         
-<<<<<<< HEAD
         print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
-=======
-        print(jobTitleInput.text!, jobDescriptionInput.text!, categoryInput.text!, jobDurationInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
-    }
-    
-    @objc func didTapTextField() {
-        
->>>>>>> cfdd6a4 (add integration with viewmodel)
     }
 }
 

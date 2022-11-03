@@ -205,9 +205,9 @@ class editProfileController: UIViewController {
                 print("ERROR FETCh")
             }
             else {
-                let userName = snapshot?.get("firstname") as? String
-                let phoneNumber = snapshot?.get("phone") as? String
-                let email = snapshot?.get("email") as? String
+                let userName = snapshot?.get("firstname") as! String
+                let phoneNumber = snapshot?.get("phone") as! String
+                let email = snapshot?.get("email") as! String
                 
                 self.nameTextField.text = userName
                 self.phoneTextField.text = phoneNumber
