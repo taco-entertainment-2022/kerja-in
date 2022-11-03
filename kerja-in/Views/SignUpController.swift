@@ -154,12 +154,8 @@ class SignUpController: UIViewController {
     }()
     
     let checkbox1 = CheckboxButton(frame: CGRect(x: 70, y: 200, width: 40, height: 40 ))
+    
     func termsLabel() {
-        
-//        let label = UILabel()//frame: CGRect(x: 115, y: 200, width: 200, height: 40))
-//        label.text = "Saya setuju dengan perjanjian syarat dan ketentuan."
-//        label.font = UIFont.Outfit(.light, size: 15)
-//        label.numberOfLines = 0
         
         let label: UIButton = {
             let button = UIButton(type: .system)
@@ -338,8 +334,6 @@ class SignUpController: UIViewController {
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
                 db.collection("user").document(userID!).setData(["firstname": username, "phone": phone, "email": email, "uid": result?.user.uid], merge: true)  { (error) in
-                //addDocument(data: ["firstname": username, "phone": phone, "email": email, "uid":result!.user.uid])
-              
                     
                     if let error = error {
                         print("Failed to update database values with error: ", error.localizedDescription)
@@ -437,14 +431,7 @@ class SignUpController: UIViewController {
                 print(" User is signed in")
 
               
-            }
-            
-            
-            
-            
-            
-            
-            
+            }        
             
         }
     }

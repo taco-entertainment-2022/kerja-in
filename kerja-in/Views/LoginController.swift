@@ -113,7 +113,6 @@ class LoginController: UIViewController {
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
         view.addSubview(button)
-        //button.anchor(top: seperator.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 330, height: 44)
         
         view.addSubview(button)
         button.snp.makeConstraints { make in
@@ -208,10 +207,6 @@ class LoginController: UIViewController {
         present(navVC, animated: true)
     }
     
-//    func showError(_ messsage:String) {
-//        errorLabel.text = messsage
-//        errorLabel.alpha = 1
-//    }
     
     //MARK: - API
     
@@ -257,11 +252,6 @@ class LoginController: UIViewController {
 
                     
                 }
-                
-                //print("Failed to sign user in with error: ", error.localizedDescription)
-                
-                //self.errorLabel.text = error.localizedDescription
-                //self.errorLabel.alpha = 1
                 
                 return
                 
@@ -371,9 +361,7 @@ class LoginController: UIViewController {
         view.backgroundColor = UIColor.backgroundColor()
         navigationController?.navigationBar.isHidden = true
         
-       // view.addSubview(titleTextView)
-        //titleTextView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 62, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
-        
+
         view.addSubview(titleTextView)
         titleTextView.snp.makeConstraints { make in
             make.width.equalTo(330)
@@ -383,18 +371,14 @@ class LoginController: UIViewController {
         }
         
         view.addSubview(bodyTextView)
-        //bodyTextView.anchor(top: titleTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 39, width: 0, height: 50)
-        
         bodyTextView.snp.makeConstraints { make in
             make.width.equalTo(321)
-            make.height.equalTo(40)
+            make.height.equalTo(42)
             make.top.equalTo(107)
             make.leftMargin.equalTo(21)
         }
         
         view.addSubview(emailContainerView)
-        //emailContainerView.anchor(top: bodyTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
-        
         emailContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
@@ -403,8 +387,6 @@ class LoginController: UIViewController {
         }
 
         view.addSubview(passwordContainerView)
-        //passwordContainerView.anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 50)
-        
         passwordContainerView.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(43)
@@ -413,8 +395,6 @@ class LoginController: UIViewController {
         }
 
         view.addSubview(loginButton)
-        //loginButton.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
-        
         loginButton.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(44)
@@ -423,8 +403,6 @@ class LoginController: UIViewController {
         }
 
         view.addSubview(dontHaveAccount)
-        //dontHaveAccount.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 11, paddingLeft: 90, paddingBottom: 0, paddingRight: 90, width: 0, height: 50)
-        
         dontHaveAccount.snp.makeConstraints { make in
             make.width.equalTo(202)
             make.height.equalTo(20)
@@ -433,8 +411,6 @@ class LoginController: UIViewController {
         }
 
         view.addSubview(seperator)
-       // seperator.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 42, paddingBottom: 0, paddingRight: 42, width: 305, height: 19)
-        
         seperator.snp.makeConstraints { make in
             make.width.equalTo(305)
             make.height.equalTo(19)
@@ -443,8 +419,6 @@ class LoginController: UIViewController {
         }
         
         view.addSubview(googleLoginButton)
-        //googleLoginButton.anchor(top: dontHaveAccount.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 98, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: 0, height: 44)
-        
         googleLoginButton.snp.makeConstraints { make in
             make.width.equalTo(330)
             make.height.equalTo(44)
@@ -452,9 +426,7 @@ class LoginController: UIViewController {
             make.leftMargin.equalTo(21)
         }
         
-        view.addSubview(errorLabel)
-        //errorLabel.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 68, paddingBottom: 0, paddingRight: 0, width: 258, height: 50)
-        
+        view.addSubview(errorLabel)        
         errorLabel.snp.makeConstraints { make in
             make.width.equalTo(254)
             make.height.equalTo(18)
@@ -573,23 +545,3 @@ extension AuthErrorCode {
         }
     }
 }
-
-//
-//extension UIViewController{
-//    func handleError(_ error: Error) {
-//        if let errorCode = AuthErrorCode.Code(rawValue: error._code) {
-//            //print(errorCode.errorMessage)
-//            let alert = UIAlertController(title: "Error", message: errorCode.errorMessage, preferredStyle: .alert)
-//
-//            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-//
-//            alert.addAction(okAction)
-//
-//            self.present(alert, animated: true, completion: nil)
-//
-//        }
-//    }
-//
-//}
-
-    

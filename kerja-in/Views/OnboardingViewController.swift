@@ -133,11 +133,11 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc func handleSkip() {
-        let navVC = UINavigationController(rootViewController: OnboardingViewController())
-        navVC.modalPresentationStyle = .fullScreen
-        //navVC.modalTransitionStyle = .coverVertical
-        present(navVC, animated: false) {
-            navVC.pushViewController(TabBar(), animated: false)
-        }
+//        let navVC = UINavigationController(rootViewController: TabBar())
+//        navVC.modalPresentationStyle = .fullScreen
+//        //navVC.modalTransitionStyle = .coverVertical
+//        present(navVC, animated: false) //{
+//            navVC.pushViewController(TabBar(), animated: false)
+    //  }
     }
 }
