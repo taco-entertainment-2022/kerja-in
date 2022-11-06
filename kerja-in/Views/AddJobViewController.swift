@@ -19,6 +19,9 @@ class AddJobViewController: UIViewController {
     
     let backButton = UIButton(type: .custom)
     
+    var durationInputLabelValue: String = "Durasi"
+    var category: String = ""
+
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +67,7 @@ class AddJobViewController: UIViewController {
         textField.autocapitalizationType = .words
         textField.returnKeyType = .continue
         textField.becomeFirstResponder()
+        textField.font = UIFont.Outfit(.medium, size: labelSize)
         
         return textField
     }()
@@ -86,6 +90,7 @@ class AddJobViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         textView.delegate = self
         textView.returnKeyType = .continue
+        textView.font = UIFont.Outfit(.medium, size: labelSize)
         
         return textView
     }()
@@ -106,6 +111,7 @@ class AddJobViewController: UIViewController {
         label.textAlignment = .left
         label.textColor = UIColor(named: "DetailsGray")
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.Outfit(.medium, size: labelSize)
         
         return label
     }()
@@ -137,10 +143,11 @@ class AddJobViewController: UIViewController {
     
     lazy var jobDurationInputLabel: UILabel = {
         let label = UILabel()
-        label.text = "Durasi"
+        label.text = durationInputLabelValue
         label.textAlignment = .left
         label.textColor = UIColor(named: "DetailsGray")
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.Outfit(.medium, size: labelSize)
         
         return label
     }()
@@ -434,6 +441,7 @@ class AddJobViewController: UIViewController {
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
             AddJobViewViewModel.shared.category = item
+            category = item
             categoryInputLabel.text = item
             categoryInputLabel.textColor = .black
             categoryInputLabel.font = UIFont.Outfit(.regular, size: labelSize)
