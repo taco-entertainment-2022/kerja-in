@@ -7,6 +7,8 @@
 
 import UIKit
 import Foundation
+import FirebaseFirestore
+import FirebaseAuth
 
 final class AddJobViewViewModel: ObservableObject {
     @Published var jobTitle: String?
@@ -19,6 +21,11 @@ final class AddJobViewViewModel: ObservableObject {
     @Published var jobDate: String?
     @Published var error: String?
     
+    let database = Firestore.firestore()
+    let userID = Auth.auth().currentUser?.uid
+    let timestamp = Int(Date().timeIntervalSince1970)
+
+
     static let shared = AddJobViewViewModel()
     
     func validateJobForm() {
@@ -31,6 +38,17 @@ final class AddJobViewViewModel: ObservableObject {
     
     func takeFormValues(_ formValues: [String?]) {
         print(formValues)
+    }
+    
+    
+    
+    func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String) {
+        
+        let postID: String = String(userID) + String(timestamp)
+        let docRef = database.collection("jobs").document(postID)
+        
+        
+        docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "userID": String(userID)])
     }
 
     
