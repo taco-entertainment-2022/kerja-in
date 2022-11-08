@@ -7,6 +7,7 @@
 
 import UIKit
 import DropDown
+import FirebaseFirestore
 
 class AddJobViewController: UIViewController {
     
@@ -18,6 +19,10 @@ class AddJobViewController: UIViewController {
     private let dropDown = DropDown()
     
     let backButton = UIButton(type: .custom)
+    let database = Firestore.firestore()
+    var category: String = ""
+    var duration: String = ""
+
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -281,6 +286,14 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
+        let docRef = database.collection("jobs").document("posts")
+        docRef.getDocument { snapshot, error in
+            guard let data = snapshot?.data(), error == nil else {
+                return
+            }
+            
+        }
+        
     }
     
     private func setUpViews() {
@@ -455,6 +468,28 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.jobDate = jobDateInput.text!
         
         print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
+        
+        if !jobDateInput.text!.isEmpty &&
+            !jobDescriptionInput.text.isEmpty &&
+            //(jobDurationInput.job) &&
+            !jobTitleInput.text!.isEmpty &&
+            !locationInput.text!.isEmpty &&
+            !feeInput.text!.isEmpty &&
+            (category.count == 0 || category == "") &&
+            !contactInput.text!.isEmpty {
+            AddJobViewViewModel.shared.saveData(date: AddJobViewViewModel.shared.jobDate!,
+                                                description: AddJobViewViewModel.shared.jobDescription!,
+                                                //duration: AddJobViewViewModel.shared.jobDuration!,
+                                                jobName: AddJobViewViewModel.shared.jobTitle!,
+                                                location: AddJobViewViewModel.shared.location!,
+                                                price: AddJobViewViewModel.shared.fee!,
+                                                userImage: AddJobViewViewModel.shared.category!,
+                                                userContact: AddJobViewViewModel.shared.contact!,
+                                                userID: AddJobViewViewModel.shared.userID!)
+            self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+
+            
+        }
     }
 }
 
