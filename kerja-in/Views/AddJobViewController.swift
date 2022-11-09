@@ -107,30 +107,21 @@ class AddJobViewController: UIViewController {
         
         return label
     }()
-    
-    private lazy var categoryInputLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Pilih Kategori"
-        label.textAlignment = .left
-        label.textColor = UIColor(named: "DetailsGray")
-        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return label
-    }()
-    
-    private lazy var categoryInput: UIView = {
-        let view = UIView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCategory))
+    private lazy var categoryInput: UIButton = {
+        let button = UIButton()
         
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addGestureRecognizer(tap)
-        view.isUserInteractionEnabled = true
-        view.backgroundColor = UIColor(named: "LightGray")
-        view.layer.cornerRadius = cornerRadius
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "LightGray")
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets.left = 8
+        button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
+        button.addTarget(self, action: #selector(didTapCategory), for: .touchUpInside)
+        button.setTitle("Pilih Kategori", for: .normal)
         
-        view.addSubview(categoryInputLabel)
-        
-        return view
+        return button
     }()
     
     private lazy var jobDurationLabel: UILabel = {
@@ -142,30 +133,20 @@ class AddJobViewController: UIViewController {
         
         return label
     }()
-    
-    private lazy var jobDurationInputLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Durasi"
-        label.textAlignment = .left
-        label.textColor = UIColor(named: "DetailsGray")
-        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return label
-    }()
-    
-    private lazy var jobDurationInput: UIView = {
-        let view = UIView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapDuration))
+    lazy var jobDurationInput: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "LightGray")
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets.left = 8
+        button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
+        button.addTarget(self, action: #selector(didTapDuration), for: .touchUpInside)
+        button.setTitle("Durasi", for: .normal)
         
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addGestureRecognizer(tap)
-        view.isUserInteractionEnabled = true
-        view.backgroundColor = UIColor(named: "LightGray")
-        view.layer.cornerRadius = cornerRadius
-        
-        view.addSubview(jobDurationInputLabel)
-        
-        return view
+        return button
     }()
     
     private lazy var locationLabel: UILabel = {
@@ -183,7 +164,7 @@ class AddJobViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
-        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Lokasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.semiBold, size: 16)])
+        textField.attributedPlaceholder = NSAttributedString(string: "Pilih Lokasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
         textField.delegate = self
         textField.returnKeyType = .continue
         
@@ -249,9 +230,12 @@ class AddJobViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(named: "LightGray")
         button.layer.cornerRadius = 8
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets.left = 8
+        button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
         button.addTarget(self, action: #selector(didTapJobDate), for: .touchUpInside)
-        
+        button.setTitle("", for: .normal)
         return button
     }()
     
@@ -365,11 +349,6 @@ class AddJobViewController: UIViewController {
             make.top.equalTo(categoryLabel.snp.bottom)
         }
         
-        categoryInputLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(categoryInput.snp.left).offset(10)
-            make.centerY.equalTo(categoryInput.snp.centerY)
-        }
-        
         jobDurationLabel.snp.makeConstraints { (make) in
             make.top.equalTo(categoryInput.snp.bottom).offset(20)
         }
@@ -379,11 +358,6 @@ class AddJobViewController: UIViewController {
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
             make.top.equalTo(jobDurationLabel.snp.bottom)
-        }
-        
-        jobDurationInputLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(jobDurationInput.snp.left).offset(10)
-            make.centerY.equalTo(jobDurationInput.snp.centerY)
         }
         
         locationLabel.snp.makeConstraints { (make) in
@@ -450,9 +424,9 @@ class AddJobViewController: UIViewController {
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
             AddJobViewViewModel.shared.category = item
-            categoryInputLabel.text = item
-            categoryInputLabel.textColor = .black
-            categoryInputLabel.font = UIFont.Outfit(.regular, size: labelSize)
+            categoryInput.titleLabel?.textColor = .black
+            categoryInput.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+            categoryInput.setTitle(item, for: .normal)
         }
     }
     
@@ -480,7 +454,7 @@ class AddJobViewController: UIViewController {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-        AddJobViewViewModel.shared.jobDuration = jobDurationInputLabel.text!
+        AddJobViewViewModel.shared.jobDuration = jobDurationInput.titleLabel?.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
@@ -490,7 +464,7 @@ class AddJobViewController: UIViewController {
         
         if //!jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
-            !jobDurationInputLabel.text!.isEmpty &&
+//            (!jobDurationInput.titleLabel?.text! == "") &&
             !jobTitleInput.text!.isEmpty &&
             !locationInput.text!.isEmpty &&
             !feeInput.text!.isEmpty &&
