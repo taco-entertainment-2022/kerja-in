@@ -17,6 +17,7 @@ class AddJobViewController: UIViewController {
     private let labelSize = 18.0
     
     private let dropDown = DropDown()
+    private let durationPicker = DurationPickerViewController()
     
     let backButton = UIButton(type: .custom)
     let database = Firestore.firestore()
@@ -455,6 +456,13 @@ class AddJobViewController: UIViewController {
     
     @objc private func didTapDuration() {
         print("Duration pressed")
+        if let sheet = durationPicker.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        }
+        
+        present(durationPicker, animated: true, completion: nil)
+
     }
     
     @objc func didTapCreate() {
