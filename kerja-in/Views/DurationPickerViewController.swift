@@ -7,12 +7,15 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class DurationPickerViewController: UIViewController {
     
     let numPicker = Array(1...60)
     let durationPicker = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
-    var durationValue = ""
+    var durationValue: Observable<String>?
+    let bag = DisposeBag()
     
     private lazy var durationPickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -44,12 +47,20 @@ class DurationPickerViewController: UIViewController {
         view.addSubview(saveDurationValueButton)
         
         styleLayouts()
+        populateRx()
     }
     
     @objc private func didChangeDurationValue() {
         let addJobController = AddJobViewController()
+//        addJobController.durationInputLabelValue = durationValue
         
         dismiss(animated: true)
+    }
+    
+    private func populateRx() {
+        let addJobController = AddJobViewController()
+//        durationValue = Observable.of("Durasi").
+//        addJobController.jobDurationInputLabel.text
     }
 }
 
@@ -78,7 +89,7 @@ extension DurationPickerViewController: UIPickerViewDelegate, UIPickerViewDataSo
         let numSelected = numPicker[pickerView.selectedRow(inComponent: 0)]
         let durationSelected = durationPicker[pickerView.selectedRow(inComponent: 1)]
         
-        durationValue = "\(numSelected) \(durationSelected)"
+//        durationValue = "\(numSelected) \(durationSelected)"
     }
     
     func styleLayouts() {

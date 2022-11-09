@@ -7,6 +7,8 @@
 
 import UIKit
 import DropDown
+import RxSwift
+import RxCocoa
 
 class AddJobViewController: UIViewController {
     
@@ -19,7 +21,7 @@ class AddJobViewController: UIViewController {
     
     let backButton = UIButton(type: .custom)
     
-    var durationInputLabelValue: String = "Durasi"
+    var durationInputLabelValue: String = DurationPickerViewController().durationValue
     var category: String = ""
 
     private lazy var scrollView: UIScrollView = {
@@ -30,7 +32,7 @@ class AddJobViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -152,7 +154,7 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var jobDurationInput: UIView = {
+    lazy var jobDurationInput: UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapDuration))
         
@@ -281,6 +283,7 @@ class AddJobViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
+        
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
         backButton.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
@@ -288,9 +291,16 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
+//        NSNotification.def
     }
     
-    private func setUpViews() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("Appeaer")
+    }
+    
+    func setUpViews() {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
