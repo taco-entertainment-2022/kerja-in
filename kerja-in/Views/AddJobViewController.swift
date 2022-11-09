@@ -18,11 +18,13 @@ class AddJobViewController: UIViewController {
     
     private let dropDown = DropDown()
     private let durationPicker = DurationPickerViewController()
+    private let jobDatePicker = JobDatePickerViewController()
     
     let backButton = UIButton(type: .custom)
     let database = Firestore.firestore()
     var category: String = ""
     var duration: String = ""
+    var jobDate: String = ""
 
     
     private lazy var scrollView: UIScrollView = {
@@ -242,15 +244,15 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var jobDateInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.delegate = self
-        textField.returnKeyType = .continue
+    lazy var jobDateInput: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "LightGray")
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
+        button.addTarget(self, action: #selector(didTapJobDate), for: .touchUpInside)
         
-        return textField
+        return button
     }()
     
     private lazy var createButton: UIButton = {
@@ -462,41 +464,47 @@ class AddJobViewController: UIViewController {
         }
         
         present(durationPicker, animated: true, completion: nil)
-
+    }
+    
+    @objc func didTapJobDate() {
+        print("Job date pressed")
+        if let sheet = jobDatePicker.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        }
+        
+        present(jobDatePicker, animated: true, completion: nil)
     }
     
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-//        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
+        AddJobViewViewModel.shared.jobDuration = jobDurationInputLabel.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
-        AddJobViewViewModel.shared.jobDate = jobDateInput.text!
+        AddJobViewViewModel.shared.jobDate = jobDateInput.titleLabel?.text ?? ""
         
-        print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDateInput.text!)
+        print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!)
         
-        if !jobDateInput.text!.isEmpty &&
+        if //!jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
-            //(jobDurationInput.job) &&
+            !jobDurationInputLabel.text!.isEmpty &&
             !jobTitleInput.text!.isEmpty &&
             !locationInput.text!.isEmpty &&
             !feeInput.text!.isEmpty &&
             (category.count == 0 || category == "") &&
             !contactInput.text!.isEmpty {
-            AddJobViewViewModel.shared.saveData(date: AddJobViewViewModel.shared.jobDate!,
+            AddJobViewViewModel.shared.saveData(date: AddJobViewViewModel.shared.jobDate ?? "",
                                                 description: AddJobViewViewModel.shared.jobDescription!,
-                                                //duration: AddJobViewViewModel.shared.jobDuration!,
                                                 jobName: AddJobViewViewModel.shared.jobTitle!,
                                                 location: AddJobViewViewModel.shared.location!,
                                                 price: AddJobViewViewModel.shared.fee!,
                                                 userImage: AddJobViewViewModel.shared.category!,
                                                 userContact: AddJobViewViewModel.shared.contact!,
-                                                userID: AddJobViewViewModel.shared.userID!)
+                                                userID: AddJobViewViewModel.shared.userID!, jobDuration: AddJobViewViewModel.shared.jobDuration!)
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-
-            
         }
     }
 }

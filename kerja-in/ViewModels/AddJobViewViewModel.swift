@@ -42,13 +42,13 @@ final class AddJobViewViewModel: ObservableObject {
     
     
     
-    func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String) {
+    func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String, jobDuration: String) {
         
         let postID: String = String(userID) + String(timestamp)
         let docRef = database.collection("jobs").document(postID)
         
         
-        docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "userID": String(userID)])
+        docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "jobDuration": jobDuration, "userID": String(userID)])
     }
 
     
