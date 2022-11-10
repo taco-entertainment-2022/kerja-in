@@ -25,7 +25,6 @@ final class AddJobViewViewModel: ObservableObject {
     let userID = Auth.auth().currentUser?.uid
     let timestamp = Int(Date().timeIntervalSince1970)
 
-
     static let shared = AddJobViewViewModel()
     
     func validateJobForm() {
@@ -40,8 +39,6 @@ final class AddJobViewViewModel: ObservableObject {
         print(formValues)
     }
     
-    
-    
     func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String, jobDuration: String) {
         
         let postID: String = String(userID) + String(timestamp)
@@ -50,6 +47,4 @@ final class AddJobViewViewModel: ObservableObject {
         
         docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "jobDuration": jobDuration, "userID": String(userID)])
     }
-
-    
 }

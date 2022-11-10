@@ -7,8 +7,16 @@
 
 import UIKit
 import SnapKit
+import Combine
+
+struct Duration {
+    let unix: Int
+    let human: String
+}
 
 class DurationPickerViewController: UIViewController {
+    
+    private var addJobVC = AddJobViewController()
     
     let numPicker = Array(1...60)
     let durationPicker = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
@@ -43,6 +51,7 @@ class DurationPickerViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         styleLayouts()
+        bindSubscriptions()
     }
     
     private func styleLayouts() {
@@ -60,11 +69,19 @@ class DurationPickerViewController: UIViewController {
     }
     
     @objc private func didChangeDurationValue() {
-        let vc = AddJobViewController()
-        vc.duration = durationValue
+        addJobVC.duration = durationValue
         
-        print("VC duratioin value: ", vc.duration)
+        print("VC duratioin value: ", addJobVC.duration)
         dismiss(animated: true)
+    }
+    
+    private func bindSubscriptions() {
+        let publisher = NotificationCenter.Publisher(center: .default, name: Notification.Name("duration"), object: nil)
+            .map { (notification) -> String? in
+                return (notification.object as? Duration)?.human ?? ""
+            }
+        
+        let subscriber = Subscribers.Assign(object: addJobVC.jobDurationInput.titleLabel?.text, keyPath: \.)
     }
 }
 
