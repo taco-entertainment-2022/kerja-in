@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "People.png",
+      "filename" : "Jasa Setir.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "People@2x.png",
+      "filename" : "Jasa Setir@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "People@3x.png",
+      "filename" : "Jasa Setir@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
