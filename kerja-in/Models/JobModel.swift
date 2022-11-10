@@ -19,6 +19,7 @@ class JobModel {
     var location: String?
     var price: String?
     var description: String?
+    var userContact: String?
     
 //    init(postId: String, userImage: UIImage, jobName: String, userName: String, duration: String, date: String, location: String, price: String, posted: String, description: String) {
 //        self.postId = postId
@@ -32,7 +33,7 @@ class JobModel {
 //        self.price = price
 //        self.description = description
 //    }
-    init(/*postId: String,*/ userImage: UIImage, jobName: String, /*userName: String, duration: String,*/ date: String, location: String, price: String, /*posted: String,*/ description: String) {
+    init(/*postId: String,*/ userImage: UIImage, jobName: String, /*userName: String, duration: String,*/ date: String, location: String, price: String, /*posted: String,*/ description: String, userContact: String) {
         // self.postId = postId
         self.jobImage = userImage
         self.jobName = jobName
@@ -43,5 +44,6 @@ class JobModel {
         self.location = location
         self.price = price
         self.description = description
+        self.userContact = userContact
     }
 }

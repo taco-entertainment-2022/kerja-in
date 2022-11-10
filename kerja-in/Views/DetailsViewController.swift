@@ -184,8 +184,7 @@ class DetailsViewController: UIViewController {
     }()
     
     @objc func contactButtonPressed(sender: UIButton) {
-        let phoneNumber = "6285692035755"
-        let appURL = URL(string: "https://wa.me/\(phoneNumber)?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20mengenai%20postingan%20kamu%20di%20kerjain")!
+        let appURL = URL(string: "https://wa.me/\(contactData)?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20mengenai%20postingan%20kamu%20di%20kerjain")!
         if UIApplication.shared.canOpenURL(appURL) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
@@ -196,6 +195,14 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    var jobData: String = "Interview Mahasiswa Rantau"
+    var timeData: String = "Senin, 9 Oct 2022"
+    var categoryData = UIImage(named: "Riset")
+    var durationData: String = "15 Menit"
+    var locationData: String = "Online"
+    var paymentData: String = "Rp5.000"
+    var descriptionData: String = "Butuh respondent mahasiswa rantau ya... Wajib lapor sebelum ngisi respondent. Tujuannya supaya bisa konfirmasi dulu dan bisa dibayar. Hubungi WAnya yang tertera ya. \n\nKalau bisa mahasiswa rantau dari luar Jawa ya... terus baru menjalani kuliah semester2 awal."
+    var contactData: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,7 +214,6 @@ class DetailsViewController: UIViewController {
         appearance.backgroundColor = UIColor(named: "DarkBlue")
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
-       
         
         //Navigation Bar
         self.title = "Job Detail"
@@ -218,21 +224,39 @@ class DetailsViewController: UIViewController {
         self.navigationItem.setRightBarButtonItems([item1], animated: true)
         
         //MARK: - Upper
-        userImage.image = UIImage(named: "People")
-        jobLabel.text = "Interview Mahasiswa Rantau"
+        userImage.image = categoryData
+        jobLabel.text = jobData
         daysLabel.text = "5 days ago, oleh Fredo Sembi"
         
         
         //MARK: - Details Text
-        timeInfo.text = "Senin, 9 Oct 2022"
-        durationInfo.text = "15 Menit"
-        categoryInfo.text = "Responden"
-        locationInfo.text = "Online"
-        paymentInfo.text = "Rp5.000"
+        timeInfo.text = timeData
+        durationInfo.text = durationData
+        
+        if categoryData == UIImage(named: "Responden") {
+            categoryInfo.text = "Responden"
+        } else if categoryData == UIImage(named: "Jasa Setir") {
+            categoryInfo.text = "Jasa Setir"
+        } else if categoryData == UIImage(named: "Titip Beli") {
+            categoryInfo.text = "Titip Beli"
+        } else if categoryData == UIImage(named: "Foto Model") {
+            categoryInfo.text = "Foto Model"
+        } else if categoryData == UIImage(named: "Sales") {
+            categoryInfo.text = "Sales"
+        } else if categoryData == UIImage(named: "MC") {
+            categoryInfo.text = "MC"
+        } else if categoryData == UIImage(named: "Riset") {
+            categoryInfo.text = "Riset"
+        } else {
+            categoryInfo.text = "Lainnya"
+        }
+         
+        locationInfo.text = locationData
+        paymentInfo.text = paymentData
         
         //MARK: - Lower
         descTitleLabel.text = "Deskripsi Pekerjaan"
-        descLabel.text = "Butuh respondent mahasiswa rantau ya... Wajib lapor sebelum ngisi respondent. Tujuannya supaya bisa konfirmasi dulu dan bisa dibayar. Hubungi WAnya yang tertera ya. \n\nKalau bisa mahasiswa rantau dari luar Jawa ya... terus baru menjalani kuliah semester2 awal."
+        descLabel.text = descriptionData
 
 
         //Guide Label
