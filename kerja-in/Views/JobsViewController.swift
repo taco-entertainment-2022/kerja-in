@@ -73,12 +73,13 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     
-                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-"))
+                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
                 }
             }
             self.tableView.reloadData()
         }
     }
+
     
     
     func setTableView() {
@@ -133,7 +134,17 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(DetailsViewController(), animated: true)
+        let nextVC = DetailsViewController()
+        nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
+        nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
+        nextVC.categoryData = jobsArr[indexPath.row].jobImage
+        nextVC.durationData = jobsArr[indexPath.row].duration ?? "-"
+        nextVC.locationData = jobsArr[indexPath.row].location ?? "-"
+        nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
+        nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
+        nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+        navigationController?.pushViewController(nextVC, animated: true)
+        
     }
     
 }
