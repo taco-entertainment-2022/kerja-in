@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import Firebase
 
 class JobsViewController: UIViewController, UISearchBarDelegate {
     
@@ -13,6 +15,11 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
     var jobsArr = [JobModel]()
     lazy var searchBar: UISearchBar = UISearchBar()
     let addButton = UIButton(type: .custom)
+    
+    let database = Firestore.firestore()
+    let userID = Auth.auth().currentUser?.uid
+    let timestamp = Int(Date().timeIntervalSince1970)
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +58,26 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         
         //MARK: - Set Table View
         setTableView()
-        jobsArr.append(JobModel(postId: "1", userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Skripsi", userName: "Fredo Sembi", duration: "15 menit", date: "Mon, 7 Oct 2022", location: "Online", price: "Rp 10.000", posted: "3 days ago", description: "Mencari testimoni mahasiswa yang sedang mencari Dragon Ball ketujuh dan One Piece"))
-        jobsArr.append(JobModel(postId: "2", userImage: UIImage(named: "Car")!, jobName: "Jasa Pengemudi Malam Hari", userName: "Leslar Tibi", duration: "7 Hari", date: "Mon, 7 Oct 2022", location: "Jakarta Barat", price: "RP 1.200.000", posted: "5 days ago", description: "Yang kuat melek 24/7 monggo dilamar"))
-        jobsArr.append(JobModel(postId: "3", userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja Bulanan", userName: "Purani Mahaan", duration: "1 Hari", date: "Tue, 8 Oct 2022", location: "Singapore", price: "Rp 2.000.000", posted: "1 days ago", description: "Bantu belanja bulanan ke Marina Bay Sands"))
-        jobsArr.append(JobModel(postId: "4", userImage: UIImage(named: "People")!, jobName: "Interview Mahasiswi Teknik", userName: "Sakata Gintoki Kintama", duration: "5 menit", date: "Tue, 8 Oct 2022", location: "Online", price: "Rp 10.000", posted: "2 days ago", description: "Tugas ini ibarat mencari jarum dalam tumpukan jerami, mencari One Piece, atau unicorn. Karena sangat jarang, tolong bantu saya untuk mewawancarai mahasiswi yang berkuliah di jurusan Teknik Informatika dengan jenis kelamin perempuan."))
-        jobsArr.append(JobModel(postId: "5", userImage: UIImage(named: "People")!, jobName: "Menjadi Responden Thesis", userName: "Yoko Ohno", duration: "15 menit", date: "Wed, 9 Oct 2022", location: "Surabaya", price: "Rp 5.000", posted: "1 day ago", description: "Saya ingin menulis thesis mengenai Cruel Angel Thesis dan reaksi orang - orang pada umumnya ketika mendengarnya."))
-        jobsArr.append(JobModel(postId: "6", userImage: UIImage(named: "Car")!, jobName: "Jasa Mengemudi Siang Hari", userName: "Indro", duration: "8 Jam", date: "Thu, 10 Oct 2022", location: "Saranjana", price: "Rp 800.000", posted: "a few seconds ago", description: "Saya tidak hafal jalan setiap kali saya diberi alamar di kota ini. Tolong temani saya untuk membacakan peta selama perjalanan. Garansi kembali tidak dijamin."))
-        jobsArr.append(JobModel(postId: "7", userImage: UIImage(named: "Cart")!, jobName: "Bantu Belanja MPASI untuk bayi umur 276 bulan", userName: "Tatang Glia", duration: "1 bulan", date: "Fri, 10 Oct 2022", location: "Tasikmalaya", price: "Rp 1.500.000", posted: "a few seconds ago", description: "Minta tolong untuk memasak harian untuk anak saya yang berusia 276 bulan. Saya sibuk."))
-        jobsArr.append(JobModel(postId: "8", userImage: UIImage(named: "People")!, jobName: "Menjadi Pasien Praktikum", userName: "Ningsih Slay", duration: "1 jam", date: "Fri, 10 Oct 2022", location: "Batam", price: "20.000.000", posted: "a few seconds ago", description: "Dicari kadaver hidup untuk praktikum bedah organ dalam!"))
         
+        let db = Firestore.firestore()
+        db.collection("jobs").getDocuments { snapshot, error in
+            if error != nil {
+                print("Error Fetch")
+            } else {
+                for document in snapshot!.documents {
+                    let jobName = document.data()["jobName"] as? String
+                    let description = document.data()["description"] as? String
+                    let date = document.data()["date"] as? String
+                    let location = document.data()["location"] as? String
+                    let price = document.data()["price"] as? String
+                    let userContact = document.data()["userContact"] as? String
+                    let userImage = document.data()["userImage"] as? String
+                    
+                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-"))
+                }
+            }
+            self.tableView.reloadData()
+        }
     }
     
     
