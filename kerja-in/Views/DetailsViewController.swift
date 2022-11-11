@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import FirebaseFirestore
 
 class DetailsViewController: UIViewController {
     
@@ -214,6 +216,34 @@ class DetailsViewController: UIViewController {
         appearance.backgroundColor = UIColor(named: "DarkBlue")
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
+        
+        let db = Firestore.firestore()
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+
+        
+        db.collection("jobs").whereField("userID", isEqualTo: userUID).getDocuments { snapshot, error in
+            if error != nil {
+                print("ERROR FETCH")
+            }
+            else {
+                
+                for document in snapshot!.documents {
+                    //print("\(document.data()["jobName"] as! String)")
+                    let jobName = document.data()["jobName"] as? String
+                    let description = document.data()["description"] as? String
+                    let date = document.data()["date"] as? String
+                    let location = document.data()["location"] as? String
+                    let price = document.data()["price"] as? String
+                    let userContact = document.data()["userContact"] as? String
+                    let userImage = document.data()["userImage"] as? String
+                    
+                   // print(userUID)
+                    
+                }
+            }
+//            self.tableView.reloadData()
+        }
+        
         
         //Navigation Bar
         self.title = "Job Detail"

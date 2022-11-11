@@ -120,19 +120,6 @@ class editProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "DarkWhite")
-        
-        let appearance = UINavigationBarAppearance(idiom: .phone)
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.Outfit(.semiBold, size: 20)]
-        appearance.backgroundColor = UIColor(named: "DarkBlue")
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-       
-        
-        //Navigation Bar
-        self.title = "Edit Profile"
-        
         configureViewComponents()
         loadData()
     }
@@ -205,9 +192,9 @@ class editProfileController: UIViewController {
                 print("ERROR FETCh")
             }
             else {
-                let userName = snapshot?.get("firstname") as! String
-                let phoneNumber = snapshot?.get("phone") as! String
-                let email = snapshot?.get("email") as! String
+                let userName = snapshot?.get("firstname") as? String
+                let phoneNumber = snapshot?.get("phone") as? String
+                let email = snapshot?.get("email") as? String
                 
                 self.nameTextField.text = userName
                 self.phoneTextField.text = phoneNumber
@@ -232,8 +219,9 @@ class editProfileController: UIViewController {
 
     func configureViewComponents() {
         
-        view.backgroundColor = UIColor.backgroundColor()
-        navigationController?.navigationBar.isHidden = true
+        view.backgroundColor = UIColor(named: "DarkWhite")
+        self.title = "Edit Profile"
+        //navigationController?.navigationBar.isHidden = true
         
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
