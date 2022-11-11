@@ -54,6 +54,52 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return label
     }()
     
+    lazy var fileLabel: UILabel = {
+        let label = UILabel()
+        label.text = "File Saya"
+        label.font = UIFont.Outfit(.semiBold, size: 20)
+        
+        return label
+    }()
+    
+    lazy var supportLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Support"
+        label.font = UIFont.Outfit(.semiBold, size: 20)
+        
+        return label
+    }()
+    
+    lazy var noAccountHeadLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Anda belum punya akun... "
+        label.font = UIFont.Outfit(.semiBold, size: 20)
+        
+        return label
+    }()
+    
+    lazy var noAccountBodyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Daftarkan diri anda untuk dapat melamar dan menawarkan pekerjaan tambahan"
+        label.font = UIFont.Outfit(.light, size: 15)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    let signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Daftar", for: .normal)
+        
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: 20)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor.buttonColor()
+        
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.layer.cornerRadius = 20
+        
+        return button
+    }()
     
     private let  tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -76,22 +122,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
   
         return view
-    }()
-    
-    lazy var fileLabel: UILabel = {
-        let label = UILabel()
-        label.text = "File Saya"
-        label.font = UIFont.Outfit(.semiBold, size: 20)
-        
-        return label
-    }()
-    
-    lazy var supportLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Support"
-        label.font = UIFont.Outfit(.semiBold, size: 20)
-        
-        return label
     }()
     
     let editButton: UIButton = {
@@ -141,65 +171,225 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
   
     }
     
+    @objc func handleSignUp() {
+//        navigationController?.pushViewController(SignUpController(), animated: false)
+        
+        let navVC = UINavigationController(rootViewController: TabBar())
+        navVC.modalPresentationStyle = .fullScreen
+        //navVC.modalTransitionStyle = .coverVertical
+        self.present(navVC, animated: false) {
+            navVC.pushViewController(SignUpController(), animated: false)
+        }
+    }
+    
     func configure() {
-        models.append(Section(title:" ", option: [
-            SettingOption(title: "Job Posted") {
-                print("Tapped First Cell")
-            },
-            SettingOption(title: "Saved Jobs") {
-                
-            },
+        
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
+        
             
-        ]))
-        
-        
-        models.append(Section(title:" ", option: [
-            SettingOption(title: "FAQ") {
+            if isLoggedIn == true{
+             print("loggedIn")
                 
-            },
-            SettingOption(title: "Tutorial") {
                 
-            },
-            SettingOption(title: "Ulas Aplikasi") {
-                
-            },
-            SettingOption(title: "Report") {
-                
-            },
-            SettingOption(title: "Mengenai Kerjaan") {
-                
-            },
+                 view.addSubview(backView)
+                 backView.snp.makeConstraints { make in
+                     make.width.equalTo(350)
+                     make.height.equalTo(79)
+                     make.top.equalTo(109)
+                     make.left.equalTo(20)
+                     make.right.equalTo(-20)
+                 }
+                 
+                 
+                 view.addSubview(profileImageView)
+                 profileImageView.snp.makeConstraints { make in
+                     make.width.equalTo(59)
+                     make.height.equalTo(59)
+                     make.top.equalTo(119)
+                     make.left.equalTo(31)
+                     //make.right.equalTo(-300)
+                 }
+                 
+                 view.addSubview(nameLabel)
+                 nameLabel.snp.makeConstraints { make in
+         //            make.width.equalTo(112)
+                     make.height.equalTo(25)
+                     make.top.equalTo(127)
+                     make.left.equalTo(105)
+         //            make.right.equalTo(-173)
+                 }
+                 
+                 view.addSubview(phoneLabel)
+                 phoneLabel.snp.makeConstraints { make in
+                     make.top.equalTo(152)
+                     make.left.equalTo(105)
+                 }
             
-        ]))
-        
-        models.append(Section(title: "", option: [
-            SettingOption(title: "Keluar") {
+                 view.addSubview(editButton)
+                 editButton.snp.makeConstraints { make in
+                     make.width.equalTo(16)
+                     make.height.equalTo(16)
+                     make.top.equalTo(141)
+                     //make.left.equalTo(340)
+                     make.right.equalTo(-34)
+                 }
                 
-                UserDefaults.standard.set(false, forKey: "userLoggedIn")
-                UserDefaults.standard.synchronize()
-                
-                do {
-                    try Auth.auth().signOut()
-                    
-                    let navVC = UINavigationController(rootViewController: ProfileViewController())
-                    navVC.modalPresentationStyle = .fullScreen
-                    //navVC.modalTransitionStyle = .coverVertical
-                    self.present(navVC, animated: false) {
-                        navVC.pushViewController(LoginController(), animated: false)
-                    }
-                    
-                    
-                } catch let error {
-                    print("Failed to sign out with error...", error)
+                view.addSubview(fileLabel)
+                fileLabel.snp.makeConstraints { make in
+                    make.width.equalTo(80)
+                    make.height.equalTo(25)
+                    make.top.equalTo(203)
+                    make.left.equalTo(21)
+                    make.right.equalTo(-287)
                 }
                 
-            },
-            
-        ]))
+                view.addSubview(supportLabel)
+                supportLabel.snp.makeConstraints { make in
+                    make.width.equalTo(74)
+                    make.height.equalTo(25)
+                    make.top.equalTo(338)
+                    make.left.equalTo(20)
+                    make.right.equalTo(-296)
+                }
+
+                models.append(Section(title:" ", option: [
+                    SettingOption(title: "Job Posted") {
+                        print("Tapped First Cell")
+                        
+                        self.navigationController?.pushViewController(JobsPostedViewController(), animated: true)
+                    },
+                    SettingOption(title: "Saved Jobs") {
+                        
+                    },
+                    
+                ]))
+                
+                
+                view.addSubview(tableView)
+                tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 180, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+               
+                
+                models.append(Section(title:" ", option: [
+                    SettingOption(title: "FAQ") {
+                        
+                    },
+                    SettingOption(title: "Tutorial") {
+                        
+                    },
+                    SettingOption(title: "Ulas Aplikasi") {
+                        
+                    },
+                    SettingOption(title: "Report") {
+                        
+                    },
+                    SettingOption(title: "Mengenai Kerjaan") {
+                        
+                    },
+                    
+                ]))
+                
+                models.append(Section(title: "", option: [
+                    SettingOption(title: "Keluar") {
+                        
+                        UserDefaults.standard.set(false, forKey: "userLoggedIn")
+                        UserDefaults.standard.synchronize()
+                        
+                        do {
+                            try Auth.auth().signOut()
+                            
+                            let navVC = UINavigationController(rootViewController: ProfileViewController())
+                            navVC.modalPresentationStyle = .fullScreen
+                            //navVC.modalTransitionStyle = .coverVertical
+                            self.present(navVC, animated: false) {
+                                navVC.pushViewController(LoginController(), animated: false)
+                            }
+                            
+                            
+                        } catch let error {
+                            print("Failed to sign out with error...", error)
+                        }
+                        
+                    },
+                    
+                ]))
+                
+            }else{
+             print("loggedOut")
+                
+                view.addSubview(backView)
+                backView.snp.makeConstraints { make in
+                    make.width.equalTo(350)
+                    make.height.equalTo(139)
+                    make.top.equalTo(107)
+                    make.left.equalTo(20)
+                    //make.right.equalTo(-296)
+                }
+                
+                view.addSubview(noAccountHeadLabel)
+                noAccountHeadLabel.snp.makeConstraints { make in
+                    make.height.equalTo(25)
+                    make.top.equalTo(120)
+                    make.left.equalTo(78)
+                    //make.right.equalTo(-296)
+                }
+                
+                view.addSubview(noAccountBodyLabel)
+                noAccountBodyLabel.snp.makeConstraints { make in
+                    make.width.equalTo(316)
+                    make.height.equalTo(38)
+                    make.top.equalTo(150)
+                    make.left.equalTo(37)
+                    //make.right.equalTo(-296)
+                }
+                
+                view.addSubview(signUpButton)
+                signUpButton.snp.makeConstraints { make in
+                    make.width.equalTo(114)
+                    make.height.equalTo(35)
+                    make.top.equalTo(198)
+                    make.left.equalTo(138)
+                    //make.right.equalTo(-296)
+                }
+                
+                view.addSubview(supportLabel)
+                supportLabel.snp.makeConstraints { make in
+                    make.width.equalTo(74)
+                    make.height.equalTo(25)
+                    make.top.equalTo(257)
+                    make.left.equalTo(20)
+                    //make.right.equalTo(-296)
+                }
+                
+                
+                view.addSubview(tableView)
+                tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 247, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+               
+                
+                models.append(Section(title:" ", option: [
+                    SettingOption(title: "FAQ") {
+                        
+                    },
+                    SettingOption(title: "Tutorial") {
+                        
+                    },
+                    SettingOption(title: "Ulas Aplikasi") {
+                        
+                    },
+                    SettingOption(title: "Report") {
+                        
+                    },
+                    SettingOption(title: "Mengenai Kerjaan") {
+                        
+                    },
+                    
+                ]))
+                
+            }
     }
     
     @objc func handleEdit() {
         navigationController?.pushViewController(editProfileController(), animated: true)
+
     }
     
     
@@ -246,8 +436,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 print("ERROR FETCH")
             }
             else {
-                let userName = snapshot?.get("firstname") as! String
-                let phoneNumber = snapshot?.get("phone") as! String
+                let userName = snapshot?.get("firstname") as? String
+                let phoneNumber = snapshot?.get("phone") as? String
                 
                 self.nameLabel.text = userName
                 self.phoneLabel.text = phoneNumber
@@ -257,67 +447,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func configureViewComponents() {
         
-        view.addSubview(backView)
-        backView.snp.makeConstraints { make in
-            make.width.equalTo(350)
-            make.height.equalTo(79)
-            make.top.equalTo(109)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
-        }
+
         
-        view.addSubview(tableView)
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 180, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+
         
-        view.addSubview(profileImageView)
-        profileImageView.snp.makeConstraints { make in
-            make.width.equalTo(59)
-            make.height.equalTo(59)
-            make.top.equalTo(119)
-            make.left.equalTo(31)
-            //make.right.equalTo(-300)
-        }
-        
-        view.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-//            make.width.equalTo(112)
-            make.height.equalTo(25)
-            make.top.equalTo(127)
-            make.left.equalTo(105)
-//            make.right.equalTo(-173)
-        }
-        
-        view.addSubview(phoneLabel)
-        phoneLabel.snp.makeConstraints { make in
-            make.top.equalTo(152)
-            make.left.equalTo(105)
-        }
-   
-        view.addSubview(editButton)
-        editButton.snp.makeConstraints { make in
-            make.width.equalTo(16)
-            make.height.equalTo(16)
-            make.top.equalTo(141)
-            //make.left.equalTo(340)
-            make.right.equalTo(-34)
-        }
-        
-        view.addSubview(fileLabel)
-        fileLabel.snp.makeConstraints { make in
-            make.width.equalTo(80)
-            make.height.equalTo(25)
-            make.top.equalTo(203)
-            make.left.equalTo(21)
-            make.right.equalTo(-287)
-        }
-        
-        view.addSubview(supportLabel)
-        supportLabel.snp.makeConstraints { make in
-            make.width.equalTo(74)
-            make.height.equalTo(25)
-            make.top.equalTo(338)
-            make.left.equalTo(20)
-            make.right.equalTo(-296)
-        }
+
     }
 }
