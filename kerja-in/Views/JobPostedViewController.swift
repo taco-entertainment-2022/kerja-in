@@ -55,6 +55,7 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
             }
             else {
                 
+                
                 for document in snapshot!.documents {
                     //print("\(document.data()["jobName"] as! String)")
                     let jobName = document.data()["jobName"] as? String
@@ -64,11 +65,13 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
                     let price = document.data()["price"] as? String
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
+
                     
-                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-"))
+                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
                     
-                }
-            }
+                        }
+                    }
+
             self.tableView.reloadData()
         }
         
@@ -124,13 +127,17 @@ extension JobsPostedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostedCell", for: indexPath!) as? JobPostedTableViewCell else {fatalError("Unable to create cell")}
+        let nextVC = DetailsViewController()
+        nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
+        nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
+        nextVC.categoryData = jobsArr[indexPath.row].jobImage
+        nextVC.durationData = jobsArr[indexPath.row].duration ?? "-"
+        nextVC.locationData = jobsArr[indexPath.row].location ?? "-"
+        nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
+        nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
+        nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
         
-        print(cell.jobLabel.text)
-        
-        navigationController?.pushViewController(DetailsViewController(), animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }
