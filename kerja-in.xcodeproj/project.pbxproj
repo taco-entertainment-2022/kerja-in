@@ -18,7 +18,6 @@
 		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
 		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
 		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
-		4EE1E8C5291B8F770062EC2E /* JobDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE1E8C4291B8F770062EC2E /* JobDatePickerViewController.swift */; };
 		4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */; };
 		4EE22AB12912F76D0090F7CE /* TransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22AB02912F76D0090F7CE /* TransitioningDelegate.swift */; };
 		4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
@@ -85,7 +84,6 @@
 		4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
-		4EE1E8C4291B8F770062EC2E /* JobDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDatePickerViewController.swift; sourceTree = "<group>"; };
 		4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewViewModel.swift; sourceTree = "<group>"; };
 		4EE22AB02912F76D0090F7CE /* TransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,7 +183,6 @@
 				4E930F572905EF47005FA88A /* SignUpController.swift */,
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
 				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
-				4EE1E8C4291B8F770062EC2E /* JobDatePickerViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -600,7 +597,6 @@
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
-				4EE1E8C5291B8F770062EC2E /* JobDatePickerViewController.swift in Sources */,
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
 				4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */,

@@ -17,12 +17,7 @@ class AddJobViewController: UIViewController {
     private let cornerRadius = 10.0
     private let labelSize = 18.0
     
-    private let dropDown = DropDown()
-    private let jobDatePicker = JobDatePickerViewController()
-    
-    private var subscribers = Set<AnyCancellable>()
-    private var viewModel: AddJobViewViewModel!
-    
+    private let dropDown = DropDown()    
     private let numOption = Array(1...60)
     private let durationOption = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
     
@@ -150,7 +145,6 @@ class AddJobViewController: UIViewController {
         textField.becomeFirstResponder()
         textField.attributedPlaceholder = NSAttributedString(string: "Durasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
         textField.font = UIFont.Outfit(.medium, size: 16)
-//        textField.addTarget(self, action: #selector(didTapDuration), for: .editingDidBegin)
         
         return textField
     }()
@@ -231,18 +225,19 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    lazy var jobDateInput: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor(named: "LightGray")
-        button.layer.cornerRadius = 8
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets.left = 8
-        button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
-        button.addTarget(self, action: #selector(didTapJobDate), for: .touchUpInside)
-        button.setTitle("", for: .normal)
-        return button
+    lazy var jobDateInput: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = UIColor(named: "LightGray")
+        textField.delegate = self
+        textField.autocapitalizationType = .words
+        textField.returnKeyType = .continue
+        textField.becomeFirstResponder()
+        textField.attributedPlaceholder = NSAttributedString(string: "Tanggal pekerjaan dilaksanakan", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        
+        return textField
     }()
     
     private lazy var createButton: UIButton = {
@@ -263,6 +258,20 @@ class AddJobViewController: UIViewController {
         pickerView.backgroundColor = .white
         
         return pickerView
+    }()
+    
+    private lazy var jobDatePickerView: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.backgroundColor = .white
+        datePicker.preferredDatePickerStyle = .wheels
+        
+        let localDate = Locale(identifier: "id")
+        datePicker.locale = localDate
+        datePicker.datePickerMode = .dateAndTime
+        
+        return datePicker
     }()
     
     private var toolBar: UIToolbar = {
@@ -297,7 +306,8 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
-        bindViews()
+        connectDurationInput()
+        connectJobDateInput()
         
         let docRef = database.collection("jobs").document("posts")
         docRef.getDocument { snapshot, error in
@@ -308,11 +318,7 @@ class AddJobViewController: UIViewController {
         }
         
     }
-    
-    private func bindViews() {
-
-    }
-    
+        
     private func setUpViews() {
         //styling
         view.addSubview(scrollView)
@@ -439,8 +445,9 @@ class AddJobViewController: UIViewController {
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
         }
-        
-        //integration
+    }
+    
+    func connectDurationInput() {
         durationPickerView.delegate = self
         durationPickerView.dataSource = self
         
@@ -455,6 +462,19 @@ class AddJobViewController: UIViewController {
         jobDurationInput.inputAccessoryView = toolBar
     }
     
+    func connectJobDateInput() {
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(donePickerDidTap))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePickerDidTap))
+        
+        toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        jobDatePickerView.addTarget(self, action: #selector(jobDatePickerViewChanged), for: .valueChanged)
+        jobDateInput.inputView = jobDatePickerView
+        jobDateInput.inputAccessoryView = toolBar
+    }
+    
     @objc func backPressed() {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
@@ -466,26 +486,23 @@ class AddJobViewController: UIViewController {
         dropDown.show()
         
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            print("Selected item: \(item) at index: \(index)")
             AddJobViewViewModel.shared.category = item
             categoryInput.titleLabel?.textColor = .black
             categoryInput.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
             categoryInput.setTitle(item, for: .normal)
         }
     }
-        
-    @objc func didTapJobDate() {
-        print("Job date pressed")
-        if let sheet = jobDatePicker.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-        }
-        
-        present(jobDatePicker, animated: true, completion: nil)
-    }
     
     @objc func donePickerDidTap() {
-        view.endEditing(true)
+            view.endEditing(true)
+    }
+    
+    @objc func jobDatePickerViewChanged() {
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale(identifier: "id-ID")
+        dateFormat.dateFormat = "EEE, dd-MM-yyyy hh:mm"
+        jobDate = dateFormat.string(from: jobDatePickerView.date)
+        jobDateInput.text = "\(jobDate)"
     }
     
     @objc func didTapCreate() {
@@ -496,13 +513,13 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
-        AddJobViewViewModel.shared.jobDate = jobDateInput.titleLabel?.text ?? ""
+        AddJobViewViewModel.shared.jobDate = jobDateInput.text ?? ""
         
-        print("Save button pressed", jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDurationInput.text!, jobDateInput.titleLabel?.text!)
+        print("Save button pressed", jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDurationInput.text!, jobDateInput.text!)
         
-        if //!jobDateInput.text!.isEmpty &&
+        if !jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
-//            (!jobDurationInput.titleLabel?.text! == "") &&
+            !jobDurationInput.text!.isEmpty &&
             !jobTitleInput.text!.isEmpty &&
             !locationInput.text!.isEmpty &&
             !feeInput.text!.isEmpty &&
@@ -515,7 +532,8 @@ class AddJobViewController: UIViewController {
                                                 price: AddJobViewViewModel.shared.fee!,
                                                 userImage: AddJobViewViewModel.shared.category!,
                                                 userContact: AddJobViewViewModel.shared.contact!,
-                                                userID: AddJobViewViewModel.shared.userID!, jobDuration: AddJobViewViewModel.shared.jobDuration!)
+                                                userID: AddJobViewViewModel.shared.userID!,
+                                                jobDuration: AddJobViewViewModel.shared.jobDuration!)
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }
