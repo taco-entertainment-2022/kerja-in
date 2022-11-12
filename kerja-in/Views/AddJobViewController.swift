@@ -8,6 +8,7 @@
 import UIKit
 import DropDown
 import FirebaseFirestore
+import Combine
 
 class AddJobViewController: UIViewController {
     
@@ -17,16 +18,20 @@ class AddJobViewController: UIViewController {
     private let labelSize = 18.0
     
     private let dropDown = DropDown()
-    private let durationPicker = DurationPickerViewController()
     private let jobDatePicker = JobDatePickerViewController()
+    
+    private var subscribers = Set<AnyCancellable>()
+    private var viewModel: AddJobViewViewModel!
+    
+    private let numOption = Array(1...60)
+    private let durationOption = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
     
     let backButton = UIButton(type: .custom)
     let database = Firestore.firestore()
     var category: String = ""
     var duration: String = ""
     var jobDate: String = ""
-
-    
+        
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -134,19 +139,20 @@ class AddJobViewController: UIViewController {
         return label
     }()
         
-    lazy var jobDurationInput: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor(named: "LightGray")
-        button.layer.cornerRadius = 8
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets.left = 8
-        button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
-        button.addTarget(self, action: #selector(didTapDuration), for: .touchUpInside)
-        button.setTitle("Durasi", for: .normal)
+    lazy var jobDurationInput: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = UIColor(named: "LightGray")
+        textField.delegate = self
+        textField.autocapitalizationType = .words
+        textField.returnKeyType = .continue
+        textField.becomeFirstResponder()
+        textField.attributedPlaceholder = NSAttributedString(string: "Durasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
+        textField.font = UIFont.Outfit(.medium, size: 16)
+//        textField.addTarget(self, action: #selector(didTapDuration), for: .editingDidBegin)
         
-        return button
+        return textField
     }()
     
     private lazy var locationLabel: UILabel = {
@@ -251,6 +257,24 @@ class AddJobViewController: UIViewController {
         return button
     }()
         
+    private lazy var durationPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.backgroundColor = .white
+        
+        return pickerView
+    }()
+    
+    private var toolBar: UIToolbar = {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(named: "DarkBlue")
+        toolBar.sizeToFit()
+        
+        return toolBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "DarkWhite")
@@ -273,6 +297,8 @@ class AddJobViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
             
         setUpViews()
+        bindViews()
+        
         let docRef = database.collection("jobs").document("posts")
         docRef.getDocument { snapshot, error in
             guard let data = snapshot?.data(), error == nil else {
@@ -283,8 +309,12 @@ class AddJobViewController: UIViewController {
         
     }
     
+    private func bindViews() {
+
+    }
+    
     private func setUpViews() {
-        
+        //styling
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
@@ -409,6 +439,20 @@ class AddJobViewController: UIViewController {
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
         }
+        
+        //integration
+        durationPickerView.delegate = self
+        durationPickerView.dataSource = self
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(donePickerDidTap))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePickerDidTap))
+        
+        toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        jobDurationInput.inputView = durationPickerView
+        jobDurationInput.inputAccessoryView = toolBar
     }
     
     @objc func backPressed() {
@@ -429,17 +473,7 @@ class AddJobViewController: UIViewController {
             categoryInput.setTitle(item, for: .normal)
         }
     }
-    
-    @objc private func didTapDuration() {
-        print("Duration pressed")
-        if let sheet = durationPicker.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-        }
         
-        present(durationPicker, animated: true, completion: nil)
-    }
-    
     @objc func didTapJobDate() {
         print("Job date pressed")
         if let sheet = jobDatePicker.sheetPresentationController {
@@ -450,17 +484,21 @@ class AddJobViewController: UIViewController {
         present(jobDatePicker, animated: true, completion: nil)
     }
     
+    @objc func donePickerDidTap() {
+        view.endEditing(true)
+    }
+    
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-        AddJobViewViewModel.shared.jobDuration = jobDurationInput.titleLabel?.text!
+        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!//jobDurationInput.titleLabel?.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.titleLabel?.text ?? ""
         
-        print(jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!)
+        print("Save button pressed", jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDurationInput.text!, jobDateInput.titleLabel?.text!)
         
         if //!jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
@@ -487,5 +525,35 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return numOption.count
+        }
+        
+        return durationOption.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return "\(numOption[row])"
+        }
+        
+        return "\(durationOption[row])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let numSelected = numOption[pickerView.selectedRow(inComponent: 0)]
+        let durationSelected = durationOption[pickerView.selectedRow(inComponent: 1)]
+        
+        duration = "\(numSelected) \(durationSelected)"
+        jobDurationInput.text = duration
     }
 }
