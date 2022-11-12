@@ -189,11 +189,8 @@
 				4E930F572905EF47005FA88A /* SignUpController.swift */,
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
 				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
-<<<<<<< HEAD
 				4EE1E8C4291B8F770062EC2E /* JobDatePickerViewController.swift */,
 				93F05E07291D4A7100B55756 /* JobPostedViewController.swift */,
-=======
->>>>>>> shera/feature/combine
 			);
 			path = Views;
 			sourceTree = "<group>";
