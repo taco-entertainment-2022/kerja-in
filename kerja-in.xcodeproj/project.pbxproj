@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E36F6C3291FD63F005D8495 /* ViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */; };
 		4E6A412928FF9647007F56D2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A412828FF9647007F56D2 /* DataModel.swift */; };
 		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
 		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
@@ -19,7 +20,6 @@
 		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
 		4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */; };
 		4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */; };
-		4EE22AB12912F76D0090F7CE /* TransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE22AB02912F76D0090F7CE /* TransitioningDelegate.swift */; };
 		4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933616812909C16800F6B668 /* CheckboxButton.swift */; };
 		4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0628E6A5F8003B161F /* AppDelegate.swift */; };
 		4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */; };
@@ -76,6 +76,7 @@
 /* Begin PBXFileReference section */
 		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
 		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstraints.swift; sourceTree = "<group>"; };
 		4E6A412828FF9647007F56D2 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4E930F522905EF46005FA88A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4E930F532905EF47005FA88A /* CurrentUserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserModels.swift; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewViewModel.swift; sourceTree = "<group>"; };
-		4EE22AB02912F76D0090F7CE /* TransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0328E6A5F8003B161F /* kerja-in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kerja-in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE62D0628E6A5F8003B161F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE62D0828E6A5F8003B161F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				4E930F562905EF47005FA88A /* Extensions.swift */,
-				4EE22AB02912F76D0090F7CE /* TransitioningDelegate.swift */,
+				4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -590,9 +590,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */,
+				4E36F6C3291FD63F005D8495 /* ViewConstraints.swift in Sources */,
 				A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */,
 				A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */,
-				4EE22AB12912F76D0090F7CE /* TransitioningDelegate.swift in Sources */,
 				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
 				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
 				4E930F582905EF47005FA88A /* LoginController.swift in Sources */,
