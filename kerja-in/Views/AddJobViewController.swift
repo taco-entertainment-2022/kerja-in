@@ -330,6 +330,7 @@ class AddJobViewController: UIViewController {
         setUpViews()
         connectDurationInput()
         connectJobDateInput()
+        self.dismissKeyboard()
         
         let docRef = database.collection("jobs").document("posts")
         docRef.getDocument { snapshot, error in
@@ -556,6 +557,18 @@ class AddJobViewController: UIViewController {
                                                 jobDuration: AddJobViewViewModel.shared.jobDuration!)
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         }
+    }
+}
+
+extension UIViewController {
+    func dismissKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardTouchOutside))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboardTouchOutside() {
+        view.endEditing(true)
     }
 }
 
