@@ -16,6 +16,10 @@ class AddJobViewController: UIViewController {
     private let textFieldHeight = 44
     private let cornerRadius = 10.0
     private let labelSize = 18.0
+    private let inputFontSize = 16.0
+    private let offsetLabelToTextfield = 8.0
+    private let offsetTextfieldToLabel = 20.0
+    private let paddings = 10.0
     
     private let dropDown = DropDown()    
     private let numOption = Array(1...60)
@@ -66,11 +70,13 @@ class AddJobViewController: UIViewController {
     private lazy var jobTitleInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
+        textField.layer.cornerRadius = cornerRadius
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.delegate = self
         textField.autocapitalizationType = .words
         textField.returnKeyType = .continue
+        textField.setPadding(left: paddings, right: paddings)
         textField.becomeFirstResponder()
         
         return textField
@@ -94,6 +100,8 @@ class AddJobViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         textView.delegate = self
         textView.returnKeyType = .continue
+        textView.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textView.textColor = UIColor(named: "Black")
         
         return textView
     }()
@@ -113,8 +121,8 @@ class AddJobViewController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(named: "LightGray")
-        button.layer.cornerRadius = 8
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.layer.cornerRadius = cornerRadius
+        button.titleLabel?.font = UIFont.Outfit(.medium, size: inputFontSize)
         button.contentHorizontalAlignment = .left
         button.titleEdgeInsets.left = 8
         button.setTitleColor(UIColor(named: "GuideGray"), for: .normal)
@@ -137,14 +145,16 @@ class AddJobViewController: UIViewController {
     lazy var jobDurationInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
+        textField.layer.cornerRadius = cornerRadius
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.delegate = self
         textField.autocapitalizationType = .words
         textField.returnKeyType = .continue
         textField.becomeFirstResponder()
         textField.attributedPlaceholder = NSAttributedString(string: "Durasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
-        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textField.textColor = UIColor(named: "Black")
+        textField.setPadding(left: paddings, right: paddings)
         
         return textField
     }()
@@ -162,11 +172,14 @@ class AddJobViewController: UIViewController {
     private lazy var locationInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.layer.cornerRadius = cornerRadius
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.attributedPlaceholder = NSAttributedString(string: "Pilih Lokasi", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
         textField.delegate = self
         textField.returnKeyType = .continue
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textField.textColor = UIColor(named: "Black")
+        textField.setPadding(left: paddings, right: paddings)
         
         return textField
     }()
@@ -184,11 +197,14 @@ class AddJobViewController: UIViewController {
     private lazy var feeInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.delegate = self
         textField.returnKeyType = .continue
         textField.keyboardType = .numberPad
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textField.textColor = UIColor(named: "Black")
+        textField.layer.cornerRadius = cornerRadius
+        textField.setPadding(left: paddings, right: paddings)
         
         return textField
     }()
@@ -206,11 +222,14 @@ class AddJobViewController: UIViewController {
     private lazy var contactInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.delegate = self
         textField.returnKeyType = .continue
         textField.keyboardType = .phonePad
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textField.textColor = UIColor(named: "Black")
+        textField.layer.cornerRadius = cornerRadius
+        textField.setPadding(left: paddings, right: paddings)
         
         return textField
     }()
@@ -228,14 +247,16 @@ class AddJobViewController: UIViewController {
     lazy var jobDateInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
+        textField.layer.cornerRadius = cornerRadius
         textField.backgroundColor = UIColor(named: "LightGray")
         textField.delegate = self
         textField.autocapitalizationType = .words
         textField.returnKeyType = .continue
         textField.becomeFirstResponder()
-        textField.attributedPlaceholder = NSAttributedString(string: "Tanggal pekerjaan dilaksanakan", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
-        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.medium, size: 16), NSAttributedString.Key.foregroundColor: UIColor(named: "GuideGray")!])
+        textField.font = UIFont.Outfit(.regular, size: inputFontSize)
+        textField.textColor = UIColor(named: "Black")
+        textField.setPadding(left: paddings, right: paddings)
         
         return textField
     }()
@@ -265,6 +286,7 @@ class AddJobViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.timeZone = NSTimeZone.local
         datePicker.backgroundColor = .white
+//        datePicker.setValue(UIColor.white, forKey: "backgroundColor")
         datePicker.preferredDatePickerStyle = .wheels
         
         let localDate = Locale(identifier: "id")
@@ -360,84 +382,84 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobTitleLabel.snp.bottom)
+            make.top.equalTo(jobTitleLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         jobDescriptionLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(jobTitleInput.snp.bottom).offset(20)
+            make.top.equalTo(jobTitleInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         jobDescriptionInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(120)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDescriptionLabel.snp.bottom)
+            make.top.equalTo(jobDescriptionLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         categoryLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(jobDescriptionInput.snp.bottom).offset(20)
+            make.top.equalTo(jobDescriptionInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         categoryInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(categoryLabel.snp.bottom)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         jobDurationLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(categoryInput.snp.bottom).offset(20)
+            make.top.equalTo(categoryInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         jobDurationInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDurationLabel.snp.bottom)
+            make.top.equalTo(jobDurationLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         locationLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(jobDurationInput.snp.bottom).offset(20)
+            make.top.equalTo(jobDurationInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         locationInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(locationLabel.snp.bottom)
+            make.top.equalTo(locationLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         feeLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(locationInput.snp.bottom).offset(20)
+            make.top.equalTo(locationInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         feeInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(feeLabel.snp.bottom)
+            make.top.equalTo(feeLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         contactLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(feeInput.snp.bottom).offset(20)
+            make.top.equalTo(feeInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         contactInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(contactLabel.snp.bottom)
+            make.top.equalTo(contactLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         jobDateLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contactInput.snp.bottom).offset(20)
+            make.top.equalTo(contactInput.snp.bottom).offset(offsetTextfieldToLabel)
         }
         
         jobDateInput.snp.makeConstraints { (make) in
             make.width.equalTo(textFieldWidth)
             make.height.equalTo(textFieldHeight)
             make.centerX.equalToSuperview()
-            make.top.equalTo(jobDateLabel.snp.bottom)
+            make.top.equalTo(jobDateLabel.snp.bottom).offset(offsetLabelToTextfield)
         }
         
         createButton.snp.makeConstraints { (make) in
@@ -487,7 +509,7 @@ class AddJobViewController: UIViewController {
         
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             AddJobViewViewModel.shared.category = item
-            categoryInput.titleLabel?.textColor = .black
+            categoryInput.titleLabel?.textColor = UIColor.init(named: "Black")
             categoryInput.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
             categoryInput.setTitle(item, for: .normal)
         }
@@ -515,8 +537,6 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text ?? ""
         
-        print("Save button pressed", jobTitleInput.text!, jobDescriptionInput.text!, locationInput.text!, feeInput.text!, contactInput.text!, jobDurationInput.text!, jobDateInput.text!)
-        
         if !jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
             !jobDurationInput.text!.isEmpty &&
@@ -537,6 +557,27 @@ class AddJobViewController: UIViewController {
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }
+}
+
+extension UITextField {
+    func setPadding(left: CGFloat, right: CGFloat? = nil) {
+        setLeftPadding(left)
+        if let rightPadding = right {
+            setRightPadding(rightPadding)
+        }
+    }
+    
+    private func setLeftPadding(_ padding: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    
+    private func setRightPadding(_ padding: CGFloat) {
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.size.height))
+            self.rightView = paddingView
+            self.rightViewMode = .always
+        }
 }
 
 extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
