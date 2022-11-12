@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
+import Combine
 
 final class AddJobViewViewModel: ObservableObject {
     @Published var jobTitle: String?
@@ -25,7 +26,6 @@ final class AddJobViewViewModel: ObservableObject {
     let userID = Auth.auth().currentUser?.uid
     let timestamp = Int(Date().timeIntervalSince1970)
 
-
     static let shared = AddJobViewViewModel()
     
     func validateJobForm() {
@@ -39,8 +39,6 @@ final class AddJobViewViewModel: ObservableObject {
     func takeFormValues(_ formValues: [String?]) {
         print(formValues)
     }
-    
-    
     
     func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String, jobDuration: String) {
         
