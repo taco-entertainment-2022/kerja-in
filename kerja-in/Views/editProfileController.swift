@@ -12,6 +12,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class editProfileController: UIViewController {
+    
+    let viewConstraints = ViewConstraints()
 
     lazy var nameContainerView: UIView = {
         let view = UIView()
@@ -66,7 +68,7 @@ class editProfileController: UIViewController {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Nama Lengkap"
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
         
         return label
     }()
@@ -74,7 +76,7 @@ class editProfileController: UIViewController {
     lazy var phoneLabel: UILabel = {
         let label = UILabel()
         label.text = "Nomor WhatsApp"
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
         
         return label
     }()
@@ -82,7 +84,7 @@ class editProfileController: UIViewController {
     lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email"
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
         
         return label
     }()
@@ -90,7 +92,7 @@ class editProfileController: UIViewController {
     lazy var passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password Lama"
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
         
         return label
     }()
@@ -98,7 +100,7 @@ class editProfileController: UIViewController {
     lazy var rePasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password Baru"
-        label.font = UIFont.Outfit(.semiBold, size: 18)
+        label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
         
         return label
     }()
@@ -225,101 +227,80 @@ class editProfileController: UIViewController {
         
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.width.equalTo(124)
-            make.height.equalTo(23)
-            make.top.equalTo(110)
-            make.left.equalTo(19)
-            make.right.equalTo(-247)
+            make.top.equalToSuperview().offset(120)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(nameContainerView)
         nameContainerView.snp.makeConstraints { make in
-            make.width.equalTo(349)
-            make.height.equalTo(43)
-            make.top.equalTo(140)
-            make.left.equalTo(20)
-            make.right.equalTo(-21)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(nameLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(phoneLabel)
         phoneLabel.snp.makeConstraints { make in
-            make.width.equalTo(148)
-            make.height.equalTo(23)
-            make.top.equalTo(193)
-            make.left.equalTo(19)
-            make.right.equalTo(-223)
+            make.top.equalTo(nameContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToLabelType2)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(phoneContainerView)
         phoneContainerView.snp.makeConstraints { make in
-            make.width.equalTo(349)
-            make.height.equalTo(43)
-            make.top.equalTo(223)
-            make.left.equalTo(20)
-            make.right.equalTo(-21)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(phoneLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { make in
-            make.width.equalTo(46)
-            make.height.equalTo(23)
-            make.top.equalTo(276)
-            make.left.equalTo(19)
-            make.right.equalTo(-325)
+            make.top.equalTo(phoneContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToLabelType2)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(emailContainerView)
         emailContainerView.snp.makeConstraints { make in
-            make.width.equalTo(349)
-            make.height.equalTo(43)
-            make.top.equalTo(306)
-            make.left.equalTo(20)
-            make.right.equalTo(-21)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(emailLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(passwordLabel)
         passwordLabel.snp.makeConstraints { make in
-            make.width.equalTo(130)
-            make.height.equalTo(23)
-            make.top.equalTo(359)
-            make.left.equalTo(19)
-            make.right.equalTo(-241)
+            make.top.equalTo(emailContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToLabelType2)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(passwordContainerView)
         passwordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(349)
-            make.height.equalTo(43)
-            make.top.equalTo(389)
-            make.left.equalTo(20)
-            make.right.equalTo(-21)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(passwordLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(rePasswordLabel)
         rePasswordLabel.snp.makeConstraints { make in
-            make.width.equalTo(122)
-            make.height.equalTo(23)
-            make.top.equalTo(442)
-            make.left.equalTo(19)
-            make.right.equalTo(-249)
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToLabelType2)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
         
         view.addSubview(rePasswordContainerView)
         rePasswordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(349)
-            make.height.equalTo(43)
-            make.top.equalTo(472)
-            make.left.equalTo(20)
-            make.right.equalTo(-21)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(rePasswordLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
 
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.width.equalTo(350)
-            make.height.equalTo(44)
-            make.top.equalTo(555)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(rePasswordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToButton)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
         }
 
     }
