@@ -14,7 +14,9 @@ import FirebaseFirestore
 class editProfileController: UIViewController {
     
     let viewConstraints = ViewConstraints()
-
+    
+    var iconClick = true
+    
     lazy var nameContainerView: UIView = {
         let view = UIView()
         return view.textContainerView(view: view, nameTextField)
@@ -56,13 +58,56 @@ class editProfileController: UIViewController {
     }()
     
     lazy var passwordTextField: UITextField = {
-        let tf = UITextField()
-        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
+        
+        let textField = UITextField()
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 10
+        textField.backgroundColor = UIColor.textFieldColor()
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        
+        let btnPassword = UIButton(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        btnPassword.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        btnPassword.contentMode = .scaleAspectFit
+        btnPassword.addTarget(self, action: #selector(passwordButtonPressed), for: .touchUpInside)
+        btnPassword.tintColor = UIColor.placeHolderColor()
+        
+        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        separatorView.addSubview(btnPassword)
+        textField.rightViewMode = .always
+        textField.rightView = separatorView
+        
+        
+        return textField
     }()
     
     lazy var rePasswordTextField: UITextField = {
-        let tf = UITextField()
-        return tf.textField(withPlaceholder: "", isSecureTextEntry: false)
+        let textField = UITextField()
+        textField.font = UIFont.Outfit(.medium, size: 16)
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 10
+        textField.backgroundColor = UIColor.textFieldColor()
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        
+        let btnPassword = UIButton(frame: CGRect(x: 12.5, y: 12.5, width: 25, height: 25))
+        btnPassword.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        btnPassword.contentMode = .scaleAspectFit
+        btnPassword.addTarget(self, action: #selector(rePasswordButtonPressed), for: .touchUpInside)
+        btnPassword.tintColor = UIColor.placeHolderColor()
+        
+        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        separatorView.addSubview(btnPassword)
+        textField.rightViewMode = .always
+        textField.rightView = separatorView
+        
+        
+        return textField
     }()
     
     lazy var nameLabel: UILabel = {
@@ -101,6 +146,15 @@ class editProfileController: UIViewController {
         let label = UILabel()
         label.text = "Password Baru"
         label.font = UIFont.Outfit(.semiBold, size: viewConstraints.labelSize)
+        
+        return label
+    }()
+    
+    lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.Outfit(.regular, size: 14)
+        label.textColor = UIColor.systemRed
+        label.numberOfLines = 0
         
         return label
     }()
@@ -147,6 +201,7 @@ class editProfileController: UIViewController {
                         self.changePassword(email: userEmail!, currentPassword: self.passwordTextField.text!, newPassword: self.rePasswordTextField.text!) { (error) in
                             if error != nil {
                                 print("ERROR CHANGE PASS")
+                                self.errorLabel.text = ("Gagal mengganti password")
                             }
                             else {
                                 print("SUCCESS CHANGE PASS")
@@ -181,6 +236,34 @@ class editProfileController: UIViewController {
             }, withCancel: { (err) in
                 print(err)
             })
+        }
+    }
+    
+    @objc func passwordButtonPressed(sender: UIButton){
+        let passwordHideImage = UIImage(systemName: "eye.slash")
+        let passwordVisibleImage = UIImage(systemName: "eye")
+        
+        iconClick = !iconClick
+        if iconClick == false {
+            passwordTextField.isSecureTextEntry = false
+            sender.setImage(passwordVisibleImage, for: .normal)
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            sender.setImage(passwordHideImage, for: .normal)
+        }
+    }
+    
+    @objc func rePasswordButtonPressed(sender: UIButton){
+        let passwordHideImage = UIImage(systemName: "eye.slash")
+        let passwordVisibleImage = UIImage(systemName: "eye")
+        
+        iconClick = !iconClick
+        if iconClick == false {
+            rePasswordTextField.isSecureTextEntry = false
+            sender.setImage(passwordVisibleImage, for: .normal)
+        } else {
+            rePasswordTextField.isSecureTextEntry = true
+            sender.setImage(passwordHideImage, for: .normal)
         }
     }
     
@@ -233,10 +316,12 @@ class editProfileController: UIViewController {
         
         view.addSubview(nameContainerView)
         nameContainerView.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(nameLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
         }
         
         view.addSubview(phoneLabel)
@@ -247,10 +332,12 @@ class editProfileController: UIViewController {
         
         view.addSubview(phoneContainerView)
         phoneContainerView.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(phoneLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
         }
         
         view.addSubview(emailLabel)
@@ -261,10 +348,12 @@ class editProfileController: UIViewController {
         
         view.addSubview(emailContainerView)
         emailContainerView.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(emailLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
         }
         
         view.addSubview(passwordLabel)
@@ -275,10 +364,12 @@ class editProfileController: UIViewController {
         
         view.addSubview(passwordContainerView)
         passwordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(passwordLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
         }
         
         view.addSubview(rePasswordLabel)
@@ -289,18 +380,28 @@ class editProfileController: UIViewController {
         
         view.addSubview(rePasswordContainerView)
         rePasswordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(rePasswordLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
+        }
+        
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(rePasswordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToLabelType2)
+            make.left.equalTo(102)
         }
 
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            //make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.top.equalTo(rePasswordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToButton)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToContent)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToContent)
+
         }
 
     }

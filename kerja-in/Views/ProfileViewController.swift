@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseFirestore
 import LBTAComponents
 import SnapKit
+import SafariServices
 
 
 struct Section {
@@ -27,14 +28,21 @@ struct SettingOption {
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let profileImageViewHeight: CGFloat = 56
-    lazy var profileImageView: CachedImageView = {
-        var iv = CachedImageView()
-        iv.backgroundColor = .blue
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = 8
-        iv.clipsToBounds = true
+//    lazy var profileImageView: CachedImageView = {
+//        var iv = CachedImageView()
+//        iv.backgroundColor = .blue
+//        iv.contentMode = .scaleAspectFill
+//        iv.layer.cornerRadius = 8
+//        iv.clipsToBounds = true
+//
+//        return iv
+//    }()
+    let profileImageView: UIImageView = {
+       
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "profile")
 
-        return iv
+        return imageView
     }()
 
     let nameLabel: UILabel = {
@@ -133,6 +141,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         return button
         
+    }()
+    
+    let copyright: UIImageView = {
+       
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "copyright")
+
+        return imageView
     }()
     
     var models = [Section]()
@@ -251,14 +267,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     make.left.equalTo(20)
                     make.right.equalTo(-296)
                 }
+                
+                view.addSubview(copyright)
+                copyright.snp.makeConstraints { make in
+                    make.width.equalTo(53)
+                    make.height.equalTo(13)
+                    make.top.equalTo(735)
+                    make.leftMargin.equalTo(168)
+                }
 
                 models.append(Section(title:" ", option: [
-                    SettingOption(title: "Job Posted") {
+                    SettingOption(title: "Pekerjaan Diposting") {
                         print("Tapped First Cell")
                         
                         self.navigationController?.pushViewController(JobsPostedViewController(), animated: true)
                     },
-                    SettingOption(title: "Saved Jobs") {
+                    SettingOption(title: "Pekerjaan Disimpan") {
                         
                     },
                     
@@ -272,6 +296,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 models.append(Section(title:" ", option: [
                     SettingOption(title: "FAQ") {
                         
+                        if let url = URL(string: "https://www.kerjainaja.com/faq/") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
+                        
                     },
                     SettingOption(title: "Tutorial") {
                         
@@ -282,7 +311,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     SettingOption(title: "Report") {
                         
                     },
-                    SettingOption(title: "Mengenai Kerjaan") {
+                    SettingOption(title: "Mengenai Kerjain") {
+                        
+                        if let url = URL(string: "https://www.kerjainaja.com") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
                         
                     },
                     
@@ -358,6 +392,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     make.top.equalTo(257)
                     make.left.equalTo(20)
                     //make.right.equalTo(-296)
+                }
+                
+                view.addSubview(copyright)
+                copyright.snp.makeConstraints { make in
+                    make.width.equalTo(53)
+                    make.height.equalTo(13)
+                    make.top.equalTo(735)
+                    make.leftMargin.equalTo(168)
                 }
                 
                 

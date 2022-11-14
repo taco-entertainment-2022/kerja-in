@@ -23,6 +23,7 @@ class SettingTableViewCell: UITableViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
+        label.font = UIFont.Outfit(.regular, size: 16)
         label.numberOfLines = 1
         
         return label

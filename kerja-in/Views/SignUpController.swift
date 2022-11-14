@@ -13,6 +13,8 @@ import FirebaseFirestore
 
 class SignUpController: UIViewController {
     
+    let viewConstraints = ViewConstraints()
+    
     //MARK: - Properties
     lazy var titleTextView: UILabel = {
         let text = UILabel()
@@ -120,6 +122,18 @@ class SignUpController: UIViewController {
         return textField
     }()
     
+    lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.Outfit(.regular, size: 14)
+        label.textAlignment = .center
+        label.text = "Error"
+        label.textColor = UIColor.systemRed
+        label.numberOfLines = 0
+        label.alpha = 0
+        
+        return label
+    }()
+    
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Daftar", for: .normal)
@@ -171,19 +185,18 @@ class SignUpController: UIViewController {
         checkbox1.snp.makeConstraints { make in
             make.width.equalTo(15)
             make.height.equalTo(15)
-            make.leftMargin.equalTo(21)
-            make.bottom.equalTo(-368)
+            make.top.equalTo(rePasswordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
 
-          
         }
+
         view.addSubview(label)
         label.snp.makeConstraints { make in
-            make.width.equalTo(290)
+            make.width.equalTo(300)
             make.height.equalTo(38)
-            make.leftMargin.equalTo(35)
-            make.bottom.equalTo(-349)
+            make.top.equalTo(rePasswordContainerView.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(40)
 
-          
         }
         
         
@@ -208,13 +221,14 @@ class SignUpController: UIViewController {
         let button = ASAuthorizationAppleIDButton()
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
+        
         view.addSubview(button)
-  
-        button.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(44)
-            make.leftMargin.equalTo(21)
-            make.bottom.equalTo(-146)
+         button.snp.makeConstraints { make in
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(seperator.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
         
     }
@@ -324,8 +338,46 @@ class SignUpController: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             
             if let error = error {
-                print("Failed to sign user with error: ", error.localizedDescription)
+                let err = error as NSError
+                switch err.code {
+                case AuthErrorCode.emailAlreadyInUse.rawValue:
+                    self.errorLabel.text =  "Email sudah digunakan dengan akun lain"
+                    self.errorLabel.alpha = 1
+                    
+                    
+                case AuthErrorCode.userNotFound.rawValue:
+                    self.errorLabel.text = "Akun tidak ditemukan. Silakan periksa dan coba lagi"
+                    self.errorLabel.alpha = 1
+                    
+                case AuthErrorCode.userDisabled.rawValue:
+                    self.errorLabel.text = "Akun Anda telah dinonaktifkan. Silakan hubungi support."
+                    self.errorLabel.alpha = 1
+                    
+                case AuthErrorCode.invalidEmail.rawValue, AuthErrorCode.invalidSender.rawValue, AuthErrorCode.invalidRecipientEmail.rawValue:
+                    self.errorLabel.text = "Tolong masukkan email yang benar"
+                    self.errorLabel.alpha = 1
+                    
+                case AuthErrorCode.networkError.rawValue:
+                    self.errorLabel.text = "Kesalahan jaringan. Silakan coba lagi."
+                    self.errorLabel.alpha = 1
+                    
+                case AuthErrorCode.weakPassword.rawValue:
+                    self.errorLabel.text = "Kata sandi terlalu lemah. Kata sandi harus sepanjang 6 karakter atau lebih."
+                    self.errorLabel.alpha = 1
+                    
+                case AuthErrorCode.wrongPassword.rawValue:
+                    self.errorLabel.text = "Kata sandi anda salah. Silakan coba lagi"
+                    self.errorLabel.alpha = 1
+                    
+                default:
+                    self.errorLabel.text = "Terjadi kesalahan yang tidak diketahui"
+                    self.errorLabel.alpha = 1
+                    
+                    
+                }
+                
                 return
+                
             }
             
             else {
@@ -384,57 +436,80 @@ class SignUpController: UIViewController {
     func performGoogleLogin() {
         
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
-
+        
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-
-          if let error = error {
-            print("Field to login with google", error)
-            return
-          }
-
-          guard
-            let authentication = user?.authentication,
-            let idToken = authentication.idToken
-          else {
-            return
-          }
-
-          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                         accessToken: authentication.accessToken)
-
+            
+            if let error = error {
+                print("Field to login with google", error)
+                return
+            }
+            
+            guard
+                let authentication = user?.authentication,
+                let idToken = authentication.idToken
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+            
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
-                  let authError = error as NSError
-                  if  authError.code == AuthErrorCode.secondFactorRequired.rawValue {
-                    // The user is a multi-factor user. Second factor challenge is required.
-                    let resolver = authError
-                      .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as! MultiFactorResolver
-                    var displayNameString = ""
-                    for tmpFactorInfo in resolver.hints {
-                      displayNameString += tmpFactorInfo.displayName ?? ""
-                      displayNameString += " "
+                    let authError = error as NSError
+                    if  authError.code == AuthErrorCode.secondFactorRequired.rawValue {
+                        // The user is a multi-factor user. Second factor challenge is required.
+                        let resolver = authError
+                            .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as! MultiFactorResolver
+                        var displayNameString = ""
+                        for tmpFactorInfo in resolver.hints {
+                            displayNameString += tmpFactorInfo.displayName ?? ""
+                            displayNameString += " "
+                        }
+                        
+                    } else {
+                        // self.showMessagePrompt(error.localizedDescription)
+                        print("Error to login")
+                        return
                     }
-                   
-                  } else {
-                   // self.showMessagePrompt(error.localizedDescription)
-                      print("Error to login")
+                    // ...
                     return
-                  }
-                  // ...
-                  return
                 }
                 // User is signed in
                 print(" User is signed in")
-
-              
-            }        
+                
+                // go to google view controller
+                
+                //MARK: Store Google Data to Firestore
+                let db = Firestore.firestore()
+                
+                let googleEmail = (authResult?.user.email)!
+                let googleName = (authResult?.user.displayName)!
+                
+                db.collection("user").document(String(authResult!.user.uid)).setData([
+                    "firstname": String(googleName),
+                    "email": String(googleEmail)], merge: true)
+                
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                UserDefaults.standard.synchronize()
+                
+                let navVC = UINavigationController(rootViewController: LoginController())
+                navVC.modalPresentationStyle = .fullScreen
+                //navVC.modalTransitionStyle = .coverVertical
+                self.present(navVC, animated: false) {
+                    navVC.pushViewController(TabBar(), animated: false)
+                }
+                
+                
+            }
             
         }
     }
+    
     //MARK: - Helper Functions
     
     func configureViewComponents() {
@@ -463,79 +538,92 @@ class SignUpController: UIViewController {
         
         view.addSubview(nameContainerView)
         nameContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.topMargin.equalTo(120)
-            make.leftMargin.equalTo(21)
- 
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(bodyTextView.snp.bottom).offset(viewConstraints.offsetSuperviewToContent)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
         
         view.addSubview(phoneContainerView)
         phoneContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.topMargin.equalTo(178)
-            make.leftMargin.equalTo(21)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(nameContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
 
         }
         
         view.addSubview(emailContainerView)
         emailContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.topMargin.equalTo(236)
-            make.leftMargin.equalTo(21)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(phoneContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
 
         }
 
         view.addSubview(passwordContainerView)
         passwordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.topMargin.equalTo(294)
-            make.leftMargin.equalTo(21)
-          
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(emailContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
-        
+ 
         view.addSubview(rePasswordContainerView)
         rePasswordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.topMargin.equalTo(352)
-            make.leftMargin.equalTo(21)
-        
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
+        }
+
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.height.equalTo(36)
+            make.top.equalTo(rePasswordContainerView.snp.bottom).offset(60)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
 
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(44)
-            make.leftMargin.equalTo(21)
-            make.bottom.equalTo(-265)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(errorLabel.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
 
         view.addSubview(dontHaveAccount)
         dontHaveAccount.snp.makeConstraints { make in
-            make.width.equalTo(220)
-            make.height.equalTo(20)
-            make.leftMargin.equalTo(86)
-            make.bottom.equalTo(-231)
+            make.height.equalTo(viewConstraints.labelSize)
+            make.top.equalTo(loginButton.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(85)
+            make.right.equalToSuperview().offset(-85)
+
         }
         
         view.addSubview(seperator)
         seperator.snp.makeConstraints { make in
-            make.width.equalTo(305)
             make.height.equalTo(19)
-            make.leftMargin.equalTo(34)
-            make.bottom.equalTo(-205)
+            make.top.equalTo(dontHaveAccount.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(42)
+            make.right.equalToSuperview().offset(-42)
+
         }
         
         view.addSubview(googleLoginButton)
         googleLoginButton.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(44)
-            make.leftMargin.equalTo(21)
-            make.bottom.equalTo(-89)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(seperator.snp.bottom).offset(72)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
     }
 }
