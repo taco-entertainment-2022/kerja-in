@@ -14,6 +14,7 @@ import FirebaseFirestore
 
 class LoginController: UIViewController {
 
+    let viewConstraints = ViewConstraints()
     
     //MARK: - Properties
     lazy var titleTextView: UILabel = {
@@ -117,10 +118,11 @@ class LoginController: UIViewController {
         
         view.addSubview(button)
         button.snp.makeConstraints { make in
-            make.width.equalTo(330)
+            //make.width.equalTo(330)
             make.height.equalTo(44)
             make.top.equalTo(424)
             make.leftMargin.equalTo(21)
+            make.rightMargin.equalTo(-21)
         }
 
     }
@@ -153,6 +155,14 @@ class LoginController: UIViewController {
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         
         return button
+    }()
+    
+    let copyright: UIImageView = {
+       
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "copyright")
+
+        return imageView
     }()
     
     //MARK: - Init
@@ -219,36 +229,36 @@ class LoginController: UIViewController {
                 let err = error as NSError
                 switch err.code {
                 case AuthErrorCode.emailAlreadyInUse.rawValue:
-                    self.errorLabel.text =  "The email is already in use with another account"
+                    self.errorLabel.text =  "Email sudah digunakan dengan akun lain"
                     self.errorLabel.alpha = 1
                     
                 
                 case AuthErrorCode.userNotFound.rawValue:
-                    self.errorLabel.text = "Account not found for the specified us er. Please check and try again"
+                    self.errorLabel.text = "Akun tidak ditemukan. Silakan periksa dan coba lagi"
                     self.errorLabel.alpha = 1
 
                 case AuthErrorCode.userDisabled.rawValue:
-                    self.errorLabel.text = "Your account has been disabled. Please contact support."
+                    self.errorLabel.text = "Akun Anda telah dinonaktifkan. Silakan hubungi support."
                     self.errorLabel.alpha = 1
 
                 case AuthErrorCode.invalidEmail.rawValue, AuthErrorCode.invalidSender.rawValue, AuthErrorCode.invalidRecipientEmail.rawValue:
-                    self.errorLabel.text = "Please enter a valid email"
+                    self.errorLabel.text = "Tolong masukkan email yang benar"
                     self.errorLabel.alpha = 1
 
                 case AuthErrorCode.networkError.rawValue:
-                    self.errorLabel.text = "Network error. Please try again."
+                    self.errorLabel.text = "Kesalahan jaringan. Silakan coba lagi."
                     self.errorLabel.alpha = 1
 
                 case AuthErrorCode.weakPassword.rawValue:
-                    self.errorLabel.text = "Your password is too weak. The password must be 6 characters long or more."
+                    self.errorLabel.text = "Kata sandi terlalu lemah. Kata sandi harus sepanjang 6 karakter atau lebih."
                     self.errorLabel.alpha = 1
 
                 case AuthErrorCode.wrongPassword.rawValue:
-                    self.errorLabel.text = "Your password is incorrect. Please try again or use 'Forgot password' to reset your password"
+                    self.errorLabel.text = "Kata sandi anda salah. Silakan coba lagi"
                     self.errorLabel.alpha = 1
 
                 default:
-                    self.errorLabel.text = "Unknown error occurred"
+                    self.errorLabel.text = "Terjadi kesalahan yang tidak diketahui"
                     self.errorLabel.alpha = 1
 
                     
@@ -299,57 +309,75 @@ class LoginController: UIViewController {
     func performGoogleLogin() {
         
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
-
+        
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-
-          if let error = error {
-            print("Field to login with google", error)
-            return
-          }
-
-          guard
-            let authentication = user?.authentication,
-            let idToken = authentication.idToken
-          else {
-            return
-          }
-
-          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                         accessToken: authentication.accessToken)
-
+            
+            if let error = error {
+                print("Field to login with google", error)
+                return
+            }
+            
+            guard
+                let authentication = user?.authentication,
+                let idToken = authentication.idToken
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+            
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
-                  let authError = error as NSError
-                  if  authError.code == AuthErrorCode.secondFactorRequired.rawValue {
-                    // The user is a multi-factor user. Second factor challenge is required.
-                    let resolver = authError
-                      .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as! MultiFactorResolver
-                    var displayNameString = ""
-                    for tmpFactorInfo in resolver.hints {
-                      displayNameString += tmpFactorInfo.displayName ?? ""
-                      displayNameString += " "
+                    let authError = error as NSError
+                    if  authError.code == AuthErrorCode.secondFactorRequired.rawValue {
+                        // The user is a multi-factor user. Second factor challenge is required.
+                        let resolver = authError
+                            .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as! MultiFactorResolver
+                        var displayNameString = ""
+                        for tmpFactorInfo in resolver.hints {
+                            displayNameString += tmpFactorInfo.displayName ?? ""
+                            displayNameString += " "
+                        }
+                        
+                    } else {
+                        // self.showMessagePrompt(error.localizedDescription)
+                        print("Error to login")
+                        return
                     }
-                   
-                  } else {
-                   // self.showMessagePrompt(error.localizedDescription)
-                      print("Error to login")
+                    // ...
                     return
-                  }
-                  // ...
-                  return
                 }
                 // User is signed in
                 print(" User is signed in")
                 
                 // go to google view controller
-               // goToHome()
+                
+                //MARK: Store Google Data to Firestore
+                let db = Firestore.firestore()
+                
+                let googleEmail = (authResult?.user.email)!
+                let googleName = (authResult?.user.displayName)!
+                
+                db.collection("user").document(String(authResult!.user.uid)).setData([
+                    "firstname": String(googleName),
+                    "email": String(googleEmail)], merge: true)
+                
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                UserDefaults.standard.synchronize()
+                
+                let navVC = UINavigationController(rootViewController: LoginController())
+                navVC.modalPresentationStyle = .fullScreen
+                //navVC.modalTransitionStyle = .coverVertical
+                self.present(navVC, animated: false) {
+                    navVC.pushViewController(TabBar(), animated: false)
+                }
                 
                 
-              
             }
             
         }
@@ -378,61 +406,80 @@ class LoginController: UIViewController {
             make.top.equalTo(107)
             make.leftMargin.equalTo(21)
         }
-        
+
         view.addSubview(emailContainerView)
         emailContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.top.equalTo(167)
-            make.leftMargin.equalTo(21)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(bodyTextView.snp.bottom).offset(viewConstraints.offsetSuperviewToContent)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
 
-        view.addSubview(passwordContainerView)
-        passwordContainerView.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(43)
-            make.top.equalTo(225)
-            make.leftMargin.equalTo(21)
+ 
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(emailContainerView.snp.bottom).offset(viewConstraints.offsetTextfieldToTextfield)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+
         }
 
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.width.equalTo(330)
-            make.height.equalTo(44)
-            make.top.equalTo(308)
-            make.leftMargin.equalTo(21)
-        }
+            //make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
 
+        }
+        
         view.addSubview(dontHaveAccount)
         dontHaveAccount.snp.makeConstraints { make in
-            make.width.equalTo(202)
+            //make.width.equalTo(202)
             make.height.equalTo(20)
             make.top.equalTo(363)
             make.leftMargin.equalTo(85)
+            make.rightMargin.equalTo(-85)
         }
 
         view.addSubview(seperator)
         seperator.snp.makeConstraints { make in
-            make.width.equalTo(305)
+            //make.width.equalTo(305)
             make.height.equalTo(19)
             make.top.equalTo(390)
             make.leftMargin.equalTo(34)
+            make.rightMargin.equalTo(-34)
+
         }
         
         view.addSubview(googleLoginButton)
         googleLoginButton.snp.makeConstraints { make in
-            make.width.equalTo(330)
+            //make.width.equalTo(330)
             make.height.equalTo(44)
             make.top.equalTo(481)
             make.leftMargin.equalTo(21)
+            make.rightMargin.equalTo(-21)
         }
         
         view.addSubview(errorLabel)        
         errorLabel.snp.makeConstraints { make in
-            make.width.equalTo(254)
+            //make.width.equalTo(254)
             make.height.equalTo(18)
             make.top.equalTo(280)
             make.leftMargin.equalTo(59)
+            make.rightMargin.equalTo(-59)
+        }
+        
+        view.addSubview(copyright)
+        copyright.snp.makeConstraints { make in
+            //make.width.equalTo(53)
+            make.height.equalTo(14)
+            make.bottom.equalTo(-43)
+            make.leftMargin.equalTo(168)
+            make.rightMargin.equalTo(-169)
         }
           
     }
