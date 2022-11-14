@@ -13,15 +13,6 @@ import Combine
 class AddJobViewController: UIViewController {
     let viewConstraints = ViewConstraints()
     
-//    private let ViewConstraints.textFieldWidth = 350
-//    private let ViewConstraints.textFieldHeight = 44
-//    private let ViewConstraints.cornerRadius = 10.0
-//    private let ViewConstraints.labelSize = 18.0
-//    private letViewConstraints.inputFontSize = 16.0
-//    private letViewConstraints.offsetLabelToTextfield = 8.0
-//    private letViewConstraints.offsetTextfieldToLabel = 20.0
-//    private letViewConstraints.paddings = 10.0
-    
     private let dropDown = DropDown()    
     private let numOption = Array(1...60)
     private let durationOption = ["Menit", "Jam", "Hari", "Bulan", "Tahun"]
@@ -262,6 +253,17 @@ class AddJobViewController: UIViewController {
         return textField
     }()
     
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .red
+        label.font = UIFont.Outfit(.regular, size: 14)
+//        label.text = "Text"
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     private lazy var createButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -287,7 +289,6 @@ class AddJobViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.timeZone = NSTimeZone.local
         datePicker.backgroundColor = .white
-//        datePicker.setValue(UIColor.white, forKey: "backgroundColor")
         datePicker.preferredDatePickerStyle = .wheels
         
         let localDate = Locale(identifier: "id")
@@ -349,7 +350,7 @@ class AddJobViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         
-        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, createButton]
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
 
         for i in 0..<views.count {
             stackView.addArrangedSubview(views[i])
@@ -464,6 +465,11 @@ class AddJobViewController: UIViewController {
             make.top.equalTo(jobDateLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
         }
         
+        errorLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(jobDateInput.snp.bottom).offset(10)
+            make.centerX.equalTo(jobDateInput.snp.centerX)
+        }
+        
         createButton.snp.makeConstraints { (make) in
             make.width.equalTo(viewConstraints.textFieldWidth)
             make.height.equalTo(viewConstraints.textFieldHeight)
@@ -556,7 +562,10 @@ class AddJobViewController: UIViewController {
                                                 userContact: AddJobViewViewModel.shared.contact!,
                                                 userID: AddJobViewViewModel.shared.userID!,
                                                 jobDuration: AddJobViewViewModel.shared.jobDuration!)
+            errorLabel.text = ""
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        } else {
+            errorLabel.text = "Semua data wajib diisi"
         }
     }
 }
