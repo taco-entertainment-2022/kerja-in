@@ -179,7 +179,6 @@
 				4E930F572905EF47005FA88A /* SignUpController.swift */,
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
 				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
-				4EE1E8C4291B8F770062EC2E /* JobDatePickerViewController.swift */,
 				93F05E07291D4A7100B55756 /* JobPostedViewController.swift */,
 			);
 			path = Views;
@@ -776,7 +775,7 @@
 				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NRD8HSMRZ7;
+				DEVELOPMENT_TEAM = 8Q7D2536H4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -790,7 +789,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerjain";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-in";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -807,7 +806,7 @@
 				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NRD8HSMRZ7;
+				DEVELOPMENT_TEAM = 8Q7D2536H4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -821,7 +820,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerjain";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.taco-ent.kerja-in";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

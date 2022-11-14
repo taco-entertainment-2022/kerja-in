@@ -525,6 +525,7 @@ extension LoginController: ASAuthorizationControllerDelegate {
                         navVC.pushViewController(TabBar(), animated: false)
                     }
                 }
+                print(error?.localizedDescription)
             }
         }
     }
