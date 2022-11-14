@@ -34,6 +34,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         searchBar.isTranslucent = false
         searchBar.delegate = self
         searchBar.tintColor = UIColor(named: "Black")
+        searchBar.searchTextField.font = UIFont.Outfit(.light, size: 16)
         navigationItem.titleView = searchBar
         
         searchBar.compatibleSearchTextField.textColor = UIColor(named: "Black")
