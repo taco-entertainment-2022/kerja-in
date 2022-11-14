@@ -255,6 +255,15 @@ class SignUpController: UIViewController {
         return button
     }()
     
+    let skipButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Lewati", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.light, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+
+        return button
+    }()
+    
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -329,6 +338,12 @@ class SignUpController: UIViewController {
     @objc func handleGoogleLogin() {
         
         performGoogleLogin()
+    }
+    
+    @objc func handleSkip() {
+        let navVC = TabBar()
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: false)
     }
     
     //MARK: - API
@@ -624,6 +639,12 @@ class SignUpController: UIViewController {
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
             make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
 
+        }
+        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints { make in
+            make.top.equalTo(googleLoginButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
         }
     }
 }

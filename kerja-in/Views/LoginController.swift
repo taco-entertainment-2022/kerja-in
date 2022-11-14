@@ -157,6 +157,15 @@ class LoginController: UIViewController {
         return button
     }()
     
+    let skipButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Lewati", attributes: [NSAttributedString.Key.font: UIFont.Outfit(.light, size: 16), NSAttributedString.Key.foregroundColor: UIColor.black])
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+
+        return button
+    }()
+    
     let copyright: UIImageView = {
        
         let imageView = UIImageView()
@@ -218,6 +227,11 @@ class LoginController: UIViewController {
         present(navVC, animated: true)
     }
     
+    @objc func handleSkip() {
+        let navVC = TabBar()
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: false)
+    }
     
     //MARK: - API
     
@@ -471,6 +485,12 @@ class LoginController: UIViewController {
             make.top.equalTo(280)
             make.leftMargin.equalTo(59)
             make.rightMargin.equalTo(-59)
+        }
+        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints { make in
+            make.top.equalTo(googleLoginButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
         }
         
         view.addSubview(copyright)
