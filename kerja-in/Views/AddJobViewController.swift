@@ -258,7 +258,6 @@ class AddJobViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .red
         label.font = UIFont.Outfit(.regular, size: 14)
-//        label.text = "Text"
         label.textAlignment = .center
         
         return label
@@ -310,7 +309,24 @@ class AddJobViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "DarkWhite")
+        
+        setNavigation()
+        setUpViews()
+        connectDurationInput()
+        connectJobDateInput()
+        self.dismissKeyboard()
+        
+        let docRef = database.collection("jobs").document("posts")
+        docRef.getDocument { snapshot, error in
+            guard let data = snapshot?.data(), error == nil else {
+                return
+            }
+            
+        }
+        
+    }
+    
+    private func setNavigation() {
         self.title = "Add Job"
         
         let appearance = UINavigationBarAppearance()
@@ -328,24 +344,11 @@ class AddJobViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backPressed), for: .touchUpInside)
         let item1 = UIBarButtonItem(customView: backButton)
         self.navigationItem.setLeftBarButtonItems([item1], animated: true)
-            
-        setUpViews()
-        connectDurationInput()
-        connectJobDateInput()
-        self.dismissKeyboard()
-        
-        let docRef = database.collection("jobs").document("posts")
-        docRef.getDocument { snapshot, error in
-            guard let data = snapshot?.data(), error == nil else {
-                return
-            }
-            
-        }
-        
     }
         
     private func setUpViews() {
         //styling
+        view.backgroundColor = UIColor(named: "DarkWhite")
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
@@ -442,7 +445,7 @@ class AddJobViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
         }
-        
+                
         contactLabel.snp.makeConstraints { (make) in
             make.top.equalTo(feeInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
@@ -537,9 +540,10 @@ class AddJobViewController: UIViewController {
     
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
+        
         AddJobViewViewModel.shared.jobTitle = jobTitleInput.text!
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
-        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!//jobDurationInput.titleLabel?.text!
+        AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
@@ -597,10 +601,10 @@ extension UITextField {
     }
     
     private func setRightPadding(_ padding: CGFloat) {
-            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.size.height))
-            self.rightView = paddingView
-            self.rightViewMode = .always
-        }
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
 }
 
 extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
