@@ -316,10 +316,17 @@ class SignUpController: UIViewController {
 
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
+        guard let rePassword = rePasswordTextField.text else {return}
         guard let username = nameTextField.text else {return}
         guard let phone = phoneTextField.text else {return}
         
-        createUser(withEmail: email, password: password, username: username, phone: phone)
+        if rePassword == password {
+            createUser(withEmail: email, password: password, username: username, phone: phone)
+
+        } else {
+            errorLabel.text = "password dan konfirmasi password beda"
+        }
+        
     }
     
     @objc func handleShowLogin() {
