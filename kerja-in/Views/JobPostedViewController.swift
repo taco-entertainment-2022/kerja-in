@@ -65,9 +65,10 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
                     let price = document.data()["price"] as? String
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
+                    let duration = document.data()["jobDuration"] as? String
 
                     
-                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
+                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", duration: duration ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
                     
                         }
                     }

@@ -22,14 +22,14 @@ class JobPostedModel {
     var userContact: String?
 
     
-    init(/*postId: String,*/ userImage: UIImage, jobName: String, /*userName: String, duration: String,*/ date: String, location: String, price: String, /*posted: String,*/ description: String, userContact: String) {
+    init(/*postId: String,*/ userImage: UIImage, jobName: String, /*userName: String,*/ duration: String, date: String, location: String, price: String, /*posted: String,*/ description: String, userContact: String) {
        // self.postId = postId
         self.jobImage = userImage
         self.jobName = jobName
        // self.posted = posted
         //self.userName = userName
         self.date = date
-       // self.duration = duration
+        self.duration = duration
         self.location = location
         self.price = price
         self.description = description

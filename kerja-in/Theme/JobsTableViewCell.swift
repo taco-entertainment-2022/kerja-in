@@ -26,7 +26,8 @@ class JobsTableViewCell: UITableViewCell {
     }()
     
     lazy var calendarIcon: UIImageView = {
-        let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 37, width: 19, height: 18))
+        //let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 37, width: 14, height: 14))
+        let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 39, width: 14, height: 14))
         calendarIcon.image = UIImage(named: "Calendar")
         return calendarIcon
     }()
