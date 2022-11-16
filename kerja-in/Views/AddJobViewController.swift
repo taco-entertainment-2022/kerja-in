@@ -22,7 +22,8 @@ class AddJobViewController: UIViewController {
     var category: String = ""
     var duration: String = ""
     var jobDate: String = ""
-        
+    var fee: String = ""
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -186,19 +187,21 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var feeInput: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = UIColor(named: "LightGray")
-        textField.delegate = self
-        textField.returnKeyType = .continue
-        textField.keyboardType = .numberPad
-        textField.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
-        textField.textColor = UIColor(named: "Black")
-        textField.layer.cornerRadius = viewConstraints.cornerRadius
-        textField.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
+    private lazy var currencyLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: "GuideFray")
+        label.font = UIFont.Outfit(.regular, size: viewConstraints.labelSize)
+        label.text = "Rp"
         
-        return textField
+        return label
+    }()
+    
+    private lazy var feeInput: CurrencyTextField = {
+        let currencyTextField = CurrencyTextField()
+        currencyTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return currencyTextField
     }()
     
     private lazy var contactLabel: UILabel = {
@@ -312,19 +315,19 @@ class AddJobViewController: UIViewController {
         
         setNavigation()
         setUpViews()
+        setCurrencyField()
         connectDurationInput()
         connectJobDateInput()
-        self.dismissKeyboard()
+        dismissKeyboard()
         
         let docRef = database.collection("jobs").document("posts")
         docRef.getDocument { snapshot, error in
             guard let data = snapshot?.data(), error == nil else {
                 return
             }
-            
         }
-        
     }
+
     
     private func setNavigation() {
         self.title = "Add Job"
@@ -445,7 +448,7 @@ class AddJobViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
         }
-                
+
         contactLabel.snp.makeConstraints { (make) in
             make.top.equalTo(feeInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
@@ -480,6 +483,17 @@ class AddJobViewController: UIViewController {
         }
     }
     
+    private func setCurrencyField() {
+        feeInput.addTarget(self, action: #selector(currencyFieldChanged), for: .editingChanged)
+        feeInput.locale = Locale(identifier: "id_ID")
+        
+        feeInput.backgroundColor = UIColor(named: "LightGray")
+        feeInput.layer.cornerRadius = viewConstraints.cornerRadius
+        feeInput.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
+        feeInput.textColor = UIColor(named: "Black")
+        feeInput.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
+    }
+    
     func connectDurationInput() {
         durationPickerView.delegate = self
         durationPickerView.dataSource = self
@@ -506,6 +520,10 @@ class AddJobViewController: UIViewController {
         jobDatePickerView.addTarget(self, action: #selector(jobDatePickerViewChanged), for: .valueChanged)
         jobDateInput.inputView = jobDatePickerView
         jobDateInput.inputAccessoryView = toolBar
+    }
+    
+    @objc func currencyFieldChanged() {
+        AddJobViewViewModel.shared.fee = (feeInput.decimal as NSDecimalNumber).doubleValue
     }
     
     @objc func backPressed() {
@@ -545,7 +563,6 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
         AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
         AddJobViewViewModel.shared.location = locationInput.text!
-        AddJobViewViewModel.shared.fee = feeInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text ?? ""
         
@@ -612,6 +629,34 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        fee = ""
+        return true
+    }
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let formatter = NumberFormatter()
+//        formatter.minimumFractionDigits = 0
+//        formatter.maximumFractionDigits = 0
+//
+//        if string.count > 0 {
+//            fee += string
+//            let decimals = NSDecimalNumber(string: fee).multiplying(by: 0.01)
+//            let newString = "Rp " + formatter.string(from: decimals)!
+//            textField.text = newString
+//        } else {
+//            fee = String(fee.dropLast())
+//            if fee.count > 0 {
+//                let decimals = NSDecimalNumber(string: fee).multiplying(by: 0.01)
+//                let newString = "Rp" + formatter.string(from: decimals)!
+//                textField.text = newString
+//            } else {
+//                textField.text = "Rp 0.00"
+//            }
+//        }
+//        return false
+//    }
 }
 
 extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
