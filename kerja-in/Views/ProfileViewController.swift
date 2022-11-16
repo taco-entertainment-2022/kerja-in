@@ -90,6 +90,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let label = UILabel()
         label.text = "Daftarkan diri anda untuk dapat melamar dan menawarkan pekerjaan tambahan"
         label.font = UIFont.Outfit(.light, size: 15)
+        label.textAlignment = .center
         label.numberOfLines = 0
         
         return label
@@ -272,7 +273,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 copyright.snp.makeConstraints { make in
                     make.width.equalTo(53)
                     make.height.equalTo(13)
-                    make.top.equalTo(735)
+                    make.bottom.equalTo(-12)
                     make.leftMargin.equalTo(168)
                 }
 
@@ -352,11 +353,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 view.addSubview(backView)
                 backView.snp.makeConstraints { make in
-                    make.width.equalTo(350)
+                    //make.width.equalTo(350)
                     make.height.equalTo(139)
                     make.top.equalTo(107)
                     make.left.equalTo(20)
-                    //make.right.equalTo(-296)
+                    make.right.equalTo(-20)
                 }
                 
                 view.addSubview(noAccountHeadLabel)
@@ -364,25 +365,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     make.height.equalTo(25)
                     make.top.equalTo(120)
                     make.left.equalTo(78)
-                    //make.right.equalTo(-296)
+                    make.right.equalTo(-78)
                 }
                 
                 view.addSubview(noAccountBodyLabel)
                 noAccountBodyLabel.snp.makeConstraints { make in
-                    make.width.equalTo(316)
+                   // make.width.equalTo(316)
                     make.height.equalTo(38)
                     make.top.equalTo(150)
                     make.left.equalTo(37)
-                    //make.right.equalTo(-296)
+                    make.right.equalTo(-37)
                 }
                 
                 view.addSubview(signUpButton)
                 signUpButton.snp.makeConstraints { make in
-                    make.width.equalTo(114)
+                    //make.width.equalTo(114)
                     make.height.equalTo(35)
                     make.top.equalTo(198)
                     make.left.equalTo(138)
-                    //make.right.equalTo(-296)
+                    make.right.equalTo(-138)
                 }
                 
                 view.addSubview(supportLabel)
@@ -398,7 +399,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 copyright.snp.makeConstraints { make in
                     make.width.equalTo(53)
                     make.height.equalTo(13)
-                    make.top.equalTo(735)
+                    make.bottom.equalTo(-12)
                     make.leftMargin.equalTo(168)
                 }
                 
@@ -409,6 +410,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 models.append(Section(title:" ", option: [
                     SettingOption(title: "FAQ") {
+                        
+                        if let url = URL(string: "https://www.kerjainaja.com/faq/") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
                         
                     },
                     SettingOption(title: "Tutorial") {
@@ -421,6 +427,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                     },
                     SettingOption(title: "Mengenai Kerjaan") {
+                        
+                        if let url = URL(string: "https://www.kerjainaja.com") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
                         
                     },
                     

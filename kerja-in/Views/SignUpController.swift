@@ -56,9 +56,20 @@ class SignUpController: UIViewController {
         return tf.textField(withPlaceholder: "Nama Lengkap", isSecureTextEntry: false)
     }()
     
-    lazy var phoneTextField: UITextField = {
+    private lazy var phoneTextField: UITextField = {
         let tf = UITextField()
-        return tf.textField(withPlaceholder: "Nomor Telepon", isSecureTextEntry: false)
+        tf.borderStyle = .none
+        tf.backgroundColor = UIColor.textFieldColor()
+        tf.layer.cornerRadius = 10
+        tf.font = UIFont.Outfit(.medium, size: 16)
+        tf.textColor = .black
+        tf.isSecureTextEntry = false
+        tf.keyboardType = .numberPad
+        tf.attributedPlaceholder = NSAttributedString(string: "Nomor Telepon", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor()])
+        
+        tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: tf.frame.height))
+        tf.leftViewMode = .always
+        return tf
     }()
     
     lazy var emailTextField: UITextField = {
@@ -235,13 +246,14 @@ class SignUpController: UIViewController {
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Daftar menggunakan Google", for: .normal)
+        button.setTitle("Sign in with Google", for: .normal)
         button.setImage(UIImage(named: "google"), for: .normal)
         button.imageView?.anchor(top: nil, left: nil , bottom: nil, right: button.titleLabel?.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 16, height: 16)
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        //button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.titleLabel?.font = .systemFont(ofSize: 17)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
@@ -272,6 +284,7 @@ class SignUpController: UIViewController {
         appleLoginButton()
         
         termsLabel()
+        self.dismissKeyboard()
         
         if checkbox1.checkmark.isHidden {
             loginButton.isUserInteractionEnabled = true

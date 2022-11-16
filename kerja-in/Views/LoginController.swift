@@ -129,13 +129,14 @@ class LoginController: UIViewController {
     
     let googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Daftar menggunakan Google", for: .normal)
+        button.setTitle("Sign in with Google", for: .normal)
         button.setImage(UIImage(named: "google"), for: .normal)
         button.imageView?.anchor(top: nil, left: nil , bottom: nil, right: button.titleLabel?.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 4, width: 16, height: 16)
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         
         button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
-        button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+       // button.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
+        button.titleLabel?.font = .systemFont(ofSize: 17)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
@@ -181,6 +182,7 @@ class LoginController: UIViewController {
                 
         configureViewComponents()
         appleLoginButton()
+        self.dismissKeyboard()
         
         
     }
@@ -493,15 +495,22 @@ class LoginController: UIViewController {
             make.centerX.equalToSuperview()
         }
         
+//        view.addSubview(copyright)
+//        copyright.snp.makeConstraints { make in
+//            //make.width.equalTo(53)
+//            make.height.equalTo(14)
+//            make.bottom.equalTo(-43)
+//            make.leftMargin.equalTo(168)
+//            make.rightMargin.equalTo(-169)
+//        }
         view.addSubview(copyright)
         copyright.snp.makeConstraints { make in
-            //make.width.equalTo(53)
-            make.height.equalTo(14)
+            make.width.equalTo(53)
+            make.height.equalTo(13)
             make.bottom.equalTo(-43)
             make.leftMargin.equalTo(168)
             make.rightMargin.equalTo(-169)
         }
-          
     }
 }
 
