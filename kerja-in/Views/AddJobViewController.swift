@@ -22,7 +22,6 @@ class AddJobViewController: UIViewController {
     var category: String = ""
     var duration: String = ""
     var jobDate: String = ""
-    var fee: String = ""
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -629,34 +628,6 @@ extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        fee = ""
-        return true
-    }
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let formatter = NumberFormatter()
-//        formatter.minimumFractionDigits = 0
-//        formatter.maximumFractionDigits = 0
-//
-//        if string.count > 0 {
-//            fee += string
-//            let decimals = NSDecimalNumber(string: fee).multiplying(by: 0.01)
-//            let newString = "Rp " + formatter.string(from: decimals)!
-//            textField.text = newString
-//        } else {
-//            fee = String(fee.dropLast())
-//            if fee.count > 0 {
-//                let decimals = NSDecimalNumber(string: fee).multiplying(by: 0.01)
-//                let newString = "Rp" + formatter.string(from: decimals)!
-//                textField.text = newString
-//            } else {
-//                textField.text = "Rp 0.00"
-//            }
-//        }
-//        return false
-//    }
 }
 
 extension AddJobViewController: UIPickerViewDelegate, UIPickerViewDataSource {
