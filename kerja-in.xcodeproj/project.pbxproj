@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E36F6C3291FD63F005D8495 /* ViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */; };
+		4E36F70D292568A4005D8495 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36F70C292568A4005D8495 /* CurrencyTextField.swift */; };
 		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
 		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
 		4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F542905EF47005FA88A /* editProfileController.swift */; };
@@ -76,6 +77,7 @@
 		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
 		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstraints.swift; sourceTree = "<group>"; };
+		4E36F70C292568A4005D8495 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		4E930F522905EF46005FA88A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4E930F532905EF47005FA88A /* CurrentUserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserModels.swift; sourceTree = "<group>"; };
 		4E930F542905EF47005FA88A /* editProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editProfileController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E36F70B2925686C005D8495 /* ComponentReusables */ = {
+			isa = PBXGroup;
+			children = (
+				4E36F70C292568A4005D8495 /* CurrencyTextField.swift */,
+			);
+			path = ComponentReusables;
+			sourceTree = "<group>";
+		};
 		4E930F5E2905F0BB005FA88A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +181,7 @@
 		4E930F5F2905F0D2005FA88A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4E36F70B2925686C005D8495 /* ComponentReusables */,
 				4EE62D0A28E6A5F8003B161F /* JobsViewController.swift */,
 				A87870A528F573C000633B2D /* DetailsViewController.swift */,
 				A82FAF5028E73F85006587D6 /* ProfileViewController.swift */,
@@ -605,6 +616,7 @@
 				4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */,
 				4ED4332E28F4819800FF74D5 /* BookmarkModel.swift in Sources */,
 				4EE22A6F291065770090F7CE /* AddJobViewViewModel.swift in Sources */,
+				4E36F70D292568A4005D8495 /* CurrencyTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
