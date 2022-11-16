@@ -509,7 +509,7 @@ class AddJobViewController: UIViewController {
     }
     
     @objc func backPressed() {
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func didTapCategory() {
@@ -567,7 +567,7 @@ class AddJobViewController: UIViewController {
                                                 userID: AddJobViewViewModel.shared.userID!,
                                                 jobDuration: AddJobViewViewModel.shared.jobDuration!)
             errorLabel.text = ""
-            self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
         } else {
             errorLabel.text = "Semua data wajib diisi"
         }
