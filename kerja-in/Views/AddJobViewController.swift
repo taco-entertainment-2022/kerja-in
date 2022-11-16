@@ -196,7 +196,7 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private lazy var feeInput: CurrencyTextField = {
+    private var feeInput: CurrencyTextField = {
         let currencyTextField = CurrencyTextField()
         currencyTextField.translatesAutoresizingMaskIntoConstraints = false
         

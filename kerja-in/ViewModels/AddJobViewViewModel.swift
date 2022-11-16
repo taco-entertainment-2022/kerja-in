@@ -28,10 +28,6 @@ final class AddJobViewViewModel: ObservableObject {
 
     static let shared = AddJobViewViewModel()
     
-    func takeFormValues(_ formValues: [String?]) {
-        print(formValues)
-    }
-    
     func saveData(date: String, description: String, jobName: String, location: String, price: Double, userImage: String, userContact: String, userID: String, jobDuration: String) {
         
         let postID: String = String(userID) + String(timestamp)
