@@ -73,14 +73,30 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                 for document in snapshot!.documents {
                     let jobName = document.data()["jobName"] as? String
                     let description = document.data()["description"] as? String
-                    let date = document.data()["date"] as? String
+                    var date = document.data()["date"] as? String
+                    var dateModified = date
+                    
+//                    for i in 16..<20 {
+//                        
+//                        if let index = dateModified?.index(dateModified!.startIndex, offsetBy: i, limitedBy: dateModified!.endIndex) {
+//                            dateModified?.remove(at: index)
+//                        }
+//                    }
+                    
                     let location = document.data()["location"] as? String
                     let price = document.data()["price"] as? String
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     
-                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", duration: duration ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
+                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
+                                                 jobName: jobName ?? "-",
+                                                 duration: duration ?? "-",
+                                                 date: dateModified ?? "-",
+                                                 location: location ?? "-",
+                                                 price: price ?? "-",
+                                                 description: description ?? "-",
+                                                 userContact: userContact ?? "-"))
                 }
             }
             self.tableView.reloadData()
@@ -110,11 +126,8 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc private func didTapAdd() {
-        print("Add")
-        let rootVC = AddJobViewController()
-        let navVC = UINavigationController(rootViewController: rootVC)
-        navVC.modalPresentationStyle = .fullScreen
-        present(navVC, animated: true)
+        let destinationVC = AddJobViewController()
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

@@ -57,7 +57,7 @@ class DetailsViewController: UIViewController {
         return lbl
     }()
     lazy var timeInfo: UILabel = {
-        let lbl = UILabel(frame: CGRect(x: 157, y: 0, width: detailsBackView.frame.width + 10, height: 18))
+        let lbl = UILabel(frame: CGRect(x: 157, y: 0, width: detailsBackView.frame.width + 45, height: 18))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.medium, size: 14)
         lbl.textColor = UIColor(named: "Black")
