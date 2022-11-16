@@ -20,6 +20,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
     let userID = Auth.auth().currentUser?.uid
     let timestamp = Int(Date().timeIntervalSince1970)
  
+    let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +52,15 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.backButtonTitle = ""
-        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        addButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
-        addButton.addTarget(self, action: #selector(didTapAdd), for: .touchUpInside)
-        let item1 = UIBarButtonItem(customView: addButton)
-        self.navigationItem.setRightBarButtonItems([item1], animated: true)
+        
+        if isLoggedIn == true {
+            addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            addButton.frame = CGRect(x: 0, y: 0, width: 31, height: 31)
+            addButton.addTarget(self, action: #selector(didTapAdd), for: .touchUpInside)
+            let item1 = UIBarButtonItem(customView: addButton)
+            self.navigationItem.setRightBarButtonItems([item1], animated: true)
+        }
+
         
         //MARK: - Set Table View
         setTableView()
@@ -137,16 +142,23 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = DetailsViewController()
-        nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
-        nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
-        nextVC.categoryData = jobsArr[indexPath.row].jobImage
-        nextVC.durationData = jobsArr[indexPath.row].duration ?? "-"
-        nextVC.locationData = jobsArr[indexPath.row].location ?? "-"
-        nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
-        nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
-        nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
-        navigationController?.pushViewController(nextVC, animated: true)
-        
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
+
+        if isLoggedIn == true {
+            
+            nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
+            nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
+            nextVC.categoryData = jobsArr[indexPath.row].jobImage
+            nextVC.durationData = jobsArr[indexPath.row].duration ?? "-"
+            nextVC.locationData = jobsArr[indexPath.row].location ?? "-"
+            nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
+            nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
+            nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+            navigationController?.pushViewController(nextVC, animated: true)
+            
+        } else {
+            navigationController?.pushViewController(ProfileViewController(), animated: true)
+        }
     }
     
 }

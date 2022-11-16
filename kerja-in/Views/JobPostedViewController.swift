@@ -33,18 +33,6 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
         searchBar.compatibleSearchTextField.textColor = UIColor(named: "Black")
         searchBar.compatibleSearchTextField.backgroundColor = UIColor(named: "White")
         
-        //MARK: - Set Navigation Bar
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "DarkBlue")
-        
-        // Customizing navigation bar
-        navigationController?.navigationBar.tintColor = UIColor(named: "White")
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.backButtonTitle = ""
-        
         
         let db = Firestore.firestore()
         guard let userUID = Auth.auth().currentUser?.uid else { return }
