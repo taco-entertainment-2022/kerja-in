@@ -196,9 +196,17 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
-    private var feeInput: CurrencyTextField = {
-        let currencyTextField = CurrencyTextField()
+    private lazy var feeInput: UITextField = {
+        let currencyTextField = UITextField()
         currencyTextField.translatesAutoresizingMaskIntoConstraints = false
+//        currencyTextField.addTarget(self, action: #selector(currencyFieldChanged), for: .editingChanged)
+        
+        currencyTextField.backgroundColor = UIColor(named: "LightGray")
+        currencyTextField.layer.cornerRadius = viewConstraints.cornerRadius
+        currencyTextField.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
+        currencyTextField.textColor = UIColor(named: "Black")
+        currencyTextField.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
+        currencyTextField.keyboardType = .numberPad
         
         return currencyTextField
     }()
@@ -314,7 +322,6 @@ class AddJobViewController: UIViewController {
         
         setNavigation()
         setUpViews()
-        setCurrencyField()
         connectDurationInput()
         connectJobDateInput()
         dismissKeyboard()
@@ -481,18 +488,7 @@ class AddJobViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
     }
-    
-    private func setCurrencyField() {
-        feeInput.addTarget(self, action: #selector(currencyFieldChanged), for: .editingChanged)
-        feeInput.locale = Locale(identifier: "id_ID")
         
-        feeInput.backgroundColor = UIColor(named: "LightGray")
-        feeInput.layer.cornerRadius = viewConstraints.cornerRadius
-        feeInput.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
-        feeInput.textColor = UIColor(named: "Black")
-        feeInput.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
-    }
-    
     func connectDurationInput() {
         durationPickerView.delegate = self
         durationPickerView.dataSource = self
@@ -521,10 +517,6 @@ class AddJobViewController: UIViewController {
         jobDateInput.inputAccessoryView = toolBar
     }
     
-    @objc func currencyFieldChanged() {
-        AddJobViewViewModel.shared.fee = (feeInput.decimal as NSDecimalNumber).doubleValue
-    }
-    
     @objc func backPressed() {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -537,6 +529,7 @@ class AddJobViewController: UIViewController {
         
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             AddJobViewViewModel.shared.category = item
+            category = item
             categoryInput.titleLabel?.textColor = UIColor.init(named: "Black")
             categoryInput.titleLabel?.font = UIFont.Outfit(.medium, size: 16)
             categoryInput.setTitle(item, for: .normal)
@@ -564,6 +557,7 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.location = locationInput.text!
         AddJobViewViewModel.shared.contact = contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text ?? ""
+        AddJobViewViewModel.shared.fee = feeInput.text ?? "0"
         
         if !jobDateInput.text!.isEmpty &&
             !jobDescriptionInput.text.isEmpty &&
@@ -571,7 +565,7 @@ class AddJobViewController: UIViewController {
             !jobTitleInput.text!.isEmpty &&
             !locationInput.text!.isEmpty &&
             !feeInput.text!.isEmpty &&
-            (category.count == 0 || category == "") &&
+            !(category.count == 0 || category == "") &&
             !contactInput.text!.isEmpty {
             AddJobViewViewModel.shared.saveData(date: AddJobViewViewModel.shared.jobDate ?? "",
                                                 description: AddJobViewViewModel.shared.jobDescription!,
