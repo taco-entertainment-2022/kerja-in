@@ -176,6 +176,17 @@ class AddJobViewController: UIViewController {
         return textField
     }()
     
+    private lazy var feeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .leading
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalCentering
+        
+        return stackView
+    }()
+    
     private lazy var feeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -192,6 +203,11 @@ class AddJobViewController: UIViewController {
         label.textColor = UIColor(named: "GuideFray")
         label.font = UIFont.Outfit(.regular, size: viewConstraints.labelSize)
         label.text = "Rp"
+        label.backgroundColor = UIColor(named: "LightGray")
+        label.textAlignment = .center
+        label.clipsToBounds = true
+        label.layer.cornerRadius = viewConstraints.cornerRadius
+        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
         return label
     }()
@@ -199,7 +215,6 @@ class AddJobViewController: UIViewController {
     private lazy var feeInput: UITextField = {
         let currencyTextField = UITextField()
         currencyTextField.translatesAutoresizingMaskIntoConstraints = false
-//        currencyTextField.addTarget(self, action: #selector(currencyFieldChanged), for: .editingChanged)
         
         currencyTextField.backgroundColor = UIColor(named: "LightGray")
         currencyTextField.layer.cornerRadius = viewConstraints.cornerRadius
@@ -207,6 +222,8 @@ class AddJobViewController: UIViewController {
         currencyTextField.textColor = UIColor(named: "Black")
         currencyTextField.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
         currencyTextField.keyboardType = .numberPad
+        currencyTextField.delegate = self
+        currencyTextField.addTarget(self, action: #selector(feeInputDidChange), for: .editingChanged)
         
         return currencyTextField
     }()
@@ -361,8 +378,12 @@ class AddJobViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
+        contentView.addSubview(feeStackView)
         
-        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeInput, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
+        feeStackView.addArrangedSubview(currencyLabel)
+        feeStackView.addArrangedSubview(feeInput)
+        
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
 
         for i in 0..<views.count {
             stackView.addArrangedSubview(views[i])
@@ -448,11 +469,21 @@ class AddJobViewController: UIViewController {
             make.top.equalTo(locationInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
         
+        feeStackView.snp.makeConstraints { (make) in
+            make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
+            make.left.equalTo(scrollView.snp.left)
+            make.right.equalTo(scrollView.snp.right)
+        }
+        
+        currencyLabel.snp.makeConstraints { (make) in
+            make.width.equalTo(50)
+            make.height.equalTo(44)
+        }
+        
         feeInput.snp.makeConstraints { (make) in
-            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.width.equalTo(viewConstraints.textFieldWidth - 50)
             make.height.equalTo(viewConstraints.textFieldHeight)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalTo(currencyLabel.snp.right).offset(10)
         }
 
         contactLabel.snp.makeConstraints { (make) in
@@ -546,6 +577,12 @@ class AddJobViewController: UIViewController {
         dateFormat.dateFormat = "EEE, dd-MM-yyyy hh:mm"
         jobDate = dateFormat.string(from: jobDatePickerView.date)
         jobDateInput.text = "\(jobDate)"
+    }
+    
+    @objc func feeInputDidChange() {
+        if let amountString = feeInput.text?.currencyInputFormatting() {
+            feeInput.text = amountString
+        }
     }
     
     @objc func didTapCreate() {
