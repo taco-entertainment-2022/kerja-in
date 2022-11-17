@@ -200,8 +200,8 @@ class AddJobViewController: UIViewController {
     private lazy var currencyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(named: "GuideFray")
-        label.font = UIFont.Outfit(.regular, size: viewConstraints.labelSize)
+        label.textColor = UIColor(named: "GuideGray")
+        label.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
         label.text = "Rp"
         label.backgroundColor = UIColor(named: "LightGray")
         label.textAlignment = .center
@@ -222,7 +222,7 @@ class AddJobViewController: UIViewController {
         currencyTextField.textColor = UIColor(named: "Black")
         currencyTextField.setPadding(left: viewConstraints.paddings, right: viewConstraints.paddings)
         currencyTextField.keyboardType = .numberPad
-        currencyTextField.delegate = self
+        currencyTextField.clipsToBounds = true
         currencyTextField.addTarget(self, action: #selector(feeInputDidChange), for: .editingChanged)
         
         return currencyTextField
@@ -378,18 +378,16 @@ class AddJobViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
-        contentView.addSubview(feeStackView)
         
-        feeStackView.addArrangedSubview(currencyLabel)
-        feeStackView.addArrangedSubview(feeInput)
-        
-        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeStackView, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
 
         for i in 0..<views.count {
             stackView.addArrangedSubview(views[i])
         }
         
         scrollView.addSubview(stackView)
+        feeStackView.addArrangedSubview(currencyLabel)
+        feeStackView.addArrangedSubview(feeInput)
         
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -470,7 +468,7 @@ class AddJobViewController: UIViewController {
         }
         
         feeStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
+            make.top.equalTo(feeLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
             make.left.equalTo(scrollView.snp.left)
             make.right.equalTo(scrollView.snp.right)
         }
@@ -481,7 +479,6 @@ class AddJobViewController: UIViewController {
         }
         
         feeInput.snp.makeConstraints { (make) in
-            make.width.equalTo(viewConstraints.textFieldWidth - 50)
             make.height.equalTo(viewConstraints.textFieldHeight)
             make.left.equalTo(currencyLabel.snp.right).offset(10)
         }
@@ -580,11 +577,11 @@ class AddJobViewController: UIViewController {
     }
     
     @objc func feeInputDidChange() {
-        if let amountString = feeInput.text?.currencyInputFormatting() {
+        if let amountString = feeInput.text?.currencyInputFormatting(){
             feeInput.text = amountString
         }
     }
-    
+        
     @objc func didTapCreate() {
         createButton.resignFirstResponder()
         
@@ -630,6 +627,32 @@ extension UIViewController {
     
     @objc func dismissKeyboardTouchOutside() {
         view.endEditing(true)
+    }
+}
+
+extension String {
+    func currencyInputFormatting() -> String {
+        var number: NSNumber!
+        let formatter = NumberFormatter()
+        
+        formatter.locale = Locale(identifier: "id_ID")
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        
+        var amountWithPrefix = self
+        
+        let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
+        amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count), withTemplate: "")
+        
+        let double = (amountWithPrefix as NSString).doubleValue
+        number = NSNumber(value: (double / 100))
+        
+        guard number != 0 as NSNumber else {
+            return ""
+        }
+        
+        return formatter.string(from: number)!
     }
 }
 

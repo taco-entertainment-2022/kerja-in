@@ -94,7 +94,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                                                  duration: duration ?? "-",
                                                  date: dateModified ?? "-",
                                                  location: location ?? "-",
-                                                 price: price ?? "-",
+                                                 price: (price != nil) ? "Rp  \(price!)" : "-",
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }
