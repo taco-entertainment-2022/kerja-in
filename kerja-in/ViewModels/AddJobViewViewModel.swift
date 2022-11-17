@@ -17,7 +17,7 @@ final class AddJobViewViewModel: ObservableObject {
     @Published var category: String?
     @Published var jobDuration: String?
     @Published var location: String?
-    @Published var fee: Double?
+    @Published var fee: String?
     @Published var contact: String?
     @Published var jobDate: String?
     @Published var error: String?
@@ -28,7 +28,7 @@ final class AddJobViewViewModel: ObservableObject {
 
     static let shared = AddJobViewViewModel()
     
-    func saveData(date: String, description: String, jobName: String, location: String, price: Double, userImage: String, userContact: String, userID: String, jobDuration: String) {
+    func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String, jobDuration: String) {
         
         let postID: String = String(userID) + String(timestamp)
         let docRef = database.collection("jobs").document(postID)
