@@ -303,13 +303,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                         
                     },
-                    SettingOption(title: "Tutorial") {
-                        
-                    },
+//                    SettingOption(title: "Tutorial") {
+//
+//                    },
                     SettingOption(title: "Ulas Aplikasi") {
                         
                     },
                     SettingOption(title: "Report") {
+                        
+                        if let url = URL(string: "https://www.kerjainaja.com/contact-us/") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
                         
                     },
                     SettingOption(title: "Mengenai Kerjain") {
@@ -417,13 +422,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                         
                     },
-                    SettingOption(title: "Tutorial") {
-                        
-                    },
+//                    SettingOption(title: "Tutorial") {
+//
+//                    },
                     SettingOption(title: "Ulas Aplikasi") {
                         
                     },
                     SettingOption(title: "Report") {
+                        
+                        if let url = URL(string: "https://www.kerjainaja.com/contact-us/") {
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
                         
                     },
                     SettingOption(title: "Mengenai Kerjaan") {
