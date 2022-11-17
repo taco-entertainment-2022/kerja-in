@@ -238,6 +238,32 @@ class AddJobViewController: UIViewController {
         return label
     }()
     
+    private lazy var contactStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .leading
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalCentering
+        
+        return stackView
+    }()
+    
+    private lazy var countryCodeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: "GuideGray")
+        label.font = UIFont.Outfit(.regular, size: viewConstraints.inputFontSize)
+        label.text = "+62"
+        label.backgroundColor = UIColor(named: "LightGray")
+        label.textAlignment = .center
+        label.clipsToBounds = true
+        label.layer.cornerRadius = viewConstraints.cornerRadius
+        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        return label
+    }()
+    
     private lazy var contactInput: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -379,7 +405,7 @@ class AddJobViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         
-        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeStackView, contactLabel, contactInput, jobDateLabel, jobDateInput, errorLabel, createButton]
+        let views = [jobTitleLabel, jobTitleInput, jobDescriptionLabel, jobDescriptionInput, categoryLabel, categoryInput, jobDurationLabel, jobDurationInput, locationLabel, locationInput, feeLabel, feeStackView, contactLabel, contactStackView, jobDateLabel, jobDateInput, errorLabel, createButton]
 
         for i in 0..<views.count {
             stackView.addArrangedSubview(views[i])
@@ -388,6 +414,8 @@ class AddJobViewController: UIViewController {
         scrollView.addSubview(stackView)
         feeStackView.addArrangedSubview(currencyLabel)
         feeStackView.addArrangedSubview(feeInput)
+        contactStackView.addArrangedSubview(countryCodeLabel)
+        contactStackView.addArrangedSubview(contactInput)
         
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -487,13 +515,29 @@ class AddJobViewController: UIViewController {
             make.top.equalTo(feeInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
         
-        contactInput.snp.makeConstraints { (make) in
-            make.width.equalTo(viewConstraints.textFieldWidth)
-            make.height.equalTo(viewConstraints.textFieldHeight)
-            make.centerX.equalToSuperview()
+        contactStackView.snp.makeConstraints { (make) in
             make.top.equalTo(contactLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+            make.left.equalToSuperview()
         }
         
+        countryCodeLabel.snp.makeConstraints { (make) in
+            make.width.equalTo(50)
+            make.height.equalTo(viewConstraints.textFieldHeight)
+        }
+        
+        contactInput.snp.makeConstraints { (make) in
+            make.height.equalTo(viewConstraints.textFieldHeight)
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.left.equalTo(countryCodeLabel.snp.right).offset(10)
+        }
+        
+//        contactInput.snp.makeConstraints { (make) in
+//            make.width.equalTo(viewConstraints.textFieldWidth)
+//            make.height.equalTo(viewConstraints.textFieldHeight)
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(contactLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
+//        }
+//
         jobDateLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contactInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
