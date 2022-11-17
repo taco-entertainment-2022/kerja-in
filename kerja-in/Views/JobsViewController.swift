@@ -66,23 +66,14 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         setTableView()
         
         let db = Firestore.firestore()
-        db.collection("jobs").getDocuments { snapshot, error in
+        db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             if error != nil {
                 print("Error Fetch")
             } else {
                 for document in snapshot!.documents {
                     let jobName = document.data()["jobName"] as? String
                     let description = document.data()["description"] as? String
-                    var date = document.data()["date"] as? String
-                    var dateModified = date
-                    
-//                    for i in 16..<20 {
-//                        
-//                        if let index = dateModified?.index(dateModified!.startIndex, offsetBy: i, limitedBy: dateModified!.endIndex) {
-//                            dateModified?.remove(at: index)
-//                        }
-//                    }
-                    
+                    let date = document.data()["date"] as? String
                     let location = document.data()["location"] as? String
                     let price = document.data()["price"] as? String
                     let userContact = document.data()["userContact"] as? String
@@ -92,9 +83,9 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  duration: duration ?? "-",
-                                                 date: dateModified ?? "-",
+                                                 date: date ?? "-",
                                                  location: location ?? "-",
-                                                 price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 price: price ?? "-",
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }
@@ -143,6 +134,11 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.userImage.image = jobsArr[indexPath.row].jobImage
         cell.jobLabel.text = jobsArr[indexPath.row].jobName
         cell.dateLabel.text = jobsArr[indexPath.row].date
+        
+        //Remove watch from date in table
+        for _ in 16...20 {
+            cell.dateLabel.text?.removeLast()
+        }
         cell.locationLabel.text = jobsArr[indexPath.row].location
         cell.priceLabel.text = jobsArr[indexPath.row].price
         cell.postedLabel.text = jobsArr[indexPath.row].posted
@@ -158,7 +154,6 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
         let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
 
         if isLoggedIn == true {
-            
             nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
             nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
             nextVC.categoryData = jobsArr[indexPath.row].jobImage
@@ -168,7 +163,6 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
             nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
             nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
             navigationController?.pushViewController(nextVC, animated: true)
-            
         } else {
             navigationController?.pushViewController(ProfileViewController(), animated: true)
         }

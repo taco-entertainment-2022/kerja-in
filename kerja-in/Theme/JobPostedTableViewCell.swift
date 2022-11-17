@@ -26,7 +26,7 @@ class JobPostedTableViewCell: UITableViewCell {
     }()
     
     lazy var calendarIcon: UIImageView = {
-        let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 37, width: 19, height: 18))
+        let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 39, width: 14, height: 14))
         calendarIcon.image = UIImage(named: "Calendar")
         return calendarIcon
     }()
@@ -66,7 +66,7 @@ class JobPostedTableViewCell: UITableViewCell {
     }()
     
     lazy var dateLabel: UILabel = {
-        let lbl = UILabel(frame: CGRect(x: 105, y: 31, width: backView.frame.width - 116, height: 30))
+        let lbl = UILabel(frame: CGRect(x: 100, y: 31, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
         lbl.font = UIFont.Outfit(.light, size: 14)
         lbl.textColor = UIColor(named: "DarkGray")

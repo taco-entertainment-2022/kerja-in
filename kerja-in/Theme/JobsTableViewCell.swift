@@ -26,7 +26,6 @@ class JobsTableViewCell: UITableViewCell {
     }()
     
     lazy var calendarIcon: UIImageView = {
-        //let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 37, width: 14, height: 14))
         let calendarIcon = UIImageView(frame: CGRect(x: 80, y: 39, width: 14, height: 14))
         calendarIcon.image = UIImage(named: "Calendar")
         return calendarIcon
@@ -73,7 +72,7 @@ class JobsTableViewCell: UITableViewCell {
         lbl.textColor = UIColor(named: "DarkGray")
         return lbl
     }()
-    
+
     lazy var locationLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 240, y: 31, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
