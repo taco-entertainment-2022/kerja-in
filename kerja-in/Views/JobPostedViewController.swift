@@ -42,8 +42,6 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
                 print("ERROR FETCH")
             }
             else {
-                
-                
                 for document in snapshot!.documents {
                     //print("\(document.data()["jobName"] as! String)")
                     let jobName = document.data()["jobName"] as? String

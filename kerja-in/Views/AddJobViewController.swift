@@ -531,13 +531,6 @@ class AddJobViewController: UIViewController {
             make.left.equalTo(countryCodeLabel.snp.right).offset(10)
         }
         
-//        contactInput.snp.makeConstraints { (make) in
-//            make.width.equalTo(viewConstraints.textFieldWidth)
-//            make.height.equalTo(viewConstraints.textFieldHeight)
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(contactLabel.snp.bottom).offset(viewConstraints.offsetLabelToTextfield)
-//        }
-//
         jobDateLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contactInput.snp.bottom).offset(viewConstraints.offsetTextfieldToLabel)
         }
@@ -653,7 +646,8 @@ class AddJobViewController: UIViewController {
                                                 userImage: AddJobViewViewModel.shared.category!,
                                                 userContact: AddJobViewViewModel.shared.contact!,
                                                 userID: AddJobViewViewModel.shared.userID!,
-                                                jobDuration: AddJobViewViewModel.shared.jobDuration!)
+                                                jobDuration: AddJobViewViewModel.shared.jobDuration!,
+                                                timestamp: AddJobViewViewModel.shared.timestamp)
             errorLabel.text = ""
             self.navigationController?.popToRootViewController(animated: true)
         } else {
