@@ -633,7 +633,7 @@ class AddJobViewController: UIViewController {
         AddJobViewViewModel.shared.jobDescription = jobDescriptionInput.text!
         AddJobViewViewModel.shared.jobDuration = jobDurationInput.text!
         AddJobViewViewModel.shared.location = locationInput.text!
-        AddJobViewViewModel.shared.contact = contactInput.text!
+        AddJobViewViewModel.shared.contact = "62" + contactInput.text!
         AddJobViewViewModel.shared.jobDate = jobDateInput.text ?? ""
         AddJobViewViewModel.shared.fee = feeInput.text ?? "0"
         
@@ -724,6 +724,18 @@ extension UITextField {
 extension AddJobViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.text?.count == 0 && string == "0" {
+            return false
+        }
+        
+        if (textField.text?.contains("."))! && string == "." {
+            return false
+        }
+        
         return true
     }
 }
