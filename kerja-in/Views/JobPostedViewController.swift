@@ -104,6 +104,10 @@ extension JobsPostedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.userImage.image = jobsArr[indexPath.row].jobImage
         cell.jobLabel.text = jobsArr[indexPath.row].jobName
         cell.dateLabel.text = jobsArr[indexPath.row].date
+        //Remove watch from date in table
+        for _ in 16...20 {
+            cell.dateLabel.text?.removeLast()
+        }
         cell.locationLabel.text = jobsArr[indexPath.row].location
         cell.priceLabel.text = jobsArr[indexPath.row].price
         cell.postedLabel.text = jobsArr[indexPath.row].posted
