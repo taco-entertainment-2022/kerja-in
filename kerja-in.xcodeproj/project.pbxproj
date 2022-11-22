@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4E36F6C3291FD63F005D8495 /* ViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */; };
+		4E7DEDCB292CF4DB00624626 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DEDCA292CF4DB00624626 /* FilterViewController.swift */; };
+		4E7DEDD1292D162600624626 /* CheckboxWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DEDD0292D162600624626 /* CheckboxWithTitle.swift */; };
+		4E7DEDD3292D2AB300624626 /* JobViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DEDD2292D2AB300624626 /* JobViewViewModel.swift */; };
 		4E930F582905EF47005FA88A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F522905EF46005FA88A /* LoginController.swift */; };
 		4E930F592905EF47005FA88A /* CurrentUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F532905EF47005FA88A /* CurrentUserModels.swift */; };
 		4E930F5A2905EF47005FA88A /* editProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F542905EF47005FA88A /* editProfileController.swift */; };
 		4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F562905EF47005FA88A /* Extensions.swift */; };
 		4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F572905EF47005FA88A /* SignUpController.swift */; };
-		4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */; };
 		4EB2FB512909A2CB00C5CF53 /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */; };
 		4ED4331F28F3E35300FF74D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */; };
 		4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED4332B28F47ACD00FF74D5 /* UserModel.swift */; };
@@ -76,12 +78,14 @@
 		3935A33A2E92A2ECC571DF3B /* Pods-kerja-in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kerja-in.debug.xcconfig"; path = "Target Support Files/Pods-kerja-in/Pods-kerja-in.debug.xcconfig"; sourceTree = "<group>"; };
 		3977605FA91793F9DCC3D95F /* Pods_kerja_in_kerja_inUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kerja_in_kerja_inUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstraints.swift; sourceTree = "<group>"; };
+		4E7DEDCA292CF4DB00624626 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		4E7DEDD0292D162600624626 /* CheckboxWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxWithTitle.swift; sourceTree = "<group>"; };
+		4E7DEDD2292D2AB300624626 /* JobViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobViewViewModel.swift; sourceTree = "<group>"; };
 		4E930F522905EF46005FA88A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4E930F532905EF47005FA88A /* CurrentUserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserModels.swift; sourceTree = "<group>"; };
 		4E930F542905EF47005FA88A /* editProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editProfileController.swift; sourceTree = "<group>"; };
 		4E930F562905EF47005FA88A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4E930F572905EF47005FA88A /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
-		4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewViewModel.swift; sourceTree = "<group>"; };
 		4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
 		4ED4331E28F3E35300FF74D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ED4332B28F47ACD00FF74D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -162,8 +166,8 @@
 		4E930F5E2905F0BB005FA88A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				4E930F622905F19B005FA88A /* AuthenticationViewViewModel.swift */,
 				4EE22A6E291065770090F7CE /* AddJobViewViewModel.swift */,
+				4E7DEDD2292D2AB300624626 /* JobViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -180,6 +184,7 @@
 				4EB2FB502909A2CB00C5CF53 /* AddJobViewController.swift */,
 				93F05D6D2912ABB000B55756 /* OnboardingViewController.swift */,
 				93F05E07291D4A7100B55756 /* JobPostedViewController.swift */,
+				4E7DEDCA292CF4DB00624626 /* FilterViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				A8B690D828F2997700AA7A02 /* CustomFont.swift */,
 				A8B690DD28F3084500AA7A02 /* CustomSearchBar.swift */,
 				93F05E0B291D4AA900B55756 /* JobPostedTableViewCell.swift */,
+				4E7DEDD0292D162600624626 /* CheckboxWithTitle.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 				933616802908FFCA00F6B668 /* SettingTableViewCell.swift in Sources */,
 				4E36F6C3291FD63F005D8495 /* ViewConstraints.swift in Sources */,
 				A8B690D928F2997700AA7A02 /* CustomFont.swift in Sources */,
+				4E7DEDD1292D162600624626 /* CheckboxWithTitle.swift in Sources */,
 				A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */,
 				A8B690DB28F29AAE00AA7A02 /* JobModel.swift in Sources */,
 				A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */,
@@ -589,10 +596,11 @@
 				4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */,
 				A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */,
 				4EB2FB512909A2CB00C5CF53 /* AddJobViewController.swift in Sources */,
+				4E7DEDD3292D2AB300624626 /* JobViewViewModel.swift in Sources */,
 				4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */,
-				4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
 				93F05E0A291D4A8C00B55756 /* JobPostedModel.swift in Sources */,
+				4E7DEDCB292CF4DB00624626 /* FilterViewController.swift in Sources */,
 				A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */,
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
