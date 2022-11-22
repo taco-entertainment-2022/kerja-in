@@ -15,6 +15,7 @@ class JobsViewController: UIViewController {
     var jobsArr = [JobModel]()
     var filteredJobs = [JobModel]()
     var isSearching = false
+    let db = Firestore.firestore()
     
     lazy var searchBar: UISearchController = {
         let searchBar = UISearchController(searchResultsController: nil)
@@ -76,8 +77,6 @@ class JobsViewController: UIViewController {
         
         //MARK: - Set Table View
         setTableView()
-        
-        let db = Firestore.firestore()
         db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             if error != nil {
                 print("Error Fetch")
@@ -92,7 +91,7 @@ class JobsViewController: UIViewController {
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
-                    
+
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -104,40 +103,12 @@ class JobsViewController: UIViewController {
                                                  userContact: userContact ?? "-"))
                 }
             }
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
-//        cancelSearch()
         tableView.keyboardDismissMode = .onDrag
-        
-        
     }
-    
-    lazy var toolBar: UIToolbar = {
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(named: "DarkBlue")
-        toolBar.sizeToFit()
-        
-        return toolBar
-    }()
-    
-//    func cancelSearch() {
-//        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-//                                        target: nil, action: nil)
-//        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain,
-//                                         target: self, action: #selector(cancelButtonPressed))
-//        
-//        toolBar.isUserInteractionEnabled = true
-//        toolBar.setItems([flexSpace, cancelButton], animated: true)
-//        toolBar.sizeToFit()
-//        searchBar.searchBar.searchTextField.resignFirstResponder()
-//        searchBar.searchBar.searchTextField.inputAccessoryView = toolBar
-//    }
-//    
-//    @objc func cancelButtonPressed() {
-//        view.endEditing(true)
-//    }
     
     func loadUserName() {
 
