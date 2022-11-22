@@ -376,6 +376,39 @@ class AddJobViewController: UIViewController {
             }
         }
     }
+    
+    var jobsArr = [JobModel]()
+    var tableView = UITableView()
+    override func viewDidDisappear(_ animated: Bool) {
+    
+        let db = Firestore.firestore()
+        db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
+            if error != nil {
+                print("Error Fetch")
+            } else {
+                for document in snapshot!.documents {
+                    let jobName = document.data()["jobName"] as? String
+                    let description = document.data()["description"] as? String
+                    let date = document.data()["date"] as? String
+                    let location = document.data()["location"] as? String
+                    let price = document.data()["price"] as? String
+                    let userContact = document.data()["userContact"] as? String
+                    let userImage = document.data()["userImage"] as? String
+                    let duration = document.data()["jobDuration"] as? String
+                    
+                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
+                                                 jobName: jobName ?? "-",
+                                                 duration: duration ?? "-",
+                                                 date: date ?? "-",
+                                                 location: location ?? "-",
+                                                 price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 description: description ?? "-",
+                                                 userContact: userContact ?? "-"))
+                }
+            }
+            self.tableView.reloadData()
+        }
+    }
 
     
     private func setNavigation() {

@@ -36,6 +36,7 @@
 		93F05E0C291D4AA900B55756 /* JobPostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05E0B291D4AA900B55756 /* JobPostedTableViewCell.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
+		A871CDC0292A95AE0084946E /* FilteredJobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A871CDBF292A95AE0084946E /* FilteredJobModel.swift */; };
 		A87870A628F573C000633B2D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87870A528F573C000633B2D /* DetailsViewController.swift */; };
 		A8B690C328F296E300AA7A02 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */; };
 		A8B690CF28F2982000AA7A02 /* Outfit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */; };
@@ -112,6 +113,7 @@
 		93F05E0B291D4AA900B55756 /* JobPostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostedTableViewCell.swift; sourceTree = "<group>"; };
 		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A871CDBF292A95AE0084946E /* FilteredJobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredJobModel.swift; sourceTree = "<group>"; };
 		A87870A528F573C000633B2D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		A8B690C228F296E300AA7A02 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
 		A8B690C628F2982000AA7A02 /* Outfit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				933616812909C16800F6B668 /* CheckboxButton.swift */,
 				4E930F532905EF47005FA88A /* CurrentUserModels.swift */,
 				A8B690DA28F29AAE00AA7A02 /* JobModel.swift */,
+				A871CDBF292A95AE0084946E /* FilteredJobModel.swift */,
 				4ED4332B28F47ACD00FF74D5 /* UserModel.swift */,
 				4ED4332D28F4819800FF74D5 /* BookmarkModel.swift */,
 				93F05E09291D4A8C00B55756 /* JobPostedModel.swift */,
@@ -589,6 +592,7 @@
 				4E930F5C2905EF47005FA88A /* Extensions.swift in Sources */,
 				A8EA50C928FBE7F60033D994 /* DetailsTableViewCell.swift in Sources */,
 				4EB2FB512909A2CB00C5CF53 /* AddJobViewController.swift in Sources */,
+				A871CDC0292A95AE0084946E /* FilteredJobModel.swift in Sources */,
 				4EE22AEC2913B50A0090F7CE /* CheckboxButton.swift in Sources */,
 				4E930F632905F19B005FA88A /* AuthenticationViewViewModel.swift in Sources */,
 				A8B690DE28F3084500AA7A02 /* CustomSearchBar.swift in Sources */,
