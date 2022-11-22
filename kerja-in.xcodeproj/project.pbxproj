@@ -775,7 +775,7 @@
 				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NRD8HSMRZ7;
+				DEVELOPMENT_TEAM = 8Q7D2536H4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = kerjain;
@@ -811,7 +811,7 @@
 				CODE_SIGN_ENTITLEMENTS = "kerja-in/kerja-in.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NRD8HSMRZ7;
+				DEVELOPMENT_TEAM = 8Q7D2536H4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "kerja-in/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = kerjain;

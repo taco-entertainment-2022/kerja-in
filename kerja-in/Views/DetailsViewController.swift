@@ -205,6 +205,7 @@ class DetailsViewController: UIViewController {
     var paymentData: String = "Rp5.000"
     var descriptionData: String = "Butuh respondent mahasiswa rantau ya... Wajib lapor sebelum ngisi respondent. Tujuannya supaya bisa konfirmasi dulu dan bisa dibayar. Hubungi WAnya yang tertera ya. \n\nKalau bisa mahasiswa rantau dari luar Jawa ya... terus baru menjalani kuliah semester2 awal."
     var contactData: String = ""
+    var daysData: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -228,7 +229,7 @@ class DetailsViewController: UIViewController {
         //MARK: - Upper
         userImage.image = categoryData
         jobLabel.text = jobData
-        daysLabel.text = "5 days ago, oleh Fredo Sembi"
+        daysLabel.text = "oleh \(daysData)"//"5 days ago, oleh Fredo Sembi"
         
         
         //MARK: - Details Text

@@ -26,7 +26,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
-        
+        loadData()
         
         //MARK: - Set Search Bar
         searchBar.searchBarStyle = UISearchBar.Style.default
@@ -79,9 +79,11 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
-                    
+                    let userName = document.data()["userName"] as? String
+
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
+                                                 userName: userName ?? "-" ,
                                                  duration: duration ?? "-",
                                                  date: date ?? "-",
                                                  location: location ?? "-",
@@ -94,6 +96,26 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         }
     }
 
+    func loadData() {
+
+        let db = Firestore.firestore()
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+        
+        db.collection("user").document(userUID).getDocument { snapshot, error in
+            if error != nil {
+                print("ERROR FETCH")
+            }
+            else {
+                let userName = snapshot?.get("firstname") as? String
+                
+ 
+                
+                let defaults = UserDefaults.standard
+                defaults.set(userName, forKey: "myIntValue")
+                defaults.synchronize()
+            }
+        }
+    }
     
     
     func setTableView() {
@@ -162,6 +184,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
             nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
             nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
             nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+            nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
             navigationController?.pushViewController(nextVC, animated: true)
         } else {
             navigationController?.pushViewController(ProfileViewController(), animated: true)

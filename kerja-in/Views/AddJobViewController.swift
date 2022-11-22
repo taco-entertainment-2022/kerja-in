@@ -650,6 +650,8 @@ class AddJobViewController: UIViewController {
                                                 timestamp: AddJobViewViewModel.shared.timestamp)
             errorLabel.text = ""
             self.navigationController?.popToRootViewController(animated: true)
+            
+            
         } else {
             errorLabel.text = "Semua data wajib diisi"
         }

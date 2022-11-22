@@ -48,6 +48,7 @@ class JobsTableViewCell: UITableViewCell {
     
     @objc func savedButtonPressed(sender: UIButton){
         print("Button Clicked")
+      
         isOn.toggle()
         if isOn {
             savedButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
