@@ -35,7 +35,7 @@ final class AddJobViewViewModel: ObservableObject {
         let docRef = database.collection("jobs").document(postID)
         
         
-        docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "jobDuration": jobDuration, "userID": String(userID), "timestamp": timestamp])
+        docRef.setData(["date": date, "description": description, "jobName": jobName, "location": location, "price": price, "userImage": userImage, "userContact": userContact, "jobDuration": jobDuration, "userID": String(userID), "timestamp": timestamp, "userName": UserDefaults.standard.string(forKey: "myIntValue")])
     }
 
     

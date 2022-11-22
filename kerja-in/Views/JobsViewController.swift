@@ -47,6 +47,7 @@ class JobsViewController: UIViewController {
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
         
+        loadUserName()
         
         //MARK: - Set Search Bar
         navigationItem.titleView = self.searchBar.searchBar
@@ -90,9 +91,11 @@ class JobsViewController: UIViewController {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
+                    let userName = document.data()["userName"] as? String
                     
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
+                                                 userName: userName ?? "-",
                                                  duration: duration ?? "-",
                                                  date: date ?? "-",
                                                  location: location ?? "-",
@@ -135,6 +138,26 @@ class JobsViewController: UIViewController {
 //    @objc func cancelButtonPressed() {
 //        view.endEditing(true)
 //    }
+    
+    func loadUserName() {
+
+        let db = Firestore.firestore()
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+        
+        db.collection("user").document(userUID).getDocument { snapshot, error in
+            if error != nil {
+                print("ERROR FETCH")
+            }
+            else {
+                let userName = snapshot?.get("firstname") as? String
+                
+                let defaults = UserDefaults.standard
+                defaults.set(userName, forKey: "myIntValue")
+                defaults.synchronize()
+            }
+        }
+    }
+    
     
     func setTableView() {
         tableView.frame = self.view.frame
@@ -198,6 +221,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
             nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
             nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
             nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+            nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
             if isSearching == false {
                 nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
                 nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
@@ -207,6 +231,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
                 nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
                 nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
                 nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+                nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
             } else {
                 nextVC.jobData = filteredJobs[indexPath.row].jobName ?? "-"
                 nextVC.timeData = filteredJobs[indexPath.row].date ?? "-"
@@ -216,6 +241,7 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
                 nextVC.paymentData = filteredJobs[indexPath.row].price ?? "-"
                 nextVC.descriptionData = filteredJobs[indexPath.row].description ?? "-"
                 nextVC.contactData = filteredJobs[indexPath.row].userContact ?? "-"
+                nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
             }
             navigationController?.pushViewController(nextVC, animated: true)
         } else {
