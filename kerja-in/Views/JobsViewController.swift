@@ -83,14 +83,12 @@ class JobsViewController: UIViewController {
         button.tintColor = UIColor(named: "Black")
 
         button.layer.cornerRadius = viewConstraints.cornerRadius
+        button.layer.cornerRadius = 10
         button.clipsToBounds = false
         button.layer.shadowColor = UIColor(named: "Black")?.cgColor
-        button.layer.shadowOpacity = 1
-        button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowRadius = 10
-        button.layer.shadowPath = UIBezierPath(rect: button.bounds).cgPath
-        button.layer.shouldRasterize = true
-        button.layer.rasterizationScale = UIScreen.main.scale
+        button.layer.shadowOpacity = 0.1
+        button.layer.shadowRadius = 6
+        button.layer.shadowOffset = CGSize(width: 1, height: 2)
         
         return button
     }()
@@ -173,7 +171,7 @@ class JobsViewController: UIViewController {
         
         //MARK: - Set Table View
         setTableView()
-        setFilterView()
+//        setFilterView()
         
         let db = Firestore.firestore()
         db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
