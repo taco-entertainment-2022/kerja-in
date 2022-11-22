@@ -395,9 +395,11 @@ class AddJobViewController: UIViewController {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
+                    let userName = document.data()["userName"] as? String
                     
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
+                                                 userName: userName ?? "-",
                                                  duration: duration ?? "-",
                                                  date: date ?? "-",
                                                  location: location ?? "-",
