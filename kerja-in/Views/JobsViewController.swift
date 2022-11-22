@@ -9,17 +9,38 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 
-class JobsViewController: UIViewController, UISearchBarDelegate {
+class JobsViewController: UIViewController {
     
     var tableView = UITableView()
     var jobsArr = [JobModel]()
-    lazy var searchBar: UISearchBar = UISearchBar()
+    var filteredJobs = [JobModel]()
+    var isSearching = false
+    let db = Firestore.firestore()
+    
+    lazy var searchBar: UISearchController = {
+        let searchBar = UISearchController(searchResultsController: nil)
+        searchBar.dimsBackgroundDuringPresentation = false
+        searchBar.hidesNavigationBarDuringPresentation = false
+        searchBar.searchBar.searchTextField.backgroundColor = UIColor(named: "White")
+        searchBar.searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.searchBar.placeholder = "Cari Pekerjaan..."
+        searchBar.searchBar.sizeToFit()
+        searchBar.searchBar.isTranslucent = false
+        searchBar.searchBar.delegate = self
+        searchBar.searchBar.tintColor = UIColor(named: "Black")
+        searchBar.searchBar.searchTextField.font = UIFont.Outfit(.light, size: 16)
+        searchBar.searchBar.compatibleSearchTextField.textColor = UIColor(named: "Black")
+        searchBar.searchBar.compatibleSearchTextField.backgroundColor = UIColor(named: "White")
+        searchBar.automaticallyShowsCancelButton = false
+        return searchBar
+    }()
+    
     let addButton = UIButton(type: .custom)
     
     let database = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
     let timestamp = Int(Date().timeIntervalSince1970)
- 
+    
     let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
     private let viewConstraints = ViewConstraints()
     
@@ -123,19 +144,11 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = UIColor(named: "DarkWhite")
         self.navigationItem.title = nil
         
+        loadUserName()
         
         //MARK: - Set Search Bar
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = "Cari Pekerjaan..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.delegate = self
-        searchBar.tintColor = UIColor(named: "Black")
-        searchBar.searchTextField.font = UIFont.Outfit(.light, size: 16)
-        navigationItem.titleView = searchBar
-        
-        searchBar.compatibleSearchTextField.textColor = UIColor(named: "Black")
-        searchBar.compatibleSearchTextField.backgroundColor = UIColor(named: "White")
+        navigationItem.titleView = self.searchBar.searchBar
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor(named: "White")
         
         //MARK: - Set Navigation Bar
         let appearance = UINavigationBarAppearance()
@@ -156,7 +169,7 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
             let item1 = UIBarButtonItem(customView: addButton)
             self.navigationItem.setRightBarButtonItems([item1], animated: true)
         }
-
+        
         
         //MARK: - Set Table View
         setTableView()
@@ -176,9 +189,11 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
-                    
+                    let userName = document.data()["userName"] as? String
+
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
+                                                 userName: userName ?? "-",
                                                  duration: duration ?? "-",
                                                  date: date ?? "-",
                                                  location: location ?? "-",
@@ -187,7 +202,29 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
                                                  userContact: userContact ?? "-"))
                 }
             }
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        tableView.keyboardDismissMode = .onDrag
+    }
+    
+    func loadUserName() {
+
+        let db = Firestore.firestore()
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+        
+        db.collection("user").document(userUID).getDocument { snapshot, error in
+            if error != nil {
+                print("ERROR FETCH")
+            }
+            else {
+                let userName = snapshot?.get("firstname") as? String
+                
+                let defaults = UserDefaults.standard
+                defaults.set(userName, forKey: "myIntValue")
+                defaults.synchronize()
+            }
         }
     }
     
@@ -236,12 +273,6 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String)
-    {
-        
-    }
-    
-    
     @objc private func didTapAdd() {
         let destinationVC = AddJobViewController()
         self.navigationController?.pushViewController(destinationVC, animated: true)
@@ -253,21 +284,22 @@ class JobsViewController: UIViewController, UISearchBarDelegate {
 //MARK: - TableView Extension
 extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobsArr.count    }
+        return isSearching ? filteredJobs.count : jobsArr.count
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? JobsTableViewCell else {fatalError("Unable to create cell")}
-        cell.userImage.image = jobsArr[indexPath.row].jobImage
-        cell.jobLabel.text = jobsArr[indexPath.row].jobName
-        cell.dateLabel.text = jobsArr[indexPath.row].date
+        cell.userImage.image = isSearching ? filteredJobs[indexPath.row].jobImage : jobsArr[indexPath.row].jobImage
+        cell.jobLabel.text = isSearching ? filteredJobs[indexPath.row].jobName : jobsArr[indexPath.row].jobName
+        cell.dateLabel.text = isSearching ? filteredJobs[indexPath.row].date : jobsArr[indexPath.row].date
         
         //Remove watch from date in table
         for _ in 16...20 {
             cell.dateLabel.text?.removeLast()
         }
-        cell.locationLabel.text = jobsArr[indexPath.row].location
-        cell.priceLabel.text = jobsArr[indexPath.row].price
-        cell.postedLabel.text = jobsArr[indexPath.row].posted
+        cell.locationLabel.text = isSearching ? filteredJobs[indexPath.row].location : jobsArr[indexPath.row].location
+        cell.priceLabel.text = isSearching ? filteredJobs[indexPath.row].price : jobsArr[indexPath.row].price
+        cell.postedLabel.text = isSearching ? filteredJobs[indexPath.row].posted : jobsArr[indexPath.row].posted
         return cell
     }
     
@@ -278,8 +310,8 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = DetailsViewController()
         let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
-
-        if isLoggedIn == true {
+        
+        if isLoggedIn {
             nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
             nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
             nextVC.categoryData = jobsArr[indexPath.row].jobImage
@@ -288,10 +320,47 @@ extension JobsViewController: UITableViewDelegate, UITableViewDataSource {
             nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
             nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
             nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+            nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
+            if isSearching == false {
+                nextVC.jobData = jobsArr[indexPath.row].jobName ?? "-"
+                nextVC.timeData = jobsArr[indexPath.row].date ?? "-"
+                nextVC.categoryData = jobsArr[indexPath.row].jobImage
+                nextVC.durationData = jobsArr[indexPath.row].duration ?? "-"
+                nextVC.locationData = jobsArr[indexPath.row].location ?? "-"
+                nextVC.paymentData = jobsArr[indexPath.row].price ?? "-"
+                nextVC.descriptionData = jobsArr[indexPath.row].description ?? "-"
+                nextVC.contactData = jobsArr[indexPath.row].userContact ?? "-"
+                nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
+            } else {
+                nextVC.jobData = filteredJobs[indexPath.row].jobName ?? "-"
+                nextVC.timeData = filteredJobs[indexPath.row].date ?? "-"
+                nextVC.categoryData = filteredJobs[indexPath.row].jobImage
+                nextVC.durationData = filteredJobs[indexPath.row].duration ?? "-"
+                nextVC.locationData = filteredJobs[indexPath.row].location ?? "-"
+                nextVC.paymentData = filteredJobs[indexPath.row].price ?? "-"
+                nextVC.descriptionData = filteredJobs[indexPath.row].description ?? "-"
+                nextVC.contactData = filteredJobs[indexPath.row].userContact ?? "-"
+                nextVC.daysData = jobsArr[indexPath.row].userName ?? "-"
+            }
             navigationController?.pushViewController(nextVC, animated: true)
         } else {
             navigationController?.pushViewController(ProfileViewController(), animated: true)
         }
     }
     
+}
+
+//MARK: - Search Bar Extension
+extension JobsViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            isSearching = false
+            tableView.reloadData()
+        } else {
+            isSearching = true
+            filteredJobs = jobsArr.filter({ $0.jobName!.lowercased().contains(searchText.lowercased()) })
+            tableView.reloadData()
+        }
+    }
 }

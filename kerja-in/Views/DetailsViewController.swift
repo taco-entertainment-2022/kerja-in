@@ -197,14 +197,15 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    var jobData: String = "Interview Mahasiswa Rantau"
-    var timeData: String = "Senin, 9 Oct 2022"
+    var jobData: String = ""
+    var timeData: String = ""
     var categoryData = UIImage(named: "Riset")
-    var durationData: String = "15 Menit"
-    var locationData: String = "Online"
-    var paymentData: String = "Rp5.000"
-    var descriptionData: String = "Butuh respondent mahasiswa rantau ya... Wajib lapor sebelum ngisi respondent. Tujuannya supaya bisa konfirmasi dulu dan bisa dibayar. Hubungi WAnya yang tertera ya. \n\nKalau bisa mahasiswa rantau dari luar Jawa ya... terus baru menjalani kuliah semester2 awal."
+    var durationData: String = ""
+    var locationData: String = ""
+    var paymentData: String = ""
+    var descriptionData: String = ""
     var contactData: String = ""
+    var daysData: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -228,7 +229,7 @@ class DetailsViewController: UIViewController {
         //MARK: - Upper
         userImage.image = categoryData
         jobLabel.text = jobData
-        daysLabel.text = "5 days ago, oleh Fredo Sembi"
+        daysLabel.text = "oleh \(daysData)"  //"5 days ago, oleh Fredo Sembi"
         
         
         //MARK: - Details Text
