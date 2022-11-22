@@ -220,9 +220,9 @@ class DetailsViewController: UIViewController {
         
         //Navigation Bar
         self.title = "Job Detail"
-        savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        savedButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        savedButton.addTarget(self, action: #selector(savedButtonPressed), for: .touchUpInside)
+//        savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+//        savedButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        savedButton.addTarget(self, action: #selector(savedButtonPressed), for: .touchUpInside)
         let item1 = UIBarButtonItem(customView: savedButton)
         self.navigationItem.setRightBarButtonItems([item1], animated: true)
         
