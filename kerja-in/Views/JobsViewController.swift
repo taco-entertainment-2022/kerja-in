@@ -42,6 +42,102 @@ class JobsViewController: UIViewController {
     let timestamp = Int(Date().timeIntervalSince1970)
     
     let isLoggedIn = UserDefaults.standard.bool(forKey: "userLoggedIn")
+    private let viewConstraints = ViewConstraints()
+    
+    private lazy var filterScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.contentSize = CGSize(width: self.view.frame.size.width, height: 500)
+        
+        return scroll
+    }()
+    
+    private lazy var filterContentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return contentView
+    }()
+    
+    private lazy var filterStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.alignment = .leading
+        stack.spacing = 16
+        stack.distribution = .equalCentering
+        
+        return stack
+    }()
+    
+    private lazy var filterViewButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Filter", for: .normal)
+        button.titleLabel?.font = UIFont.Outfit(.regular, size: 16)
+        button.setTitleColor(UIColor(named: "Black"), for: .normal)
+        button.addTarget(self, action: #selector(didTapFilter), for: .touchUpInside)
+        button.backgroundColor = UIColor(named: "White")
+        button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+        button.tintColor = UIColor(named: "Black")
+
+        button.layer.cornerRadius = viewConstraints.cornerRadius
+        button.clipsToBounds = false
+        button.layer.shadowColor = UIColor(named: "Black")?.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 10
+        button.layer.shadowPath = UIBezierPath(rect: button.bounds).cgPath
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        
+        return button
+    }()
+    
+    private lazy var filterByCategoryButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Berdasarkan Kategori", for: .normal)
+        button.titleLabel?.font = UIFont.Outfit(.regular, size: 16)
+        button.setTitleColor(UIColor(named: "Black"), for: .normal)
+        button.addTarget(self, action: #selector(didTapFilter), for: .touchUpInside)
+        button.backgroundColor = UIColor(named: "White")
+
+        button.layer.cornerRadius = viewConstraints.cornerRadius
+        button.layer.shadowColor = UIColor.green.cgColor//UIColor(named: "DetailsGray")?.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 10
+        button.layer.shadowPath = UIBezierPath(rect: button.bounds).cgPath
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        
+        return button
+    }()
+    
+    private lazy var filterByLocationBUtton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Berdasarkan Lokasi", for: .normal)
+        button.titleLabel?.font = UIFont.Outfit(.regular, size: 16)
+        button.setTitleColor(UIColor(named: "Black"), for: .normal)
+        button.addTarget(self, action: #selector(didTapFilter), for: .touchUpInside)
+        button.backgroundColor = UIColor(named: "White")
+
+        button.layer.cornerRadius = viewConstraints.cornerRadius
+        button.layer.shadowColor = UIColor.green.cgColor//UIColor(named: "DetailsGray")?.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowRadius = 10
+        button.layer.shadowPath = UIBezierPath(rect: button.bounds).cgPath
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
+        
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +173,9 @@ class JobsViewController: UIViewController {
         
         //MARK: - Set Table View
         setTableView()
+        setFilterView()
+        
+        let db = Firestore.firestore()
         db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             if error != nil {
                 print("Error Fetch")
@@ -129,7 +228,16 @@ class JobsViewController: UIViewController {
         }
     }
     
-    
+    private func setFilterView() {
+        view.addSubview(filterViewButton)
+        filterViewButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(110)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(viewConstraints.textFieldWidth)
+            make.height.equalTo(26)
+        }
+    }
+
     func setTableView() {
         tableView.frame = self.view.frame
         tableView.backgroundColor = UIColor.clear
@@ -141,7 +249,27 @@ class JobsViewController: UIViewController {
         
         tableView.register(JobsTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(self.view)
+            make.top.equalToSuperview().offset(140)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    @objc private func didTapFilter() {
+        let filterVC = FilterViewController()
+        if #available(iOS 15.0, *) {
+            if let sheet = filterVC.sheetPresentationController {
+                sheet.detents = [.large()]
+                sheet.largestUndimmedDetentIdentifier = .medium
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            }
+            
+            present(filterVC, animated: true)
+        } else {
+            present(filterVC, animated: true)
         }
     }
     
