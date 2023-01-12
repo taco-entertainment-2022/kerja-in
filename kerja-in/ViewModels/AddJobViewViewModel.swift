@@ -21,16 +21,17 @@ final class AddJobViewViewModel: ObservableObject {
     @Published var contact: String?
     @Published var jobDate: String?
     @Published var error: String?
+    @Published var timestamp: Int?
     
     
     let database = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
-    let timestamp = Int(Date().timeIntervalSince1970)
-
+    
     static let shared = AddJobViewViewModel()
     
     func saveData(date: String, description: String, jobName: String, location: String, price: String, userImage: String, userContact: String, userID: String, jobDuration: String, timestamp: Int) {
         
+        let timestamp = Int(Date().timeIntervalSince1970)
         let postID: String = String(userID) + String(timestamp)
         let docRef = database.collection("jobs").document(postID)
         

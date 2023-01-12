@@ -12,6 +12,7 @@ import Combine
 
 class AddJobViewController: UIViewController {
     let viewConstraints = ViewConstraints()
+    let JobVC = JobsViewController()
     
     private let dropDown = DropDown()    
     private let numOption = Array(1...60)
@@ -682,8 +683,12 @@ class AddJobViewController: UIViewController {
                                                 userContact: AddJobViewViewModel.shared.contact!,
                                                 userID: AddJobViewViewModel.shared.userID!,
                                                 jobDuration: AddJobViewViewModel.shared.jobDuration!,
-                                                timestamp: AddJobViewViewModel.shared.timestamp)
+                                                timestamp: AddJobViewViewModel.shared.timestamp ?? 0)
             errorLabel.text = ""
+            
+            //Use NotificationCenter for data reload trigger
+            NotificationCenter.default.post(name: NSNotification.Name("com.reload.data.success"),
+                         object: nil)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             errorLabel.text = "Semua data wajib diisi"
