@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseFirestore
 import Firebase
+import Foundation
 
 class JobsViewController: UIViewController {
     
@@ -171,8 +172,6 @@ class JobsViewController: UIViewController {
         
         //MARK: - Set Table View
         setTableView()
-//        setFilterView()
-        
         let db = Firestore.firestore()
         db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             if error != nil {
@@ -199,6 +198,9 @@ class JobsViewController: UIViewController {
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -206,6 +208,55 @@ class JobsViewController: UIViewController {
         }
         tableView.keyboardDismissMode = .onDrag
     }
+    
+    @objc func reloadData(_ notification: Notification) {
+        let db = Firestore.firestore()
+        db.collection("jobs").order(by: "timestamp", descending: true).getDocuments { snapshot, error in
+            if error != nil {
+                print("Error Fetch")
+            } else {
+                self.jobsArr.removeAll()
+                for document in snapshot!.documents {
+                    let jobName = document.data()["jobName"] as? String
+                    let description = document.data()["description"] as? String
+                    let date = document.data()["date"] as? String
+                    let location = document.data()["location"] as? String
+                    let price = document.data()["price"] as? String
+                    let userContact = document.data()["userContact"] as? String
+                    let userImage = document.data()["userImage"] as? String
+                    let duration = document.data()["jobDuration"] as? String
+                    let userName = document.data()["userName"] as? String
+
+                    self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
+                                                 jobName: jobName ?? "-",
+                                                 userName: userName ?? "-",
+                                                 duration: duration ?? "-",
+                                                 date: date ?? "-",
+                                                 location: location ?? "-",
+                                                 price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 description: description ?? "-",
+                                                 userContact: userContact ?? "-"))
+                }
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Observer of  NotificationCenter for data reload trigger
+        NotificationCenter.default
+                          .addObserver(self,
+                                       selector:#selector(reloadData(_:)),
+                                       name: NSNotification.Name ("com.reload.data.success"),
+                                       object: nil)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+
     
     func loadUserName() {
 
@@ -226,6 +277,8 @@ class JobsViewController: UIViewController {
         }
     }
     
+    
+    //MARK: - Testing
     private func setFilterView() {
         view.addSubview(filterViewButton)
         filterViewButton.snp.makeConstraints { make in
@@ -247,7 +300,7 @@ class JobsViewController: UIViewController {
         
         tableView.register(JobsTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(140)
+            make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
