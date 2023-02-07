@@ -36,6 +36,7 @@
 		93F05E08291D4A7100B55756 /* JobPostedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05E07291D4A7100B55756 /* JobPostedViewController.swift */; };
 		93F05E0A291D4A8C00B55756 /* JobPostedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05E09291D4A8C00B55756 /* JobPostedModel.swift */; };
 		93F05E0C291D4AA900B55756 /* JobPostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F05E0B291D4AA900B55756 /* JobPostedTableViewCell.swift */; };
+		A81B45E929927AF000BB17A9 /* PostedLabelSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81B45E829927AF000BB17A9 /* PostedLabelSingleton.swift */; };
 		A82FAF4F28E738EA006587D6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF4E28E738EA006587D6 /* TabBar.swift */; };
 		A82FAF5128E73F85006587D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FAF5028E73F85006587D6 /* ProfileViewController.swift */; };
 		A871CDC0292A95AE0084946E /* FilteredJobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A871CDBF292A95AE0084946E /* FilteredJobModel.swift */; };
@@ -115,6 +116,7 @@
 		93F05E07291D4A7100B55756 /* JobPostedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostedViewController.swift; sourceTree = "<group>"; };
 		93F05E09291D4A8C00B55756 /* JobPostedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostedModel.swift; sourceTree = "<group>"; };
 		93F05E0B291D4AA900B55756 /* JobPostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobPostedTableViewCell.swift; sourceTree = "<group>"; };
+		A81B45E829927AF000BB17A9 /* PostedLabelSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedLabelSingleton.swift; sourceTree = "<group>"; };
 		A82FAF4E28E738EA006587D6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		A82FAF5028E73F85006587D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A871CDBF292A95AE0084946E /* FilteredJobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredJobModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				4E930F562905EF47005FA88A /* Extensions.swift */,
 				4E36F6C2291FD63F005D8495 /* ViewConstraints.swift */,
+				A81B45E829927AF000BB17A9 /* PostedLabelSingleton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				4EE62D0728E6A5F8003B161F /* AppDelegate.swift in Sources */,
 				4ED4332C28F47ACD00FF74D5 /* UserModel.swift in Sources */,
 				4EE62D0928E6A5F8003B161F /* SceneDelegate.swift in Sources */,
+				A81B45E929927AF000BB17A9 /* PostedLabelSingleton.swift in Sources */,
 				4E930F5D2905EF47005FA88A /* SignUpController.swift in Sources */,
 				93F05D6E2912ABB000B55756 /* OnboardingViewController.swift in Sources */,
 				93F05E0C291D4AA900B55756 /* JobPostedTableViewCell.swift in Sources */,
