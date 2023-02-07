@@ -138,6 +138,8 @@ class JobsViewController: UIViewController {
         return button
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "DarkWhite")
@@ -187,7 +189,33 @@ class JobsViewController: UIViewController {
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
-
+                    let timestampInt = document.data()["timestamp"] as? Int
+                    
+                    let timestampDate = Date(timeIntervalSince1970: Double(timestampInt!))
+                    let now = Date()
+                    let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .weekOfMonth])
+                    let difference = Calendar.current.dateComponents(components, from: timestampDate, to: now)
+                    var timeText = ""
+                    
+                    if difference.second! <= 0 {
+                        timeText = "Just Now"
+                    }
+                    if difference.second! > 0 && difference.minute! == 0 {
+                        timeText =  "\(difference.second!) Second Ago"
+                    }
+                    if difference.minute! > 0 && difference.hour! == 0 {
+                        timeText =  "\(difference.minute!) Minutes Ago"
+                    }
+                    if difference.hour! > 0 && difference.day! == 0 {
+                        timeText =  "\(difference.hour!) Hours Ago"
+                    }
+                    if difference.day! > 0 && difference.weekOfMonth! == 0 {
+                        timeText =  (difference.day == 1) ? "\(difference.day!) Day Ago" : "\(difference.day!) Days Ago"
+                    }
+                    if difference.weekOfMonth! > 0 {
+                        timeText =  (difference.weekOfMonth == 1) ? "\(difference.weekOfMonth!) Week Ago" : "\(difference.weekOfMonth!) Weeks Ago"
+                    }
+                    
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -195,11 +223,9 @@ class JobsViewController: UIViewController {
                                                  date: date ?? "-",
                                                  location: location ?? "-",
                                                  price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 posted: timeText,
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
                 }
             }
             DispatchQueue.main.async {
@@ -226,7 +252,33 @@ class JobsViewController: UIViewController {
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
-
+                    let timestampInt = document.data()["timestamp"] as? Int
+                    
+                    let timestampDate = Date(timeIntervalSince1970: Double(timestampInt!))
+                    let now = Date()
+                    let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .weekOfMonth])
+                    let difference = Calendar.current.dateComponents(components, from: timestampDate, to: now)
+                    var timeText = ""
+                    
+                    if difference.second! <= 0 {
+                        timeText = "Just Now"
+                    }
+                    if difference.second! > 0 && difference.minute! == 0 {
+                        timeText =  "\(difference.second!) Second Ago"
+                    }
+                    if difference.minute! > 0 && difference.hour! == 0 {
+                        timeText =  "\(difference.minute!) Minutes Ago"
+                    }
+                    if difference.hour! > 0 && difference.day! == 0 {
+                        timeText =  "\(difference.hour!) Hours Ago"
+                    }
+                    if difference.day! > 0 && difference.weekOfMonth! == 0 {
+                        timeText =  (difference.day == 1) ? "\(difference.day!) Day Ago" : "\(difference.day!) Days Ago"
+                    }
+                    if difference.weekOfMonth! > 0 {
+                        timeText =  (difference.weekOfMonth == 1) ? "\(difference.weekOfMonth!) Week Ago" : "\(difference.weekOfMonth!) Weeks Ago"
+                    }
+                    
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -234,6 +286,7 @@ class JobsViewController: UIViewController {
                                                  date: date ?? "-",
                                                  location: location ?? "-",
                                                  price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 posted: timeText,
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }
