@@ -138,6 +138,8 @@ class JobsViewController: UIViewController {
         return button
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "DarkWhite")
@@ -187,7 +189,10 @@ class JobsViewController: UIViewController {
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
-
+                    
+                    let timestampInt = document.data()["timestamp"] as? Int
+                    let posted = PostedLabelSingleton.sharedInstance.timestampToString(timestampInt: timestampInt!)
+                    
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -195,11 +200,9 @@ class JobsViewController: UIViewController {
                                                  date: date ?? "-",
                                                  location: location ?? "-",
                                                  price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 posted: posted,
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
                 }
             }
             DispatchQueue.main.async {
@@ -226,7 +229,10 @@ class JobsViewController: UIViewController {
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
-
+                    
+                    let timestampInt = document.data()["timestamp"] as? Int
+                    let posted = PostedLabelSingleton.sharedInstance.timestampToString(timestampInt: timestampInt!)
+                    
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -234,6 +240,7 @@ class JobsViewController: UIViewController {
                                                  date: date ?? "-",
                                                  location: location ?? "-",
                                                  price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 posted: posted,
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }

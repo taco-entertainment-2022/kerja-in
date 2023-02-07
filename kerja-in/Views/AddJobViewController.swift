@@ -398,6 +398,9 @@ class AddJobViewController: UIViewController {
                     let duration = document.data()["jobDuration"] as? String
                     let userName = document.data()["userName"] as? String
                     
+                    let timestampInt = document.data()["timestamp"] as? Int
+                    let posted = PostedLabelSingleton.sharedInstance.timestampToString(timestampInt: timestampInt!)
+                    
                     self.jobsArr.append(JobModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!,
                                                  jobName: jobName ?? "-",
                                                  userName: userName ?? "-",
@@ -405,6 +408,7 @@ class AddJobViewController: UIViewController {
                                                  date: date ?? "-",
                                                  location: location ?? "-",
                                                  price: (price != nil) ? "Rp  \(price!)" : "-",
+                                                 posted: posted,
                                                  description: description ?? "-",
                                                  userContact: userContact ?? "-"))
                 }
