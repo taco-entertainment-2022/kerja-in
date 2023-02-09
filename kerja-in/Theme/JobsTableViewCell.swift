@@ -38,23 +38,23 @@ class JobsTableViewCell: UITableViewCell {
     }()
     
     //MARK: - Button
-//    lazy var savedButton: UIButton = {
-//        let savedButton = UIButton(frame: CGRect(x: 325, y: 16, width: 16, height: 18))
-//        savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-//        savedButton.tintColor = UIColor(named: "Black")
-//        savedButton.addTarget(self, action: #selector(savedButtonPressed(sender: )), for: .touchUpInside)
-//        return savedButton
-//    }()
-//    
-//    @objc func savedButtonPressed(sender: UIButton){
-//        print("Button Clicked")
-//        isOn.toggle()
-//        if isOn {
-//            savedButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-//        } else {
-//            savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-//        }
-//    }
+    lazy var savedButton: UIButton = {
+        let savedButton = UIButton(frame: CGRect(x: 325, y: 16, width: 16, height: 18))
+        savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        savedButton.tintColor = UIColor(named: "Black")
+        savedButton.addTarget(self, action: #selector(savedButtonPressed(sender: )), for: .touchUpInside)
+        return savedButton
+    }()
+    
+    @objc func savedButtonPressed(sender: UIButton){
+        print("Button Clicked")
+        isOn.toggle()
+        if isOn {
+            savedButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            savedButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+    }
     
     //MARK: - Label
     lazy var jobLabel: UILabel = {
@@ -122,11 +122,11 @@ class JobsTableViewCell: UITableViewCell {
             make.bottom.equalTo(-5)
         }
         
-        //Saved buttom & posted constraint
-//        savedButton.snp.makeConstraints { make in
-//            make.topMargin.equalTo(12)
-//            make.rightMargin.equalTo(-12)
-//        }
+//        Saved buttom & posted constraint
+        savedButton.snp.makeConstraints { make in
+            make.topMargin.equalTo(12)
+            make.rightMargin.equalTo(-12)
+        }
         postedLabel.snp.makeConstraints { make in
             make.rightMargin.bottomMargin.equalTo(-12)
         }
@@ -146,7 +146,7 @@ class JobsTableViewCell: UITableViewCell {
         backView.addSubview(locationLabel)
         backView.addSubview(priceLabel)
         backView.addSubview(postedLabel)
-//        backView.addSubview(savedButton)
+        backView.addSubview(savedButton)
         
     }
 

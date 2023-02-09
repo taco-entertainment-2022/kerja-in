@@ -36,7 +36,7 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
         
         let db = Firestore.firestore()
         guard let userUID = Auth.auth().currentUser?.uid else { return }
-        
+        print(userUID)
         db.collection("jobs").whereField("userID", isEqualTo: userUID).getDocuments { snapshot, error in
             if error != nil {
                 print("ERROR FETCH")
@@ -52,9 +52,10 @@ class JobsPostedViewController: UIViewController, UISearchBarDelegate {
                     let userContact = document.data()["userContact"] as? String
                     let userImage = document.data()["userImage"] as? String
                     let duration = document.data()["jobDuration"] as? String
+                    let timestamp = document.data()["timestamp"] as? Int
+                    let strTimestamp = String(timestamp!)
 
-                    
-                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", duration: duration ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-"))
+                    self.jobsArr.append(JobPostedModel(userImage: UIImage(named: userImage ?? "Lainnya") ?? UIImage(named: "Lainnya")!, jobName: jobName ?? "-", duration: duration ?? "-", date: date ?? "-", location: location ?? "-", price: price ?? "-", description: description ?? "-", userContact: userContact ?? "-", timestamp: strTimestamp ?? "-"))
                     
                         }
                     }
@@ -109,6 +110,7 @@ extension JobsPostedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.locationLabel.text = jobsArr[indexPath.row].location
         cell.priceLabel.text = jobsArr[indexPath.row].price
         cell.postedLabel.text = jobsArr[indexPath.row].posted
+        cell.timestampLabel.text = jobsArr[indexPath.row].timestamp
         return cell
     }
     

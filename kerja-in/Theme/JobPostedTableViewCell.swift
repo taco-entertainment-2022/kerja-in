@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
+import Firebase
 
 class JobPostedTableViewCell: UITableViewCell {
     
@@ -46,6 +48,23 @@ class JobPostedTableViewCell: UITableViewCell {
         return savedButton
     }()
     
+    lazy var deleteButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 285, y: 60, width: 62, height: 22))
+        button.setTitle("Hapus", for: .normal)
+        button.titleLabel?.font = UIFont.Outfit(.regular, size: 12)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(named: "Orange")
+        button.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        button.layer.cornerRadius = 10
+        
+        button.layer.shadowColor = UIColor(named: "Black")?.cgColor
+        button.layer.shadowOpacity = 0.1
+        button.layer.shadowRadius = 6
+        button.layer.shadowOffset = CGSize(width: 1, height: 2)
+        
+        return button
+    }()
+    
     @objc func savedButtonPressed(sender: UIButton){
         print("Button Clicked")
         isOn.toggle()
@@ -56,7 +75,34 @@ class JobPostedTableViewCell: UITableViewCell {
         }
     }
     
+    @objc func handleDelete(sender: UIButton) {
+        print("Delete Clicked")
+        
+        let db = Firestore.firestore()
+        let intTimestamp = Int(timestampLabel.text!)
+        guard let userUID = Auth.auth().currentUser?.uid else { return }
+
+        db.collection("jobs").whereField("timestamp", isEqualTo: intTimestamp).getDocuments { snapshot, err in
+          if let err = err {
+            print("Error getting documents: \(err)")
+          } else {
+            for document in snapshot!.documents {
+                document.reference.delete()
+            }
+          }
+        }
+        
+    }
+    
     //MARK: - Label
+    lazy var timestampLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont.Outfit(.medium, size: 16)
+        label.textColor = UIColor(named: "Black")
+        return label
+    }()
+    
     lazy var jobLabel: UILabel = {
         let lbl = UILabel(frame: CGRect(x: 80, y: 8, width: backView.frame.width - 116, height: 30))
         lbl.textAlignment = .left
@@ -147,6 +193,8 @@ class JobPostedTableViewCell: UITableViewCell {
         backView.addSubview(priceLabel)
         backView.addSubview(postedLabel)
         backView.addSubview(savedButton)
+        backView.addSubview(deleteButton)
+        backView.addSubview(timestampLabel)
         
     }
 

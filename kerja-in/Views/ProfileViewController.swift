@@ -277,17 +277,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     make.leftMargin.equalTo(168)
                 }
 
-//                models.append(Section(title:" ", option: [
-//                    SettingOption(title: "Pekerjaan Diposting") {
-//                        print("Tapped First Cell")
-//
-//                        self.navigationController?.pushViewController(JobsPostedViewController(), animated: true)
-//                    },
-//                    SettingOption(title: "Pekerjaan Disimpan") {
-//
-//                    },
-//
-//                ]))
+                models.append(Section(title:" ", option: [
+                    SettingOption(title: "Pekerjaan Diposting") {
+                        print("Tapped First Cell")
+
+                        self.navigationController?.pushViewController(JobsPostedViewController(), animated: true)
+                    },
+                    SettingOption(title: "Pekerjaan Disimpan") {
+
+                    },
+
+                ]))
                 
                 
                 view.addSubview(tableView)
