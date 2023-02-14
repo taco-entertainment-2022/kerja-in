@@ -233,14 +233,14 @@ class SignUpController: UIViewController {
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
         
-        view.addSubview(button)
-         button.snp.makeConstraints { make in
-            make.height.equalTo(viewConstraints.textFieldHeight)
-            make.top.equalTo(seperator.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
-            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
-
-        }
+//        view.addSubview(button)
+//         button.snp.makeConstraints { make in
+//            make.height.equalTo(viewConstraints.textFieldHeight)
+//            make.top.equalTo(seperator.snp.bottom).offset(15)
+//            make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
+//            make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
+//
+//        }
         
     }
     
@@ -655,11 +655,13 @@ class SignUpController: UIViewController {
         view.addSubview(googleLoginButton)
         googleLoginButton.snp.makeConstraints { make in
             make.height.equalTo(viewConstraints.textFieldHeight)
-            make.top.equalTo(seperator.snp.bottom).offset(72)
+//            make.top.equalTo(seperator.snp.bottom).offset(72)
+            make.top.equalTo(seperator.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(viewConstraints.offsetSuperviewToAuth)
             make.right.equalToSuperview().offset(-viewConstraints.offsetSuperviewToAuth)
 
         }
+
         
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints { make in

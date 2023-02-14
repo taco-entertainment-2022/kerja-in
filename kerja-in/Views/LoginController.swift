@@ -114,16 +114,16 @@ class LoginController: UIViewController {
         let button = ASAuthorizationAppleIDButton()
         button.addTarget(self, action: #selector(handleAppleLogin), for: .touchUpInside)
         button.center = view.center
-        view.addSubview(button)
+//        view.addSubview(button)
         
-        view.addSubview(button)
-        button.snp.makeConstraints { make in
-            //make.width.equalTo(330)
-            make.height.equalTo(44)
-            make.top.equalTo(424)
-            make.leftMargin.equalTo(21)
-            make.rightMargin.equalTo(-21)
-        }
+//        view.addSubview(button)
+//        button.snp.makeConstraints { make in
+//            //make.width.equalTo(330)
+//            make.height.equalTo(44)
+//            make.top.equalTo(424)
+//            make.leftMargin.equalTo(21)
+//            make.rightMargin.equalTo(-21)
+//        }
 
     }
     
@@ -475,11 +475,12 @@ class LoginController: UIViewController {
         googleLoginButton.snp.makeConstraints { make in
             //make.width.equalTo(330)
             make.height.equalTo(44)
-            make.top.equalTo(481)
+//            make.top.equalTo(481)
+            make.top.equalTo(424)
             make.leftMargin.equalTo(21)
             make.rightMargin.equalTo(-21)
         }
-        
+    
         view.addSubview(errorLabel)        
         errorLabel.snp.makeConstraints { make in
             //make.width.equalTo(254)
