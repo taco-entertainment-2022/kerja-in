@@ -351,6 +351,39 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                     },
                     
+                    SettingOption(title: "Hapus Akun") {
+                        
+                        let user = Auth.auth().currentUser
+
+                        user?.delete { error in
+                          if let error = error {
+                            // An error happened.
+                              print("Error")
+                              print(error.localizedDescription)
+                          } else {
+                            // Account deleted.
+                              print("Account Delete")
+                              
+                              do {
+                                  try Auth.auth().signOut()
+                                  
+                                  let navVC = UINavigationController(rootViewController: ProfileViewController())
+                                  navVC.modalPresentationStyle = .fullScreen
+                                  //navVC.modalTransitionStyle = .coverVertical
+                                  self.present(navVC, animated: false) {
+                                      navVC.pushViewController(LoginController(), animated: false)
+                                  }
+                                  
+                                  
+                              } catch let error {
+                                  print("Failed to sign out with error...", error)
+                              }
+                              
+                          }
+                        }
+                        
+                    },
+                    
                 ]))
                 
             }else{
